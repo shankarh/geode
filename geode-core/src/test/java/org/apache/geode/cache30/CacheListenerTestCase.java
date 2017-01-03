@@ -14,14 +14,7 @@
  */
 package org.apache.geode.cache30;
 
-import org.junit.experimental.categories.Category;
-import org.junit.Test;
-
 import static org.junit.Assert.*;
-
-import org.apache.geode.test.dunit.cache.internal.JUnit4CacheTestCase;
-import org.apache.geode.test.dunit.internal.JUnit4DistributedTestCase;
-import org.apache.geode.test.junit.categories.DistributedTest;
 
 import org.apache.geode.cache.AttributesFactory;
 import org.apache.geode.cache.CacheException;
@@ -33,6 +26,7 @@ import org.apache.geode.cache.RegionAttributes;
 import org.apache.geode.cache.RegionEvent;
 import org.apache.geode.internal.cache.AbstractRegionMap;
 import org.apache.geode.test.dunit.Wait;
+import org.junit.Test;
 
 /**
  * An abstract class whose test methods test the functionality of {@link CacheListener}s that are
@@ -348,7 +342,7 @@ public abstract class CacheListenerTestCase extends CacheLoaderTestCase {
         assertEquals(name, event.getRegion().getName());
         // this should be a distributed destroy unless the region
         // is local scope
-        assertFalse(event.isExpiration());
+        assertFalse(event.getOperation().isExpiration());
         assertFalse(event.isOriginRemote());
 
         this.destroyed = true;
@@ -403,7 +397,7 @@ public abstract class CacheListenerTestCase extends CacheLoaderTestCase {
 
       public void afterRegionInvalidate2(RegionEvent event) {
         assertEquals(name, event.getRegion().getName());
-        assertFalse(event.isExpiration());
+        assertFalse(event.getOperation().isExpiration());
         assertFalse(event.isOriginRemote());
 
         this.invalidated = true;

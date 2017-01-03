@@ -14,8 +14,60 @@
  */
 package org.apache.geode;
 
-import org.apache.geode.cache.*;
-import org.apache.geode.cache.query.*;
+import static org.apache.geode.distributed.ConfigurationProperties.*;
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Properties;
+import java.util.Set;
+
+import javax.transaction.Synchronization;
+
+import org.apache.geode.cache.AttributesFactory;
+import org.apache.geode.cache.AttributesMutator;
+import org.apache.geode.cache.Cache;
+import org.apache.geode.cache.CacheEvent;
+import org.apache.geode.cache.CacheException;
+import org.apache.geode.cache.CacheFactory;
+import org.apache.geode.cache.CacheListener;
+import org.apache.geode.cache.CacheLoader;
+import org.apache.geode.cache.CacheLoaderException;
+import org.apache.geode.cache.CacheTransactionManager;
+import org.apache.geode.cache.CacheWriter;
+import org.apache.geode.cache.CacheWriterException;
+import org.apache.geode.cache.CommitConflictException;
+import org.apache.geode.cache.DataPolicy;
+import org.apache.geode.cache.DiskStoreFactory;
+import org.apache.geode.cache.EntryEvent;
+import org.apache.geode.cache.EntryExistsException;
+import org.apache.geode.cache.EntryNotFoundException;
+import org.apache.geode.cache.EvictionAction;
+import org.apache.geode.cache.EvictionAttributes;
+import org.apache.geode.cache.FailedSynchronizationException;
+import org.apache.geode.cache.LoaderHelper;
+import org.apache.geode.cache.PartitionAttributes;
+import org.apache.geode.cache.PartitionAttributesFactory;
+import org.apache.geode.cache.Region;
+import org.apache.geode.cache.RegionEvent;
+import org.apache.geode.cache.Scope;
+import org.apache.geode.cache.TimeoutException;
+import org.apache.geode.cache.TransactionEvent;
+import org.apache.geode.cache.TransactionException;
+import org.apache.geode.cache.TransactionId;
+import org.apache.geode.cache.TransactionListener;
+import org.apache.geode.cache.UnsupportedOperationInTransactionException;
+import org.apache.geode.cache.query.Index;
+import org.apache.geode.cache.query.IndexType;
+import org.apache.geode.cache.query.Query;
+import org.apache.geode.cache.query.QueryException;
+import org.apache.geode.cache.query.QueryService;
+import org.apache.geode.cache.query.SelectResults;
 import org.apache.geode.cache.query.internal.index.IndexManager;
 import org.apache.geode.cache.util.CacheListenerAdapter;
 import org.apache.geode.cache.util.TransactionListenerAdapter;
@@ -23,19 +75,23 @@ import org.apache.geode.distributed.DistributedSystem;
 import org.apache.geode.distributed.internal.DistributionConfig;
 import org.apache.geode.distributed.internal.InternalDistributedSystem;
 import org.apache.geode.internal.NanoTimer;
-import org.apache.geode.internal.cache.*;
+import org.apache.geode.internal.cache.AbstractRegion;
+import org.apache.geode.internal.cache.CachePerfStats;
+import org.apache.geode.internal.cache.GemFireCacheImpl;
+import org.apache.geode.internal.cache.LocalRegion;
+import org.apache.geode.internal.cache.PartitionedRegion;
+import org.apache.geode.internal.cache.TXManagerImpl;
+import org.apache.geode.internal.cache.TXStateProxy;
 import org.apache.geode.internal.i18n.LocalizedStrings;
 import org.apache.geode.internal.util.StopWatch;
 import org.apache.geode.test.junit.categories.IntegrationTest;
-import org.junit.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.rules.TestName;
-
-import javax.transaction.Synchronization;
-import java.util.*;
-
-import static org.apache.geode.distributed.ConfigurationProperties.MCAST_PORT;
-import static org.junit.Assert.*;
 
 /**
  * Tests basic transaction functionality
@@ -429,8 +485,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -497,8 +553,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
 
@@ -533,8 +589,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -569,8 +625,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
 
@@ -605,8 +661,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -642,9 +698,9 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
+        assertTrue(!ev.getOperation().isExpiration());
         if (!isPR())
-          assertTrue(!ev.isDistributed());
+          assertTrue(!ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -680,8 +736,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -717,9 +773,9 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
+        assertTrue(!ev.getOperation().isExpiration());
         if (!isPR())
-          assertTrue(!ev.isDistributed());
+          assertTrue(!ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -968,7 +1024,7 @@ public class TXJUnitTest {
       }
 
       public void afterDestroy(EntryEvent e) {
-        if (e.isDistributed()) {
+        if (e.getOperation().isDistributed()) {
           ++this.aDestroyCalls;
         } else {
           ++this.aLocalDestroyCalls;
@@ -1100,8 +1156,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -1145,8 +1201,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -1216,8 +1272,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -1271,8 +1327,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -1406,8 +1462,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -1451,8 +1507,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -1504,8 +1560,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -1550,8 +1606,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -1595,8 +1651,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
 
@@ -1640,8 +1696,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(!ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(!ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -1695,8 +1751,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -1742,8 +1798,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(!ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(!ev.getOperation().isDistributed());
       }
     }
 
@@ -1787,8 +1843,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
 
@@ -1831,8 +1887,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(!ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(!ev.getOperation().isDistributed());
       }
     }
 
@@ -1903,8 +1959,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -1949,8 +2005,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -1999,8 +2055,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -2042,8 +2098,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
 
@@ -2085,8 +2141,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(!ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(!ev.getOperation().isDistributed());
       }
     }
 
@@ -2160,8 +2216,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -2208,8 +2264,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -2259,8 +2315,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -2303,8 +2359,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
 
@@ -2346,8 +2402,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(!ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(!ev.getOperation().isDistributed());
       }
     }
 
@@ -2421,8 +2477,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -2469,8 +2525,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -2519,8 +2575,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
 
@@ -2567,8 +2623,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(!ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(!ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -2612,8 +2668,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -2657,8 +2713,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -2702,8 +2758,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -2747,8 +2803,8 @@ public class TXJUnitTest {
         assertEquals(null, ev.getCallbackArgument());
         assertEquals(true, ev.isCallbackArgumentAvailable());
         assertTrue(!ev.isOriginRemote());
-        assertTrue(!ev.isExpiration());
-        assertTrue(ev.isDistributed());
+        assertTrue(!ev.getOperation().isExpiration());
+        assertTrue(ev.getOperation().isDistributed());
       }
     }
     reg1.localDestroy("key1");
@@ -3125,7 +3181,7 @@ public class TXJUnitTest {
       this.passedValidation = false;
       assertEquals("Expected Call Count Assertion!", this.expectedCallCount, cnt);
 
-      assertTrue(!event.isExpiration());
+      assertTrue(!event.getOperation().isExpiration());
       assertTrue(!event.isNetLoad());
       assertEquals("isLoad Assertion!", this.isLoad(), event.isLoad());
       assertEquals("isLocalLoad Assertion!", this.isLoad(), event.isLocalLoad());
@@ -3138,7 +3194,7 @@ public class TXJUnitTest {
       // assertIndexDetailsEquals(event.getTransactionId(),
       // event.getRegion().getCache().getCacheTransactionManager().getTransactionId(), );
       if (!isPR())
-        assertEquals("IsDistributed Assertion!", this.isDistributed(), event.isDistributed());
+        assertEquals("IsDistributed Assertion!", this.isDistributed(), event.getOperation().isDistributed());
       assertEquals(this.getKey(), event.getKey());
       assertSame(this.getCallBackArg(), event.getCallbackArgument());
       if (newValIdentCheck) {

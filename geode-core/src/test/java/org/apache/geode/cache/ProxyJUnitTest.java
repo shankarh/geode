@@ -14,6 +14,15 @@
  */
 package org.apache.geode.cache;
 
+import static org.apache.geode.distributed.ConfigurationProperties.*;
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Properties;
+
 import org.apache.geode.cache.query.SelectResults;
 import org.apache.geode.cache.util.CacheListenerAdapter;
 import org.apache.geode.cache.util.TransactionListenerAdapter;
@@ -29,12 +38,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-
-import java.util.*;
-
-import static org.apache.geode.distributed.ConfigurationProperties.LOCATORS;
-import static org.apache.geode.distributed.ConfigurationProperties.MCAST_PORT;
-import static org.junit.Assert.*;
 
 /**
  * Unit test for basic DataPolicy.EMPTY feature. NOTE: these tests using a loner DistributedSystem
@@ -144,8 +147,8 @@ public class ProxyJUnitTest {
       assertEquals(getCallbackArgument(), other.getCallbackArgument());
       assertEquals(isOriginRemote(), other.isOriginRemote());
       assertEquals(getDistributedMember(), other.getDistributedMember());
-      assertEquals(isExpiration(), other.isExpiration());
-      assertEquals(isDistributed(), other.isDistributed());
+      assertEquals(isExpiration(), other.getOperation().isExpiration());
+      assertEquals(isDistributed(), other.getOperation().isDistributed());
     }
 
     public Region getRegion() {

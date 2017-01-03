@@ -14,6 +14,13 @@
  */
 package org.apache.geode.cache;
 
+import static org.apache.geode.distributed.ConfigurationProperties.*;
+import static org.junit.Assert.*;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Properties;
+
 import org.apache.geode.cache.util.CacheListenerAdapter;
 import org.apache.geode.cache.util.RegionMembershipListenerAdapter;
 import org.apache.geode.cache.util.RegionRoleListenerAdapter;
@@ -24,14 +31,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Properties;
-
-import static org.apache.geode.distributed.ConfigurationProperties.LOCATORS;
-import static org.apache.geode.distributed.ConfigurationProperties.MCAST_PORT;
-import static org.junit.Assert.*;
 
 /**
  * Unit test for basic CacheListener feature. NOTE: these tests using a loner DistributedSystem and
@@ -204,8 +203,8 @@ public class CacheListenerJUnitTest {
     assertEquals(Operation.REGION_CREATE, e.getOperation());
     assertEquals(false, ((RegionEvent) e).isReinitializing());
     assertEquals(false, e.isOriginRemote());
-    assertEquals(false, e.isExpiration());
-    assertEquals(false, e.isDistributed());
+    assertEquals(false, e.getOperation().isExpiration());
+    assertEquals(false, e.getOperation().isDistributed());
   }
 
   @Test
