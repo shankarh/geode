@@ -49,7 +49,7 @@ public class TXReservationMgrJUnitTest {
     this.c = CacheFactory.create(this.ds);
     AttributesFactory af = new AttributesFactory();
     af.setScope(Scope.LOCAL);
-    this.r = (LocalRegion) c.createRegion("TXReservationMgrJUnitTest", af.create());
+    this.r = (LocalRegion) c.createRegionFactory(af.create()).create("TXReservationMgrJUnitTest");
   }
 
   @After

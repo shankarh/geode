@@ -246,7 +246,7 @@ public class HAExpiryDUnitTest extends JUnit4DistributedTestCase {
     CacheListener serverListener = new VMListener();
     factory.setCacheListener(serverListener);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.basicCreateRegion(REGION_NAME, attrs);
 
   }
 

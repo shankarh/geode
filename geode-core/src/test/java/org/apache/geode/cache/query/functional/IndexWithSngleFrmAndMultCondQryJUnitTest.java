@@ -457,7 +457,7 @@ public class IndexWithSngleFrmAndMultCondQryJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setValueConstraint(Portfolio.class);
     RegionAttributes ra = af.createRegionAttributes();
-    Region region = CacheUtils.getCache().createRegion("pos", ra);
+    Region region = CacheUtils.getCache().basicCreateRegion("pos", ra);
     for (int i = 0; i < 4; i++) {
       region.put("" + i, new Portfolio(i));
     }
@@ -474,7 +474,7 @@ public class IndexWithSngleFrmAndMultCondQryJUnitTest {
     pfa.setTotalNumBuckets(1);
     af.setPartitionAttributes(pfa.create());
     ra = af.createRegionAttributes();
-    region = CacheUtils.getCache().createRegion("pos", ra);
+    region = CacheUtils.getCache().basicCreateRegion("pos", ra);
 
     for (int i = 0; i < 4; i++) {
       Portfolio x = new Portfolio(i);
@@ -608,7 +608,7 @@ public class IndexWithSngleFrmAndMultCondQryJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setValueConstraint(Portfolio.class);
     RegionAttributes ra = af.createRegionAttributes();
-    Region region = CacheUtils.getCache().createRegion("pos", ra);
+    Region region = CacheUtils.getCache().basicCreateRegion("pos", ra);
     for (int i = 0; i < 4; i++) {
       region.put("" + i, new Portfolio(i));
     }
@@ -625,7 +625,7 @@ public class IndexWithSngleFrmAndMultCondQryJUnitTest {
     pfa.setTotalNumBuckets(1);
     af.setPartitionAttributes(pfa.create());
     ra = af.createRegionAttributes();
-    region = CacheUtils.getCache().createRegion("pos", ra);
+    region = CacheUtils.getCache().basicCreateRegion("pos", ra);
 
     for (int i = 0; i < 4; i++) {
       Portfolio x = new Portfolio(i);
@@ -778,7 +778,7 @@ public class IndexWithSngleFrmAndMultCondQryJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setValueConstraint(Portfolio.class);
     RegionAttributes ra = af.createRegionAttributes();
-    Region region = CacheUtils.getCache().createRegion("pos", ra);
+    Region region = CacheUtils.getCache().basicCreateRegion("pos", ra);
     for (int i = 0; i < 5; i++) {
       region.put("" + i, new Portfolio(i));
     }
@@ -819,7 +819,7 @@ public class IndexWithSngleFrmAndMultCondQryJUnitTest {
     pfa.setTotalNumBuckets(1);
     af.setPartitionAttributes(pfa.create());
     ra = af.createRegionAttributes();
-    region = CacheUtils.getCache().createRegion("pos", ra);
+    region = CacheUtils.getCache().basicCreateRegion("pos", ra);
 
 
     for (int i = 0; i < 5; i++) {
@@ -990,7 +990,7 @@ public class IndexWithSngleFrmAndMultCondQryJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setValueConstraint(Portfolio.class);
     RegionAttributes ra = af.createRegionAttributes();
-    Region region = CacheUtils.getCache().createRegion("pos", ra);
+    Region region = CacheUtils.getCache().basicCreateRegion("pos", ra);
     for (int i = 0; i < 5; i++) {
       region.put("" + i, new Portfolio(i));
     }
@@ -1031,7 +1031,7 @@ public class IndexWithSngleFrmAndMultCondQryJUnitTest {
     pfa.setTotalNumBuckets(1);
     af.setPartitionAttributes(pfa.create());
     ra = af.createRegionAttributes();
-    region = CacheUtils.getCache().createRegion("pos", ra);
+    region = CacheUtils.getCache().basicCreateRegion("pos", ra);
 
 
     for (int i = 0; i < 5; i++) {

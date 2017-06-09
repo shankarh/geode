@@ -74,7 +74,7 @@ public class PartitionedRegionStatsJUnitTest {
     Cache cache = PartitionedRegionTestHelper.createCache();
     PartitionedRegion pr = null;
     try {
-      pr = (PartitionedRegion) cache.createRegion(name, af.create());
+      pr = (PartitionedRegion) cache.createRegionFactory(af.create()).create(name);
     } catch (RegionExistsException rex) {
       pr = (PartitionedRegion) cache.getRegion(name);
     }
@@ -101,7 +101,7 @@ public class PartitionedRegionStatsJUnitTest {
     cache.createDiskStoreFactory().setDiskDirs(new File[] {DISK_DIR}).create("diskstore");
     PartitionedRegion pr = null;
     try {
-      pr = (PartitionedRegion) cache.createRegion(name, af.create());
+      pr = (PartitionedRegion) cache.createRegionFactory(af.create()).create(name);
     } catch (RegionExistsException rex) {
       pr = (PartitionedRegion) cache.getRegion(name);
     }

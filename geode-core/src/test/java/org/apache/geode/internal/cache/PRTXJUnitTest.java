@@ -77,7 +77,7 @@ public class PRTXJUnitTest extends TXJUnitTest {
         new PartitionAttributesFactory<String, Integer>().setTotalNumBuckets(2).create());
 
     Region<String, Integer> region =
-        this.cache.createRegion("testTxId", attributesFactory.create());
+        this.cache.basicCreateRegion("testTxId", attributesFactory.create());
     region.put("one", 1);
 
     CacheTransactionManager txManager = this.cache.getTxManager();

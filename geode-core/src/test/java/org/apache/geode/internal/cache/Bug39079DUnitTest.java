@@ -101,7 +101,7 @@ public class Bug39079DUnitTest extends JUnit4CacheTestCase {
     factory.setDiskStoreName(getCache().createDiskStoreFactory().setDiskDirs(getDiskDirs())
         .create(getClass().getSimpleName()).getName());
     RegionAttributes attr = factory.create();
-    Region region = getCache().createRegion(REGION_NAME_testGIIDiskAccessException, attr);
+    Region region = getCache().basicCreateRegion(REGION_NAME_testGIIDiskAccessException, attr);
 
     // Now put entries in the disk region
     for (int i = 0; i < 100; ++i) {
@@ -233,7 +233,7 @@ public class Bug39079DUnitTest extends JUnit4CacheTestCase {
     factory.setPoolName(pool.getName());
 
     RegionAttributes attrs = factory.create();
-    Region region = getCache().createRegion(
+    Region region = getCache().basicCreateRegion(
         REGION_NAME_testBridgeServerStoppingInSynchPersistOnlyForIOExceptionCase, attrs);
     region.registerInterest("ALL_KEYS");
   }
@@ -257,7 +257,7 @@ public class Bug39079DUnitTest extends JUnit4CacheTestCase {
               .create(getClass().getSimpleName()).getName());
 
           RegionAttributes attr = factory.create();
-          getCache().createRegion(REGION_NAME_testGIIDiskAccessException, attr);
+          getCache().basicCreateRegion(REGION_NAME_testGIIDiskAccessException, attr);
         } catch (Exception ex) {
           fail("Error Creating cache / region ", ex);
         }
@@ -284,7 +284,7 @@ public class Bug39079DUnitTest extends JUnit4CacheTestCase {
               .create(getClass().getSimpleName()).getName());
 
           RegionAttributes attr = factory.create();
-          getCache().createRegion(REGION_NAME_testGIIDiskAccessException, attr);
+          getCache().basicCreateRegion(REGION_NAME_testGIIDiskAccessException, attr);
         } catch (Exception ex) {
           fail("Error Creating cache / region ", ex);
         }

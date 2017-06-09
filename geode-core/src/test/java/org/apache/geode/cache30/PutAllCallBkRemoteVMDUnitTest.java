@@ -99,9 +99,9 @@ public class PutAllCallBkRemoteVMDUnitTest extends JUnit4DistributedTestCase {
       factory.setDataPolicy(DataPolicy.REPLICATE);
       factory.setScope(Scope.DISTRIBUTED_ACK);
       RegionAttributes attr1 = factory.create();
-      paperRegion = cache.createRegion("paper", attr1);
+      paperRegion = cache.createRegionFactory(attr1).create("paper");
       RegionAttributes attr = factory.create();
-      region = cache.createRegion("map", attr);
+      region = cache.createRegionFactory(attr).create("map");
 
     } catch (CacheException ex) {
       throw new RuntimeException("vm0 cache creation exception", ex);
@@ -119,11 +119,11 @@ public class PutAllCallBkRemoteVMDUnitTest extends JUnit4DistributedTestCase {
       factory.setDataPolicy(DataPolicy.REPLICATE);
       factory.setScope(Scope.DISTRIBUTED_ACK);
       RegionAttributes attr1 = factory.create();
-      paperRegion = cache.createRegion("paper", attr1);
+      paperRegion = cache.createRegionFactory(attr1).create("paper");
       factory.setCacheWriter(aWriter);
       factory.addCacheListener(aListener);
       RegionAttributes attr = factory.create();
-      region = cache.createRegion("map", attr);
+      region = cache.createRegionFactory(attr).create("map");
     } catch (CacheException ex) {
       throw new RuntimeException("vm1 cache creation exception", ex);
     }

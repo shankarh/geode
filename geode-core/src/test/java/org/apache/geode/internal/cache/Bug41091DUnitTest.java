@@ -102,7 +102,7 @@ public class Bug41091DUnitTest extends JUnit4CacheTestCase {
           PartitionAttributesFactory paf = new PartitionAttributesFactory();
           paf.setRedundantCopies(1);
           af.setPartitionAttributes(paf.create());
-          cache.createRegion("region", af.create());
+          cache.createRegionFactory(af.create()).create("region");
         }
       };
       vm0.invoke(createRegion);
@@ -122,7 +122,7 @@ public class Bug41091DUnitTest extends JUnit4CacheTestCase {
           paf.setRedundantCopies(1);
           paf.setLocalMaxMemory(0);
           af.setPartitionAttributes(paf.create());
-          Region region = cache.createRegion("region", af.create());
+          Region region = cache.createRegionFactory(af.create()).create("region");
           region.put(Integer.valueOf(0), "a");
         }
       });

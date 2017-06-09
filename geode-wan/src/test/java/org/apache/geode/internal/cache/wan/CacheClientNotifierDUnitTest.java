@@ -268,7 +268,7 @@ public class CacheClientNotifierDUnitTest extends WANTestBase {
     factory.setPoolName(p.getName());
     factory.setDataPolicy(DataPolicy.NORMAL);
     RegionAttributes attrs = factory.create();
-    region = cache.createRegion(regionName, attrs);
+    region = cache.createRegionFactory(attrs).create(regionName);
     region.registerInterest("ALL_KEYS");
     assertNotNull(region);
     if (isDurable) {

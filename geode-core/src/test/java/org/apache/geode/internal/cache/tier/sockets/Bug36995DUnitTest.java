@@ -88,7 +88,7 @@ public class Bug36995DUnitTest extends JUnit4DistributedTestCase {
       AttributesFactory factory = new AttributesFactory();
       factory.setPoolName(p.getName());
       RegionAttributes attrs = factory.create();
-      cache.createRegion(regionName, attrs);
+      cache.createRegionFactory(attrs).create(regionName);
       pool = p;
     } catch (Exception e) {
       fail("Test failed due to ", e);
@@ -107,7 +107,7 @@ public class Bug36995DUnitTest extends JUnit4DistributedTestCase {
       AttributesFactory factory = new AttributesFactory();
       factory.setPoolName(p.getName());
       RegionAttributes attrs = factory.create();
-      cache.createRegion(regionName, attrs);
+      cache.createRegionFactory(attrs).create(regionName);
       pool = p;
     } catch (Exception e) {
       fail("Test failed due to ", e);

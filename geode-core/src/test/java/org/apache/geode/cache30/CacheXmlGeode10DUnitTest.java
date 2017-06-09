@@ -61,7 +61,7 @@ public class CacheXmlGeode10DUnitTest extends CacheXml81DUnitTest {
     attrs.setOffHeap(true);
     assertEquals(true, attrs.getOffHeap());
 
-    final Region regionBefore = cache.createRegion(regionName, attrs);
+    final Region regionBefore = cache.basicCreateRegion(regionName, attrs);
     assertNotNull(regionBefore);
     assertEquals(true, regionBefore.getAttributes().getOffHeap());
 
@@ -88,7 +88,7 @@ public class CacheXmlGeode10DUnitTest extends CacheXml81DUnitTest {
     attrs.setOffHeap(true);
     assertEquals(true, attrs.getOffHeap());
 
-    final Region regionBefore = cache.createRegion(regionName, attrs);
+    final Region regionBefore = cache.basicCreateRegion(regionName, attrs);
     assertNotNull(regionBefore);
     assertEquals(true, regionBefore.getAttributes().getOffHeap());
 
@@ -119,7 +119,7 @@ public class CacheXmlGeode10DUnitTest extends CacheXml81DUnitTest {
     final RegionAttributesCreation rootRegionAttrs = new RegionAttributesCreation(cache);
     assertEquals(false, rootRegionAttrs.getOffHeap());
 
-    final Region rootRegionBefore = cache.createRegion(rootRegionName, rootRegionAttrs);
+    final Region rootRegionBefore = cache.basicCreateRegion(rootRegionName, rootRegionAttrs);
     assertNotNull(rootRegionBefore);
     assertEquals(false, rootRegionBefore.getAttributes().getOffHeap());
 
@@ -267,7 +267,7 @@ public class CacheXmlGeode10DUnitTest extends CacheXml81DUnitTest {
     final RegionAttributesCreation attrs = new RegionAttributesCreation(cache);
     attrs.addAsyncEventQueueId(aeqId2);
 
-    final Region regionBefore = cache.createRegion(regionName, attrs);
+    final Region regionBefore = cache.basicCreateRegion(regionName, attrs);
     assertNotNull(regionBefore);
     assertTrue(regionBefore.getAttributes().getAsyncEventQueueIds().size() == 1);
 

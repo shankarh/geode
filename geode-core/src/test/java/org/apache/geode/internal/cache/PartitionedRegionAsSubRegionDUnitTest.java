@@ -192,7 +192,7 @@ public class PartitionedRegionAsSubRegionDUnitTest extends PartitionedRegionDUni
         public void run2() throws CacheException {
           Cache cache = getCache();
           RegionAttributes ra = createRegionAttributesForDACKRegions();
-          Region parentRegion = cache.createRegion(parentRegionName, ra);
+          Region parentRegion = cache.createRegionFactory(ra).create(parentRegionName);
           parentRegion.createSubregion(childRegionName, ra);
         }
       };

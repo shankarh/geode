@@ -354,8 +354,8 @@ public class RegionManagementDUnitTest extends ManagementTestBase {
       RegionAttributes regionAttributes = attributesFactory.create();
 
       Cache cache = getCache_tmp();
-      cache.createRegion("p-os", regionAttributes);
-      cache.createRegion("p_os", regionAttributes);
+      cache.createRegionFactory(regionAttributes).create("p-os");
+      cache.createRegionFactory(regionAttributes).create("p_os");
     });
   }
 
@@ -373,7 +373,7 @@ public class RegionManagementDUnitTest extends ManagementTestBase {
       factory.setEvictionAttributes(EvictionAttributes.createLRUMemoryAttributes(20,
           new TestObjectSizerImpl(), EvictionAction.LOCAL_DESTROY));
 
-      Region region = getCache_tmp().createRegion(REGION_NAME, factory.create());
+      Region region = getCache_tmp().createRegionFactory(factory.create()).create(REGION_NAME);
 
       LRUStatistics lruStats =
           ((AbstractRegion) region).getEvictionController().getLRUHelper().getStats();
@@ -519,7 +519,8 @@ public class RegionManagementDUnitTest extends ManagementTestBase {
     AttributesFactory attributesFactory = new AttributesFactory();
     attributesFactory.setPartitionAttributes(partitionAttributesFactory.create());
 
-    fixedPartitionedRegion = getCache_tmp().createRegion(FIXED_PR_NAME, attributesFactory.create());
+    fixedPartitionedRegion =
+        getCache_tmp().createRegionFactory(attributesFactory.create()).create(FIXED_PR_NAME);
     assertThat(fixedPartitionedRegion).isNotNull();
 
     RegionMXBean regionMXBean = service.getLocalRegionMBean(FIXED_PR_PATH);

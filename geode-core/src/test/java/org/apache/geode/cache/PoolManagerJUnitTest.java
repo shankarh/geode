@@ -105,7 +105,7 @@ public class PoolManagerJUnitTest {
     Cache cache = CacheFactory.create(ds);
     AttributesFactory fact = new AttributesFactory();
     fact.setPoolName(pool.getName());
-    Region region = cache.createRegion("myRegion", fact.create());
+    Region region = cache.createRegionFactory(fact.create()).create("myRegion");
     assertEquals(pool, PoolManager.find(region));
   }
 

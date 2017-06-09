@@ -605,7 +605,7 @@ public class HARegionQueueDUnitTest extends JUnit4DistributedTestCase {
 
         });
 
-        cache.createRegion("test_region", factory.create());
+        cache.basicCreateRegion("test_region", factory.create());
 
       }
     };

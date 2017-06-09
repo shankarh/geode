@@ -110,7 +110,7 @@ public class Bug37377DUnitTest extends JUnit4CacheTestCase {
       factory.setDiskStoreName(
           cache.createDiskStoreFactory().setDiskDirs(dirs).create("Bug37377DUnitTest").getName());
       RegionAttributes attr = factory.create();
-      cache.createRegion(regionName, attr);
+      cache.createRegionFactory(attr).create(regionName);
     } catch (Exception ex) {
       ex.printStackTrace();
       fail("Error Creating cache / region ");

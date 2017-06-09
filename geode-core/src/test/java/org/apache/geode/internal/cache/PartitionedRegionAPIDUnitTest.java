@@ -154,7 +154,7 @@ public class PartitionedRegionAPIDUnitTest extends PartitionedRegionDUnitTestCas
           PartitionAttributes prAttr = paf.create();
           attr.setPartitionAttributes(prAttr);
           RegionAttributes regionAttribs = attr.create();
-          cache.createRegion("PR1", regionAttribs);
+          cache.createRegionFactory(regionAttribs).create("PR1");
         }
       };
 
@@ -173,7 +173,7 @@ public class PartitionedRegionAPIDUnitTest extends PartitionedRegionDUnitTestCas
               paf.setLocalMaxMemory(0).setTotalNumBuckets(totalNumBuckets).create();
           attr.setPartitionAttributes(prAttr);
           RegionAttributes regionAttribs = attr.create();
-          cache.createRegion("PR1", regionAttribs);
+          cache.createRegionFactory(regionAttribs).create("PR1");
           LogWriterUtils.getLogWriter().info("Region created in VM1.");
         }
       };
@@ -1237,7 +1237,7 @@ public class PartitionedRegionAPIDUnitTest extends PartitionedRegionDUnitTestCas
         attr.setEarlyAck(true);
         attr.setPartitionAttributes(new PartitionAttributesFactory().create());
         RegionAttributes regionAttribs = attr.create();
-        Region partitionedregion = cache.createRegion(rName, regionAttribs);
+        Region partitionedregion = cache.createRegionFactory(regionAttribs).create(rName);
         assertNotNull(partitionedregion);
         assertNotNull(cache.getRegion(rName));
       }
@@ -1252,7 +1252,7 @@ public class PartitionedRegionAPIDUnitTest extends PartitionedRegionDUnitTestCas
                 new PartitionAttributesFactory().setLocalMaxMemory(0).create();
             attr.setPartitionAttributes(prAttr);
             RegionAttributes regionAttribs = attr.create();
-            Region partitionedregion = cache.createRegion(rName, regionAttribs);
+            Region partitionedregion = cache.createRegionFactory(regionAttribs).create(rName);
             assertNotNull(partitionedregion);
             assertNotNull(cache.getRegion(rName));
           }
@@ -1296,7 +1296,7 @@ public class PartitionedRegionAPIDUnitTest extends PartitionedRegionDUnitTestCas
         AttributesFactory attr = new AttributesFactory();
         attr.setDataPolicy(DataPolicy.PARTITION);
         RegionAttributes regionAttribs = attr.create();
-        Region partitionedregion = cache.createRegion(rName, regionAttribs);
+        Region partitionedregion = cache.createRegionFactory(regionAttribs).create(rName);
         assertNotNull(partitionedregion);
         assertNotNull(cache.getRegion(rName));
         PartitionAttributes p = regionAttribs.getPartitionAttributes();

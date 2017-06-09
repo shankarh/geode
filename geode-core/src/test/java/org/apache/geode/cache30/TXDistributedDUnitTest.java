@@ -111,13 +111,13 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
     IgnoredException.addIgnoredException("killing members ds");
     final CacheTransactionManager txMgr = this.getCache().getCacheTransactionManager();
     final String rgnName = getUniqueName();
-    Region rgn = getCache().createRegion(rgnName, getRegionAttributes());
+    Region rgn = getCache().basicCreateRegion(rgnName, getRegionAttributes());
     rgn.create("key", null);
 
     Invoke.invokeInEveryVM(new SerializableRunnable("testRemoteGrantor: initial configuration") {
       public void run() {
         try {
-          Region rgn1 = getCache().createRegion(rgnName, getRegionAttributes());
+          Region rgn1 = getCache().basicCreateRegion(rgnName, getRegionAttributes());
           rgn1.put("key", "val0");
         } catch (CacheException e) {
           Assert.fail("While creating region", e);
@@ -178,7 +178,7 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
               Region rgn1 = c.getRegion(rgnName);
               if (rgn1 == null) {
                 // This block should only execute on VM0
-                rgn1 = c.createRegion(rgnName, getRegionAttributes());
+                rgn1 = c.createRegionFactory(getRegionAttributes()).create(rgnName);
               }
 
               txMgr2.begin();
@@ -212,7 +212,7 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
     final String rgnName1 = getUniqueName() + "_1";
     final String rgnName2 = getUniqueName() + "_2";
     final String rgnName3 = getUniqueName() + "_3";
-    Region rgn1 = getCache().createRegion(rgnName1, getRegionAttributes());
+    Region rgn1 = getCache().basicCreateRegion(rgnName1, getRegionAttributes());
 
     Host host = Host.getHost(0);
     VM vm0 = host.getVM(0);
@@ -222,10 +222,10 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
         new SerializableRunnable("testInternalCallbacks: initial configuration") {
           public void run() {
             try {
-              Region rgn1a = getCache().createRegion(rgnName1, getRegionAttributes());
-              Region rgn2 = getCache().createRegion(rgnName2, getRegionAttributes());
-              Region rgn3 =
-                  getCache().createRegion(rgnName3, getRegionAttributes(Scope.DISTRIBUTED_NO_ACK));
+              Region rgn1a = getCache().basicCreateRegion(rgnName1, getRegionAttributes());
+              Region rgn2 = getCache().basicCreateRegion(rgnName2, getRegionAttributes());
+              Region rgn3 = getCache().basicCreateRegion(rgnName3,
+                  getRegionAttributes(Scope.DISTRIBUTED_NO_ACK));
               rgn1a.create("key", null);
               rgn2.create("key", null);
               rgn3.create("key", null);
@@ -281,7 +281,7 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
     vm1.invoke(checkRgn1Again);
 
     // Try 2 regions
-    Region rgn2 = getCache().createRegion(rgnName2, getRegionAttributes());
+    Region rgn2 = getCache().basicCreateRegion(rgnName2, getRegionAttributes());
     txMgr.begin();
     rgn1.put("key", "value2");
     rgn2.put("key", "value2");
@@ -334,7 +334,8 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
     vm1.invoke(checkRgn12Again);
 
     // Try a third region (D_NO_ACK)
-    Region rgn3 = getCache().createRegion(rgnName3, getRegionAttributes(Scope.DISTRIBUTED_NO_ACK));
+    Region rgn3 =
+        getCache().basicCreateRegion(rgnName3, getRegionAttributes(Scope.DISTRIBUTED_NO_ACK));
     txMgr.begin();
     rgn1.put("key", "value4");
     rgn2.put("key", "value4");
@@ -467,7 +468,7 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
 
       public void close() {}
     });
-    Region rgn = getCache().createRegion(rgnName, factory.create());
+    Region rgn = getCache().basicCreateRegion(rgnName, factory.create());
 
     Invoke.invokeInEveryVM(new SerializableRunnable("testDACKLoadedMessage: intial configuration") {
       public void run() {
@@ -477,7 +478,7 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
           factory2.setEarlyAck(false);
           // factory.setDataPolicy(DataPolicy.REPLICATE);
           factory2.setMirrorType(MirrorType.KEYS);
-          getCache().createRegion(rgnName, factory2.create());
+          getCache().basicCreateRegion(rgnName, factory2.create());
         } catch (CacheException e) {
           Assert.fail("While creating region", e);
         }
@@ -545,7 +546,7 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
     AttributesFactory factory = new AttributesFactory();
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setEarlyAck(false);
-    Region rgn = getCache().createRegion(rgnName, factory.create());
+    Region rgn = getCache().basicCreateRegion(rgnName, factory.create());
     Invoke.invokeInEveryVM(
         new SerializableRunnable("testHighAvailabilityFeatures: intial region configuration") {
           public void run() {
@@ -554,7 +555,7 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
               factory2.setScope(Scope.DISTRIBUTED_ACK);
               factory2.setEarlyAck(false);
               factory2.setDataPolicy(DataPolicy.REPLICATE);
-              getCache().createRegion(rgnName, factory2.create());
+              getCache().basicCreateRegion(rgnName, factory2.create());
             } catch (CacheException e) {
               Assert.fail("While creating region", e);
             }
@@ -626,7 +627,7 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
                 factory2.setScope(Scope.DISTRIBUTED_ACK);
                 factory2.setEarlyAck(false);
                 factory2.setDataPolicy(DataPolicy.REPLICATE);
-                rgn1 = getCache().createRegion(rgnName, factory2.create());
+                rgn1 = getCache().basicCreateRegion(rgnName, factory2.create());
               } catch (CacheException e) {
                 Assert.fail("While creating region", e);
               }
@@ -736,7 +737,7 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
             factory2.setScope(Scope.DISTRIBUTED_ACK);
             factory2.setEarlyAck(false);
             factory2.setDataPolicy(DataPolicy.REPLICATE);
-            rgn1 = getCache().createRegion(rgnName, factory2.create());
+            rgn1 = getCache().basicCreateRegion(rgnName, factory2.create());
           } catch (CacheException e) {
             Assert.fail("While creating region", e);
           }
@@ -773,7 +774,7 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
               factory2.setScope(Scope.DISTRIBUTED_ACK);
               factory2.setEarlyAck(false);
               factory2.setDataPolicy(DataPolicy.REPLICATE);
-              Region rgn1 = getCache().createRegion(soloRegionName, factory2.create());
+              Region rgn1 = getCache().basicCreateRegion(soloRegionName, factory2.create());
               rgn1.put("soloKey0", "soloVal0_0");
               rgn1.put("soloKey1", "soloVal1_0");
             } catch (CacheException e) {
@@ -840,7 +841,7 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
             factory2.setScope(Scope.DISTRIBUTED_ACK);
             factory2.setEarlyAck(false);
             factory2.setDataPolicy(DataPolicy.REPLICATE);
-            soloRgn = getCache().createRegion(soloRegionName, factory2.create());
+            soloRgn = getCache().basicCreateRegion(soloRegionName, factory2.create());
           } catch (CacheException e) {
             Assert.fail("While creating region ", e);
           }
@@ -970,7 +971,7 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
             factory2.setScope(Scope.DISTRIBUTED_ACK);
             factory2.setEarlyAck(false);
             factory2.setDataPolicy(DataPolicy.REPLICATE);
-            soloRgn = getCache().createRegion(soloRegionName, factory2.create());
+            soloRgn = getCache().basicCreateRegion(soloRegionName, factory2.create());
           } catch (CacheException e) {
             Assert.fail("While creating region ", e);
           }
@@ -996,7 +997,7 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
             factory2.setScope(Scope.DISTRIBUTED_ACK);
             factory2.setEarlyAck(false);
             factory2.setDataPolicy(DataPolicy.REPLICATE);
-            rgn1 = getCache().createRegion(rgnName, factory2.create());
+            rgn1 = getCache().basicCreateRegion(rgnName, factory2.create());
           } catch (CacheException e) {
             Assert.fail("While creating region", e);
           }
@@ -1117,7 +1118,7 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
   @Test
   public void testLockBatchParticipantsUpdate() throws Exception {
     final String rgnName = getUniqueName();
-    Region rgn = getCache().createRegion(rgnName, getRegionAttributes());
+    Region rgn = getCache().basicCreateRegion(rgnName, getRegionAttributes());
     rgn.create("key", null);
 
     Host host = Host.getHost(0);
@@ -1128,7 +1129,7 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
         new SerializableRunnable("testLockBatchParticipantsUpdate: initial configuration") {
           public void run() {
             try {
-              Region rgn1 = getCache().createRegion(rgnName, getRegionAttributes());
+              Region rgn1 = getCache().basicCreateRegion(rgnName, getRegionAttributes());
               rgn1.create("key", null);
             } catch (CacheException e) {
               Assert.fail("While creating region", e);
@@ -1240,7 +1241,7 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
           factory.setScope(Scope.DISTRIBUTED_ACK);
           factory.setEarlyAck(false);
           factory.setDataPolicy(DataPolicy.REPLICATE);
-          getCache().createRegion(rgnName, factory.create());
+          getCache().basicCreateRegion(rgnName, factory.create());
         } catch (CacheException e) {
           Assert.fail("While creating region", e);
         }
@@ -1364,8 +1365,8 @@ public class TXDistributedDUnitTest extends JUnit4CacheTestCase {
               af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
               af.setScope(Scope.DISTRIBUTED_ACK);
               af.setDiskStoreName(diskStoreName);
-              getCache().createRegion(rgnName1, af.create());
-              getCache().createRegion(rgnName2, af.create());
+              getCache().basicCreateRegion(rgnName1, af.create());
+              getCache().basicCreateRegion(rgnName2, af.create());
             }
           };
       origin.invoke(initRegions);

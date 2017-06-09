@@ -209,14 +209,14 @@ public class MemoryMonitorJUnitTest {
     // test local sub region
     AttributesFactory factory = new AttributesFactory();
     factory.setScope(Scope.LOCAL);
-    Region parent = cache.createRegion("parent", factory.create());
+    Region parent = cache.basicCreateRegion("parent", factory.create());
     parent.createSubregion("sub", factory.create());
     parent.close();
     assertEquals(0 + SYSTEM_LISTENERS, cache.getInternalResourceManager(false)
         .getResourceListeners(ResourceType.HEAP_MEMORY).size());
 
     // test nested local region
-    parent = cache.createRegion("parent2", factory.create());
+    parent = cache.basicCreateRegion("parent2", factory.create());
     parent.createSubregion("sub", factory.create()).createSubregion("subsub", factory.create());
     parent.close();
     assertEquals(0 + SYSTEM_LISTENERS, cache.getInternalResourceManager(false)
@@ -224,13 +224,13 @@ public class MemoryMonitorJUnitTest {
 
     // test distributed sub region
     factory.setScope(Scope.DISTRIBUTED_ACK);
-    parent = cache.createRegion("parent3", factory.create());
+    parent = cache.basicCreateRegion("parent3", factory.create());
     parent.createSubregion("sub", factory.create());
     parent.close();
     assertEquals(0 + SYSTEM_LISTENERS, cache.getInternalResourceManager(false)
         .getResourceListeners(ResourceType.HEAP_MEMORY).size());
     // test nested distributed region
-    parent = cache.createRegion("parent4", factory.create());
+    parent = cache.basicCreateRegion("parent4", factory.create());
     parent.createSubregion("sub", factory.create()).createSubregion("subsub", factory.create());
     parent.close();
     assertEquals(0 + SYSTEM_LISTENERS, cache.getInternalResourceManager(false)
@@ -245,7 +245,7 @@ public class MemoryMonitorJUnitTest {
   public void testPutsRejectionDistributedRegion() throws Exception {
     AttributesFactory attr = new AttributesFactory();
     attr.setScope(Scope.DISTRIBUTED_ACK);
-    Region region = cache.createRegion("DistributedRegion", attr.create());
+    Region region = cache.basicCreateRegion("DistributedRegion", attr.create());
     checkOpRejection(region, false, true);
     region.close();
     assertEquals(0 + SYSTEM_LISTENERS, cache.getInternalResourceManager(false)
@@ -256,7 +256,7 @@ public class MemoryMonitorJUnitTest {
   public void testTxDistributedRegion() throws Exception {
     AttributesFactory attr = new AttributesFactory();
     attr.setScope(Scope.DISTRIBUTED_ACK);
-    Region region = cache.createRegion("DistributedRegion", attr.create());
+    Region region = cache.basicCreateRegion("DistributedRegion", attr.create());
     checkOpRejection(region, true, true);
     region.close();
     assertEquals(0 + SYSTEM_LISTENERS, cache.getInternalResourceManager(false)
@@ -267,7 +267,7 @@ public class MemoryMonitorJUnitTest {
   public void testPutsLocalRegion() throws Exception {
     AttributesFactory attr = new AttributesFactory();
     attr.setScope(Scope.LOCAL);
-    Region region = cache.createRegion("localRegion", attr.create());
+    Region region = cache.basicCreateRegion("localRegion", attr.create());
     checkOpRejection(region, false, true);
     region.close();
     assertEquals(0 + SYSTEM_LISTENERS, cache.getInternalResourceManager(false)
@@ -278,7 +278,7 @@ public class MemoryMonitorJUnitTest {
   public void testTxLocalRegion() throws Exception {
     AttributesFactory attr = new AttributesFactory();
     attr.setScope(Scope.LOCAL);
-    Region region = cache.createRegion("localRegion", attr.create());
+    Region region = cache.basicCreateRegion("localRegion", attr.create());
     checkOpRejection(region, true, true);
     region.close();
     assertEquals(0 + SYSTEM_LISTENERS, cache.getInternalResourceManager(false)
@@ -289,8 +289,8 @@ public class MemoryMonitorJUnitTest {
   public void testPutsRejectedSubRegion() throws Exception {
     AttributesFactory factory = new AttributesFactory();
     factory.setScope(Scope.LOCAL);
-    Region subRegion =
-        cache.createRegion("local1", factory.create()).createSubregion("sub1", factory.create());
+    Region subRegion = cache.basicCreateRegion("local1", factory.create()).createSubregion("sub1",
+        factory.create());
     checkOpRejection(subRegion, false, true);
     subRegion.close();
 
@@ -303,8 +303,8 @@ public class MemoryMonitorJUnitTest {
   public void testTxSubRegion() throws Exception {
     AttributesFactory factory = new AttributesFactory();
     factory.setScope(Scope.LOCAL);
-    Region subRegion =
-        cache.createRegion("local1", factory.create()).createSubregion("sub1", factory.create());
+    Region subRegion = cache.basicCreateRegion("local1", factory.create()).createSubregion("sub1",
+        factory.create());
     checkOpRejection(subRegion, true, true);
     subRegion.close();
 

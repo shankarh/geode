@@ -121,7 +121,7 @@ public class Bug37241DUnitTest extends JUnit4DistributedTestCase {
     factory.setDiskStoreName(
         cache.createDiskStoreFactory().setDiskDirs(dirs).create("Bug37241DUnitTest").getName());
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
   }
 
   public static void createRegionOnServer2(Scope scope) throws Exception {
@@ -152,7 +152,7 @@ public class Bug37241DUnitTest extends JUnit4DistributedTestCase {
         .info("<ExpectedException action=add>" + expectedException + "</ExpectedException>");
 
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
   }
 

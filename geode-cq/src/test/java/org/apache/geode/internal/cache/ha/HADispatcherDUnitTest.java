@@ -287,7 +287,7 @@ public class HADispatcherDUnitTest extends JUnit4DistributedTestCase {
       factory.setCacheListener(serverListener);
     }
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
     CacheServerImpl server = (CacheServerImpl) cache.addCacheServer();
     assertNotNull(server);
     int port = getRandomAvailablePort(SOCKET);
@@ -314,7 +314,7 @@ public class HADispatcherDUnitTest extends JUnit4DistributedTestCase {
       factory.setCacheListener(clientListener);
     }
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
     Region region = cache.getRegion(Region.SEPARATOR + REGION_NAME);
     assertNotNull(region);
 

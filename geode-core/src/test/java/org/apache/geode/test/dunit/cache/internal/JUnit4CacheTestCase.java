@@ -505,7 +505,11 @@ public abstract class JUnit4CacheTestCase extends JUnit4DistributedTestCase
 
   public final Region createRootRegion(final String rootName, final RegionAttributes attributes)
       throws RegionExistsException, TimeoutException {
-    return getCache().createRegion(rootName, attributes);
+    if(getCache() instanceof CacheCreation){
+      return ((CacheCreation)getCache()).createRegion(rootName, attributes);
+    }else {
+      return getCache().createRegionFactory(attributes).create(rootName);
+    }
   }
 
   public final Region createExpiryRootRegion(final String rootName,

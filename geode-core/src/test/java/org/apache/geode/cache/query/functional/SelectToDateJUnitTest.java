@@ -188,7 +188,7 @@ public class SelectToDateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     attributesFactory.setDataPolicy(DataPolicy.NORMAL);
     RegionAttributes regionAttributes = attributesFactory.create();
-    Region region = cache.createRegion(regionName, regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create(regionName);
 
     for (int i = 1; i <= numElem; i++) {
       putData(i, region);
@@ -200,7 +200,7 @@ public class SelectToDateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     attributesFactory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes regionAttributes = attributesFactory.create();
-    Region region = cache.createRegion(regionName, regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create(regionName);
 
     for (int i = 1; i <= numElem; i++) {
       putData(i, region);
@@ -213,7 +213,7 @@ public class SelectToDateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     attributesFactory.setPartitionAttributes(prAttFactory.create());
     RegionAttributes regionAttributes = attributesFactory.create();
-    Region region = cache.createRegion(regionName, regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create(regionName);
 
     for (int i = 1; i <= numElem; i++) {
       putData(i, region);

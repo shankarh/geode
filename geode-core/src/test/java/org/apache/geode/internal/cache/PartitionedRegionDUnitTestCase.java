@@ -167,7 +167,7 @@ public class PartitionedRegionDUnitTestCase extends JUnit4CacheTestCase {
         EvictionAttributes evictionAttrs = evict ? EvictionAttributes
             .createLRUEntryAttributes(Integer.MAX_VALUE, EvictionAction.LOCAL_DESTROY) : null;
         for (int i = startIndexForRegion; i < endIndexForRegion; i++) {
-          Region partitionedregion = getCache().createRegion(innerPRPrefix + i,
+          Region partitionedregion = getCache().basicCreateRegion(innerPRPrefix + i,
               createRegionAttrsForPR(innerRedundancy, innerlocalmaxMemory,
                   PartitionAttributesFactory.RECOVERY_DELAY_DEFAULT, evictionAttrs));
           getCache().getLogger()
@@ -196,7 +196,7 @@ public class PartitionedRegionDUnitTestCase extends JUnit4CacheTestCase {
         for (int i = 0; i < maxIndex; i++) {
           // final int rind = ra.nextInt(maxIndex);
           try {
-            getCache().createRegion(prPrefix + i, PartitionedRegionTestHelper
+            getCache().basicCreateRegion(prPrefix + i, PartitionedRegionTestHelper
                 .createRegionAttrsForPR(redundancy, localmaxMemory, recoveryDelay));
             org.apache.geode.test.dunit.LogWriterUtils.getLogWriter()
                 .info("Created Region  new  --- " + prPrefix + i);

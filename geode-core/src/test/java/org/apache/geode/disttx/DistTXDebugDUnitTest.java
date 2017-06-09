@@ -126,7 +126,8 @@ public class DistTXDebugDUnitTest extends JUnit4CacheTestCase {
     attr.setConcurrencyChecksEnabled(concurrencyChecks);
 
     assertNotNull(basicGetCache());
-    Region<String, String> pr = basicGetCache().createRegion(partitionedRegionName, attr.create());
+    Region<String, String> pr =
+        basicGetCache().createRegionFactory(attr.create()).create(partitionedRegionName);
     assertNotNull(pr);
     LogWriterUtils.getLogWriter().info(
         "Partitioned Region " + partitionedRegionName + " created Successfully :" + pr.toString());
@@ -162,7 +163,7 @@ public class DistTXDebugDUnitTest extends JUnit4CacheTestCase {
     }
     // Region rr = basicGetCache().createRegion(replicatedRegionName,
     // af.create());
-    Region rr = basicGetCache().createRegion(replicatedRegionName, af.create());
+    Region rr = basicGetCache().createRegionFactory(af.create()).create(replicatedRegionName);
     assertNotNull(rr);
     LogWriterUtils.getLogWriter().info(
         "Replicated Region " + replicatedRegionName + " created Successfully :" + rr.toString());

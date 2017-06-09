@@ -140,7 +140,7 @@ public class HAGIIDUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.addCacheListener(HAGIIDUnitTest.checker);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
   }
 
   public static Integer createServer1Cache() throws Exception {
@@ -149,7 +149,7 @@ public class HAGIIDUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     CacheServer server1 = cache.addCacheServer();
     server1.setPort(port);
@@ -164,7 +164,7 @@ public class HAGIIDUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
     CacheServer server1 = cache.addCacheServer();
     server1.setPort(port.intValue());
     server1.setNotifyBySubscription(true);

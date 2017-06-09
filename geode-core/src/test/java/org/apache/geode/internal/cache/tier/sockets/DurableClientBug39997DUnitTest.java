@@ -68,7 +68,7 @@ public class DurableClientBug39997DUnitTest extends JUnit4CacheTestCase {
         factory.setScope(Scope.LOCAL);
         factory.setPoolName(p.getName());
         Cache cache = getCache();
-        Region region1 = cache.createRegion("region", factory.create());
+        Region region1 = cache.createRegionFactory(factory.create()).create("region");
         cache.readyForEvents();
 
         try {
@@ -85,7 +85,7 @@ public class DurableClientBug39997DUnitTest extends JUnit4CacheTestCase {
         Cache cache = getCache();
         AttributesFactory factory = new AttributesFactory();
         factory.setScope(Scope.DISTRIBUTED_ACK);
-        cache.createRegion("region", factory.create());
+        cache.createRegionFactory(factory.create()).create("region");
         CacheServer server = cache.addCacheServer();
         server.setPort(port);
         try {

@@ -248,7 +248,7 @@ public class UpdatePropagationDUnitTest extends JUnit4CacheTestCase {
   private Integer createServerCache() throws Exception {
     Cache cache = getCache();
     RegionAttributes attrs = createCacheServerAttributes();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
     CacheServer server = cache.addCacheServer();
     assertNotNull(server);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);

@@ -330,7 +330,7 @@ public class InterestListEndpointDUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setPoolName(p.getName());
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
   }
 
@@ -347,7 +347,7 @@ public class InterestListEndpointDUnitTest extends JUnit4DistributedTestCase {
   public static Integer createServerCache(Integer maxThreads) throws Exception {
     new InterestListEndpointDUnitTest().createCache(new Properties());
     RegionAttributes attrs = impl.createServerCacheAttributes();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
     CacheServer server1 = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server1.setPort(port);

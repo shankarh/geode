@@ -50,7 +50,6 @@ import org.apache.geode.test.dunit.VM;
 public class DeltaSizingDUnitTest extends JUnit4CacheTestCase {
 
   /**
-   * @param name
    */
   public DeltaSizingDUnitTest() {
     super();
@@ -110,7 +109,8 @@ public class DeltaSizingDUnitTest extends JUnit4CacheTestCase {
         PartitionAttributes<Integer, TestDelta> prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
         attr.setDataPolicy(DataPolicy.PARTITION);
-        Region<Integer, TestDelta> region = cache.createRegion("region1", attr.create());
+        Region<Integer, TestDelta> region =
+            cache.createRegionFactory(attr.create()).create("region1");
         return region;
       }
     };
@@ -131,7 +131,8 @@ public class DeltaSizingDUnitTest extends JUnit4CacheTestCase {
         attr.setDataPolicy(DataPolicy.EMPTY);
         attr.setScope(Scope.LOCAL);
         attr.setPoolName("pool");
-        Region<Integer, TestDelta> region = cache.createRegion("region1", attr.create());
+        Region<Integer, TestDelta> region =
+            cache.createRegionFactory(attr.create()).create("region1");
         return region;
       }
     };
@@ -174,7 +175,7 @@ public class DeltaSizingDUnitTest extends JUnit4CacheTestCase {
         // }
         //
         // });
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
         CacheServer server = cache.addCacheServer();
         int port = AvailablePortHelper.getRandomAvailableTCPPort();
         server.setPort(port);

@@ -104,7 +104,7 @@ public class PRCustomPartitioningDUnitTest extends PartitionedRegionDUnitTestCas
           PartitionAttributes prAttr = paf.create();
           attr.setPartitionAttributes(prAttr);
           RegionAttributes regionAttribs = attr.create();
-          cache.createRegion("PR1", regionAttribs);
+          cache.createRegionFactory(regionAttribs).create("PR1");
         }
       };
 
@@ -122,7 +122,7 @@ public class PRCustomPartitioningDUnitTest extends PartitionedRegionDUnitTestCas
 
           attr.setPartitionAttributes(prAttr);
           RegionAttributes regionAttribs = attr.create();
-          cache.createRegion("PR1", regionAttribs);
+          cache.createRegionFactory(regionAttribs).create("PR1");
 
         }
       };

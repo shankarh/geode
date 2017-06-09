@@ -161,7 +161,7 @@ public class PartitionedRegionLoaderWriterDUnitTest extends JUnit4CacheTestCase 
       factory.setDataPolicy(DataPolicy.PARTITION);
       factory.setPartitionAttributes(paf.create());
       RegionAttributes attrs = factory.create();
-      cache.createRegion(PartitionedRegionName, attrs);
+      cache.createRegionFactory(attrs).create(PartitionedRegionName);
     } catch (Exception e) {
       Assert.fail("Not Expected : ", e);
     }
@@ -184,7 +184,7 @@ public class PartitionedRegionLoaderWriterDUnitTest extends JUnit4CacheTestCase 
       factory.setDataPolicy(DataPolicy.PARTITION);
       factory.setPartitionAttributes(paf.create());
       RegionAttributes attrs = factory.create();
-      cache.createRegion(PartitionedRegionName, attrs);
+      cache.createRegionFactory(attrs).create(PartitionedRegionName);
       fail("Expected Exception ");
     } catch (IllegalStateException e) {
       assertTrue(e.getMessage().startsWith("Incompatible"));

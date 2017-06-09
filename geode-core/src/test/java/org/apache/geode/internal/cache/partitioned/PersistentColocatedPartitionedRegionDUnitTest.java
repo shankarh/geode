@@ -126,11 +126,11 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
-        cache.createRegion("persistentLeader", af.create());
+        cache.createRegionFactory(af.create()).create("persistentLeader");
 
         af.setDataPolicy(DataPolicy.PARTITION);
         af.setDiskStoreName(null);
-        cache.createRegion("nonPersistentLeader", af.create());
+        cache.createRegionFactory(af.create()).create("nonPersistentLeader");
 
 
         // Create a non persistent PR
@@ -142,7 +142,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         // Try to colocate a persistent PR with the non persistent PR. This should fail.
         IgnoredException exp = IgnoredException.addIgnoredException("IllegalStateException");
         try {
-          cache.createRegion("colocated", af.create());
+          cache.createRegionFactory(af.create()).create("colocated");
           fail(
               "should not have been able to create a persistent region colocated with a non persistent region");
         } catch (IllegalStateException expected) {
@@ -154,14 +154,14 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         // Try to colocate a persistent PR with another persistent PR. This should work.
         paf.setColocatedWith("persistentLeader");
         af.setPartitionAttributes(paf.create());
-        cache.createRegion("colocated", af.create());
+        cache.createRegionFactory(af.create()).create("colocated");
 
         // We should also be able to colocate a non persistent region with a persistent region.
         af.setDataPolicy(DataPolicy.PARTITION);
         af.setDiskStoreName(null);
         paf.setColocatedWith("persistentLeader");
         af.setPartitionAttributes(paf.create());
-        cache.createRegion("colocated2", af.create());
+        cache.createRegionFactory(af.create()).create("colocated2");
       }
     });
   }
@@ -190,16 +190,16 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
-        cache.createRegion(PR_REGION_NAME, af.create());
+        cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
 
         paf.setColocatedWith(PR_REGION_NAME);
         af.setPartitionAttributes(paf.create());
-        cache.createRegion("region2", af.create());
+        cache.createRegionFactory(af.create()).create("region2");
         paf.setColocatedWith("region2");
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PARTITION);
         af.setDiskStoreName(null);
-        cache.createRegion("region3", af.create());
+        cache.createRegionFactory(af.create()).create("region3");
       }
     };
     vm0.invoke(createPRs);
@@ -286,7 +286,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
       af.setDataPolicy(DataPolicy.PARTITION);
       af.setDiskStoreName(null);
     }
-    cache.createRegion(regionName, af.create());
+    cache.createRegionFactory(af.create()).create(regionName);
   }
 
   private SerializableRunnable createPRsColocatedPairThread =
@@ -1332,7 +1332,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
-        cache.createRegion(PR_REGION_NAME, af.create());
+        cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
       }
     };
     SerializableRunnable createChildPR = getCreateChildPRRunnable();
@@ -1431,7 +1431,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         paf.setRedundantCopies(1);
         paf.setColocatedWith(PR_REGION_NAME);
         af.setPartitionAttributes(paf.create());
-        cache.createRegion("region2", af.create());
+        cache.createRegionFactory(af.create()).create("region2");
 
         try {
           recoveryDone.await(MAX_WAIT, TimeUnit.MILLISECONDS);
@@ -1463,7 +1463,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
-        cache.createRegion(PR_REGION_NAME, af.create());
+        cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
       }
     };
     SerializableRunnable createChildPR = getCreateChildPRRunnable();
@@ -1569,11 +1569,11 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
-        cache.createRegion(PR_REGION_NAME, af.create());
+        cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
 
         paf.setColocatedWith(PR_REGION_NAME);
         af.setPartitionAttributes(paf.create());
-        cache.createRegion("region2", af.create());
+        cache.createRegionFactory(af.create()).create("region2");
 
         try {
           if (!recoveryDone.await(MAX_WAIT, TimeUnit.MILLISECONDS)) {
@@ -1621,7 +1621,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
-        cache.createRegion(PR_REGION_NAME, af.create());
+        cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
 
         DiskStore ds2 = cache.findDiskStore("disk2");
         if (ds2 == null) {
@@ -1631,7 +1631,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         paf.setColocatedWith(PR_REGION_NAME);
         af.setPartitionAttributes(paf.create());
         af.setDiskStoreName("disk2");
-        cache.createRegion("region2", af.create());
+        cache.createRegionFactory(af.create()).create("region2");
 
         try {
           if (!recoveryDone.await(MAX_WAIT, TimeUnit.MILLISECONDS)) {
@@ -1760,7 +1760,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
-        cache.createRegion(PR_REGION_NAME, af.create());
+        cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
       }
     };
 
@@ -1787,7 +1787,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
         af.setPartitionAttributes(paf.create());
-        cache.createRegion("region2", af.create());
+        cache.createRegionFactory(af.create()).create("region2");
 
         try {
           if (!recoveryDone.await(MAX_WAIT, TimeUnit.MILLISECONDS)) {
@@ -1820,7 +1820,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
-        cache.createRegion(PR_REGION_NAME, af.create());
+        cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
       }
     };
 
@@ -1852,7 +1852,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk2");
         af.setPartitionAttributes(paf.create());
-        cache.createRegion("region2", af.create());
+        cache.createRegionFactory(af.create()).create("region2");
 
         try {
           if (!recoveryDone.await(MAX_WAIT, TimeUnit.MILLISECONDS)) {
@@ -2012,11 +2012,11 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
-        cache.createRegion(PR_REGION_NAME, af.create());
+        cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
 
         paf.setColocatedWith(PR_REGION_NAME);
         af.setPartitionAttributes(paf.create());
-        cache.createRegion("region2", af.create());
+        cache.createRegionFactory(af.create()).create("region2");
       }
     };
 
@@ -2143,11 +2143,11 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         paf.setLocalMaxMemory(0);
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PARTITION);
-        cache.createRegion(PR_REGION_NAME, af.create());
+        cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
 
         paf.setColocatedWith(PR_REGION_NAME);
         af.setPartitionAttributes(paf.create());
-        cache.createRegion("region2", af.create());
+        cache.createRegionFactory(af.create()).create("region2");
       }
     };
 
@@ -2166,11 +2166,11 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
-        cache.createRegion(PR_REGION_NAME, af.create());
+        cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
 
         paf.setColocatedWith(PR_REGION_NAME);
         af.setPartitionAttributes(paf.create());
-        cache.createRegion("region2", af.create());
+        cache.createRegionFactory(af.create()).create("region2");
       }
     };
 
@@ -2278,7 +2278,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
-        cache.createRegion(PR_REGION_NAME, af.create());
+        cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
       }
     };
 
@@ -2294,7 +2294,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
         af.setPartitionAttributes(paf.create());
-        cache.createRegion("region2", af.create());
+        cache.createRegionFactory(af.create()).create("region2");
       }
     };
 
@@ -2331,7 +2331,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
-        cache.createRegion(PR_REGION_NAME, af.create());
+        cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
 
         paf.setRedundantCopies(1);
         paf.setRecoveryDelay(-1);
@@ -2339,7 +2339,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
         af.setPartitionAttributes(paf.create());
-        cache.createRegion("region2", af.create());
+        cache.createRegionFactory(af.create()).create("region2");
       }
     };
 
@@ -2449,7 +2449,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
-        cache.createRegion(PR_REGION_NAME, af.create());
+        cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
       }
     };
 
@@ -2470,7 +2470,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk2");
         af.setPartitionAttributes(paf.create());
-        cache.createRegion("region2", af.create());
+        cache.createRegionFactory(af.create()).create("region2");
       }
     };
 
@@ -2549,7 +2549,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
           af.setPartitionAttributes(paf.create());
           af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
           af.setDiskStoreName("disk");
-          cache.createRegion(PR_REGION_NAME, af.create());
+          cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
         } finally {
           System.setProperty(DistributionConfig.GEMFIRE_PREFIX + "partitionedRegionRetryTimeout",
               String.valueOf(PartitionedRegionHelper.DEFAULT_TOTAL_WAIT_RETRY_ITERATION));
@@ -2573,7 +2573,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
           af.setPartitionAttributes(paf.create());
           // delay child region creations to cause a delay in persistent recovery
           Thread.sleep(100);
-          cache.createRegion("region2", af.create());
+          cache.createRegionFactory(af.create()).create("region2");
         } finally {
           System.setProperty(DistributionConfig.GEMFIRE_PREFIX + "partitionedRegionRetryTimeout",
               String.valueOf(PartitionedRegionHelper.DEFAULT_TOTAL_WAIT_RETRY_ITERATION));
@@ -2614,7 +2614,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
           af.setPartitionAttributes(paf.create());
           af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
           af.setDiskStoreName("disk");
-          cache.createRegion(PR_REGION_NAME, af.create());
+          cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
         } finally {
           System.setProperty(DistributionConfig.GEMFIRE_PREFIX + "partitionedRegionRetryTimeout",
               String.valueOf(PartitionedRegionHelper.DEFAULT_TOTAL_WAIT_RETRY_ITERATION));
@@ -2637,7 +2637,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
           af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
           af.setDiskStoreName("disk");
           af.setPartitionAttributes(paf.create());
-          cache.createRegion("region2", af.create());
+          cache.createRegionFactory(af.create()).create("region2");
         } finally {
           System.setProperty(DistributionConfig.GEMFIRE_PREFIX + "partitionedRegionRetryTimeout",
               String.valueOf(PartitionedRegionHelper.DEFAULT_TOTAL_WAIT_RETRY_ITERATION));
@@ -2679,7 +2679,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
           af.setPartitionAttributes(paf.create());
           af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
           af.setDiskStoreName("disk");
-          cache.createRegion(PR_REGION_NAME, af.create());
+          cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
         } finally {
           System.setProperty(DistributionConfig.GEMFIRE_PREFIX + "partitionedRegionRetryTimeout",
               String.valueOf(PartitionedRegionHelper.DEFAULT_TOTAL_WAIT_RETRY_ITERATION));
@@ -2702,7 +2702,7 @@ public class PersistentColocatedPartitionedRegionDUnitTest
           af.setDiskStoreName("disk");
           af.setPartitionAttributes(paf.create());
           Thread.sleep(1000);
-          cache.createRegion("region2", af.create());
+          cache.createRegionFactory(af.create()).create("region2");
         } finally {
           System.setProperty(DistributionConfig.GEMFIRE_PREFIX + "partitionedRegionRetryTimeout",
               String.valueOf(PartitionedRegionHelper.DEFAULT_TOTAL_WAIT_RETRY_ITERATION));
@@ -2743,15 +2743,15 @@ public class PersistentColocatedPartitionedRegionDUnitTest
     af.setPartitionAttributes(paf.create());
     af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
     af.setDiskStoreName("disk");
-    cache.createRegion("region1", af.create());
+    cache.createRegionFactory(af.create()).create("region1");
 
-    cache.createRegion("region2", af.create());
+    cache.createRegionFactory(af.create()).create("region2");
 
     if (colocatedWith != null) {
       paf.setColocatedWith(colocatedWith);
     }
     af.setPartitionAttributes(paf.create());
-    cache.createRegion("region3", af.create());
+    cache.createRegionFactory(af.create()).create("region3");
   }
 
   /**

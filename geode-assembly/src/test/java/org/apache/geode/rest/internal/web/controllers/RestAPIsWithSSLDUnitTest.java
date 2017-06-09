@@ -161,7 +161,7 @@ public class RestAPIsWithSSLDUnitTest extends LocatorTestBase {
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
     for (int i = 0; i < regions.length; i++) {
-      cache.createRegion(regions[i], attrs);
+      cache.createRegionFactory(attrs).create(regions[i]);
     }
 
     CacheServer server = cache.addCacheServer();
@@ -395,7 +395,7 @@ public class RestAPIsWithSSLDUnitTest extends LocatorTestBase {
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
     for (int i = 0; i < regions.length; i++) {
-      cache.createRegion(regions[i], attrs);
+      cache.createRegionFactory(attrs).create(regions[i]);
     }
     CacheServer server = cache.addCacheServer();
     server.setPort(0);

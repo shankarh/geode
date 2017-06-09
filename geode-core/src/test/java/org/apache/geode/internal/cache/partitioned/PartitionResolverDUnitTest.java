@@ -100,12 +100,12 @@ public class PartitionResolverDUnitTest extends JUnit4CacheTestCase {
         .setTotalNumBuckets(4).setLocalMaxMemory(isAccessor ? 0 : 1)
         .setPartitionResolver(new CountingResolver("CountingResolverCust"))
         .setRedundantCopies(redundantCopies).create());
-    getCache().createRegion(CUSTOMER, af.create());
+    getCache().basicCreateRegion(CUSTOMER, af.create());
     af.setPartitionAttributes(new PartitionAttributesFactory<OrderId, Order>().setTotalNumBuckets(4)
         .setLocalMaxMemory(isAccessor ? 0 : 1)
         .setPartitionResolver(new CountingResolver("CountingResolverOrder"))
         .setRedundantCopies(redundantCopies).setColocatedWith(CUSTOMER).create());
-    getCache().createRegion(ORDER, af.create());
+    getCache().basicCreateRegion(ORDER, af.create());
   }
 
   void populateData() {

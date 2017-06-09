@@ -135,7 +135,7 @@ public class OperationsPropagationDUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
-    region = cache.createRegion(REGION_NAME, attrs);
+    region = cache.createRegionFactory(attrs).create(REGION_NAME);
 
     CacheServerImpl server = (CacheServerImpl) cache.addCacheServer();
     assertNotNull(server);
@@ -169,7 +169,7 @@ public class OperationsPropagationDUnitTest extends JUnit4DistributedTestCase {
 
     ClientServerTestCase.configureConnectionPool(factory, host, PORT2, -1, true, -1, 2, null);
     RegionAttributes attrs = factory.create();
-    region = cache.createRegion(REGION_NAME, attrs);
+    region = cache.createRegionFactory(attrs).create(REGION_NAME);
     assertNotNull(region);
     region.registerInterest("ALL_KEYS");
   }

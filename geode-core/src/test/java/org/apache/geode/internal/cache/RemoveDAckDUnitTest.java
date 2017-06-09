@@ -81,7 +81,7 @@ public class RemoveDAckDUnitTest extends JUnit4DistributedTestCase { // TODO: re
       factory.setScope(Scope.DISTRIBUTED_ACK);
       RegionAttributes attr = factory.create();
 
-      region = cache.createRegion("map", attr);
+      region = cache.createRegionFactory(attr).create("map");
     } catch (Exception ex) {
       ex.printStackTrace();
     }
@@ -94,7 +94,7 @@ public class RemoveDAckDUnitTest extends JUnit4DistributedTestCase { // TODO: re
       cache = CacheFactory.create(ds);
       factory.setScope(Scope.DISTRIBUTED_ACK);
       RegionAttributes attr = factory.create();
-      region = cache.createRegion("map", attr);
+      region = cache.createRegionFactory(attr).create("map");
 
     } catch (Exception ex) {
       ex.printStackTrace();

@@ -76,7 +76,7 @@ public class CacheXml70GatewayDUnitTest extends CacheXmlTestCase {
 
     RegionAttributesCreation attrs = new RegionAttributesCreation();
     attrs.addAsyncEventQueueId(asyncEventQueue.getId());
-    cache.createRegion("UserRegion", attrs);
+    cache.basicCreateRegion("UserRegion", attrs);
 
     testXml(cache);
     Cache c = getCache();
@@ -185,7 +185,7 @@ public class CacheXml70GatewayDUnitTest extends CacheXmlTestCase {
 
     RegionAttributesCreation attrs = new RegionAttributesCreation();
     attrs.addGatewaySenderId(serialGatewaySender.getId());
-    cache.createRegion("UserRegion", attrs);
+    cache.basicCreateRegion("UserRegion", attrs);
 
     testXml(cache);
     Cache c = getCache();

@@ -133,7 +133,7 @@ public class Bug36269DUnitTest extends JUnit4DistributedTestCase {
     factory.setPoolName(p.getName());
     pool = p;
     assertNotNull(pool);
-    cache.createRegion(REGION_NAME, factory.create());
+    cache.createRegionFactory(factory.create()).create(REGION_NAME);
   }
 
   public static Integer createServerCache() throws Exception {
@@ -141,7 +141,7 @@ public class Bug36269DUnitTest extends JUnit4DistributedTestCase {
     AttributesFactory factory = new AttributesFactory();
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setMirrorType(MirrorType.KEYS_VALUES);
-    cache.createRegion(REGION_NAME, factory.create());
+    cache.createRegionFactory(factory.create()).create(REGION_NAME);
     CacheServer server = cache.addCacheServer();
     assertNotNull(server);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);

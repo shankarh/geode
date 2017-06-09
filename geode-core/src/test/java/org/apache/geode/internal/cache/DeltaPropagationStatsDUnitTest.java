@@ -539,7 +539,7 @@ public class DeltaPropagationStatsDUnitTest extends JUnit4DistributedTestCase {
     });
 
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs).registerInterest("ALL_KEYS");
+    cache.createRegionFactory(attrs).create(REGION_NAME).registerInterest("ALL_KEYS");
   }
 
   public static Integer createServerCache(Boolean flag) throws Exception {
@@ -570,7 +570,7 @@ public class DeltaPropagationStatsDUnitTest extends JUnit4DistributedTestCase {
       });
     }
 
-    Region region = cache.createRegion(REGION_NAME, factory.create());
+    Region region = cache.createRegionFactory(factory.create()).create(REGION_NAME);
     if (!policy.isReplicate()) {
       region.create("KEY", "KEY");
     }

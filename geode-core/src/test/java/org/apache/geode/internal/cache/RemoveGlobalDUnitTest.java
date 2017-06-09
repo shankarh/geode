@@ -114,7 +114,7 @@ public class RemoveGlobalDUnitTest extends JUnit4DistributedTestCase { // TODO: 
             AttributesFactory factory = new AttributesFactory();
             factory.setScope(Scope.GLOBAL);
             factory.setCacheWriter(cacheWriter);
-            region = cache.createRegion("map", factory.create());
+            region = cache.createRegionFactory(factory.create()).create("map");
           }
         };
 
@@ -169,7 +169,7 @@ public class RemoveGlobalDUnitTest extends JUnit4DistributedTestCase { // TODO: 
           public void run2() throws CacheException {
             AttributesFactory factory = new AttributesFactory();
             factory.setScope(Scope.GLOBAL);
-            region = cache.createRegion("map", factory.create());
+            region = cache.createRegionFactory(factory.create()).create("map");
           }
         };
 
@@ -181,7 +181,7 @@ public class RemoveGlobalDUnitTest extends JUnit4DistributedTestCase { // TODO: 
             AttributesFactory factory = new AttributesFactory();
             factory.setScope(Scope.GLOBAL);
             factory.setCacheWriter(cw);
-            region = cache.createRegion("map", factory.create());
+            region = cache.createRegionFactory(factory.create()).create("map");
           }
         };
 

@@ -110,7 +110,7 @@ public class PutAllGlobalDUnitTest extends JUnit4DistributedTestCase { // TODO: 
       AttributesFactory factory = new AttributesFactory();
       factory.setScope(Scope.GLOBAL);
       RegionAttributes attr = factory.create();
-      region = cache.createRegion("map", attr);
+      region = cache.createRegionFactory(attr).create("map");
     } catch (Exception ex) {
       ex.printStackTrace();
     }
@@ -126,7 +126,7 @@ public class PutAllGlobalDUnitTest extends JUnit4DistributedTestCase { // TODO: 
       factory.setScope(Scope.GLOBAL);
       factory.setCacheWriter(aWriter);
       RegionAttributes attr = factory.create();
-      region = cache.createRegion("map", attr);
+      region = cache.createRegionFactory(attr).create("map");
     } catch (Exception ex) {
       ex.printStackTrace();
     }

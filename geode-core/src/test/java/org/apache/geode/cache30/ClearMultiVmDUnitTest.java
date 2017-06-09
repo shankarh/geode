@@ -93,13 +93,13 @@ public class ClearMultiVmDUnitTest extends JUnit4DistributedTestCase { // TODO: 
       factory.setScope(Scope.DISTRIBUTED_ACK);
       factory.setConcurrencyChecksEnabled(true);
       RegionAttributes attr = factory.create();
-      region = cache.createRegion("map", attr);
+      region = cache.createRegionFactory(attr).create("map");
 
       AttributesFactory factory1 = new AttributesFactory();
       factory1.setScope(Scope.DISTRIBUTED_ACK);
       factory.setConcurrencyChecksEnabled(true);
       factory1.setDataPolicy(DataPolicy.REPLICATE);
-      paperWork = cache.createRegion("paperWork", factory1.create());
+      paperWork = cache.createRegionFactory(factory1.create()).create(("paperWork"));
 
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -286,7 +286,7 @@ public class ClearMultiVmDUnitTest extends JUnit4DistributedTestCase { // TODO: 
           factory1.setScope(Scope.DISTRIBUTED_ACK);
           factory1.setDataPolicy(DataPolicy.REPLICATE);
           RegionAttributes attr1 = factory1.create();
-          mirroredRegion = cache.createRegion("mirrored", attr1);
+          mirroredRegion = cache.createRegionFactory(attr1).create("mirrored");
           // reset slow
           org.apache.geode.internal.cache.InitialImageOperation.slowImageProcessing = 0;
         }

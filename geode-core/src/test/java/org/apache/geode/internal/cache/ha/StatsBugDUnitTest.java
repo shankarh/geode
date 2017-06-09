@@ -186,7 +186,7 @@ public class StatsBugDUnitTest extends JUnit4DistributedTestCase {
 
     RegionAttributes attrs = factory.create();
 
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
     CacheServer server = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server.setPort(port);
@@ -212,7 +212,7 @@ public class StatsBugDUnitTest extends JUnit4DistributedTestCase {
     pool = (PoolImpl) ClientServerTestCase.configureConnectionPool(factory, host,
         new int[] {port1.intValue(), port2.intValue()}, true, -1, 3, null);
     RegionAttributes attrs = factory.create();
-    Region region = cache.createRegion(REGION_NAME, attrs);
+    Region region = cache.createRegionFactory(attrs).create(REGION_NAME);
     region.registerInterest("ALL_KEYS");
     LogWriterUtils.getLogWriter().info("Client cache created");
   }
@@ -233,7 +233,7 @@ public class StatsBugDUnitTest extends JUnit4DistributedTestCase {
     pool = (PoolImpl) ClientServerTestCase.configureConnectionPool(factory, host,
         new int[] {port1.intValue(), port2.intValue()}, true, -1, 3, null);
     RegionAttributes attrs = factory.create();
-    Region region = cache.createRegion(REGION_NAME, attrs);
+    Region region = cache.createRegionFactory(attrs).create(REGION_NAME);
     region.registerInterest("ALL_KEYS", false, false);
     LogWriterUtils.getLogWriter().info("Client cache created");
   }

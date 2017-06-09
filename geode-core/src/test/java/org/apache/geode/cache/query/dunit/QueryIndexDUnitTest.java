@@ -81,7 +81,7 @@ public class QueryIndexDUnitTest extends JUnit4CacheTestCase {
           attributesFactory.setIndexMaintenanceSynchronous(true);
           attributesFactory.setScope(Scope.GLOBAL);
           RegionAttributes regionAttributes = attributesFactory.create();
-          region = cache.createRegion("portfolios", regionAttributes);
+          region = cache.createRegionFactory(regionAttributes).create("portfolios");
           region.put("0", new Portfolio(0));
         }
       }
@@ -1166,7 +1166,7 @@ public class QueryIndexDUnitTest extends JUnit4CacheTestCase {
           } else {
             attributesFactory.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
           }
-          cache.createRegion(regionNames[i], attributesFactory.create());
+          cache.createRegionFactory(attributesFactory.create()).create(regionNames[i]);
           logger.info("Completed creating region :" + regionNames[i]);
         } catch (Exception e) {
           Assert.fail("Could not create region" + regionNames[i], e);

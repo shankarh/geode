@@ -1083,7 +1083,7 @@ public class DeltaPropagationDUnitTest extends JUnit4DistributedTestCase {
       factory.setDataPolicy(DataPolicy.NORMAL);
       factory.setConcurrencyChecksEnabled(false);
       RegionAttributes attrs = factory.create();
-      Region r = cache.createRegion(regionName, attrs);
+      Region r = cache.createRegionFactory(attrs).create(regionName);
       logger = cache.getLogger();
       r.create(DELTA_KEY, deltaPut[0]);
     } else {
@@ -1091,7 +1091,7 @@ public class DeltaPropagationDUnitTest extends JUnit4DistributedTestCase {
       factory.setDataPolicy(DataPolicy.REPLICATE);
       factory.setConcurrencyChecksEnabled(false);
       RegionAttributes attrs = factory.create();
-      cache.createRegion(regionName, attrs);
+      cache.createRegionFactory(attrs).create(regionName);
       logger = cache.getLogger();
     }
 
@@ -1326,7 +1326,7 @@ public class DeltaPropagationDUnitTest extends JUnit4DistributedTestCase {
     }
     factory.setConcurrencyChecksEnabled(false);
     RegionAttributes attrs = factory.create();
-    Region region = cache.createRegion(regionName, attrs);
+    Region region = cache.createRegionFactory(attrs).create(regionName);
     logger = cache.getLogger();
   }
 
@@ -1368,7 +1368,7 @@ public class DeltaPropagationDUnitTest extends JUnit4DistributedTestCase {
       factory.addCacheListener(getCacheListener(listenerCode));
     }
     RegionAttributes attrs = factory.create();
-    Region r = cache.createRegion(regionName, attrs);
+    Region r = cache.createRegionFactory(attrs).create(regionName);
     r.registerInterest("ALL_KEYS");
     pool = p;
     cache.readyForEvents();

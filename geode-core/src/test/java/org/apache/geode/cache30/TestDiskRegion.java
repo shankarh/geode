@@ -66,7 +66,8 @@ public class TestDiskRegion {
     File[] dirs1 = new File[] {user_dir};
     DiskStore ds1 = dsf.setDiskDirs(dirs1).create("TestDiskRegion");
     factory.setDiskStoreName("TestDiskRegion");
-    LocalRegion region = (LocalRegion) cache.createRegion("TestDiskRegion", factory.create());
+    LocalRegion region =
+        (LocalRegion) cache.createRegionFactory(factory.create()).create("TestDiskRegion");
     DiskRegion dr = region.getDiskRegion();
     Assert.assertTrue(dr != null);
     DiskRegionStats diskStats = dr.getStats();
@@ -153,7 +154,8 @@ public class TestDiskRegion {
       }
     });
 
-    LocalRegion region = (LocalRegion) cache.createRegion("TestDiskRegion", factory.create());
+    LocalRegion region =
+        (LocalRegion) cache.createRegionFactory(factory.create()).create("TestDiskRegion");
     DiskRegion dr = region.getDiskRegion();
     DiskRegionStats diskStats = dr.getStats();
     LRUStatistics lruStats = getLRUStats(region);
@@ -180,7 +182,8 @@ public class TestDiskRegion {
     AttributesFactory factory = new AttributesFactory();
     factory.setEvictionAttributes(EvictionAttributes.createLRUMemoryAttributes(2,
         (ObjectSizer) null, EvictionAction.OVERFLOW_TO_DISK));
-    LocalRegion region = (LocalRegion) cache.createRegion("TestDiskRegion", factory.create());
+    LocalRegion region =
+        (LocalRegion) cache.createRegionFactory(factory.create()).create("TestDiskRegion");
     // DiskRegion dr = region.getDiskRegion();
     // DiskRegionStats diskStats = dr.getStats();
     // LRUStatistics lruStats = getLRUStats(region);
@@ -210,7 +213,8 @@ public class TestDiskRegion {
     AttributesFactory factory = new AttributesFactory();
     factory.setEvictionAttributes(EvictionAttributes.createLRUMemoryAttributes(2,
         (ObjectSizer) null, EvictionAction.OVERFLOW_TO_DISK));
-    LocalRegion region = (LocalRegion) cache.createRegion("TestDiskRegion", factory.create());
+    LocalRegion region =
+        (LocalRegion) cache.createRegionFactory(factory.create()).create("TestDiskRegion");
     // DiskRegion dr = region.getDiskRegion();
     // DiskRegionStats diskStats = dr.getStats();
     LRUStatistics lruStats = getLRUStats(region);

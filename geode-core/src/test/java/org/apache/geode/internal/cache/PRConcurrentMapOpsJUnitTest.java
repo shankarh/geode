@@ -57,7 +57,7 @@ public class PRConcurrentMapOpsJUnitTest {
       RegionAttributes ra = af.create();
 
       PartitionedRegion pr = null;
-      pr = (PartitionedRegion) cache.createRegion("PR4", ra);
+      pr = (PartitionedRegion) cache.createRegionFactory(ra).create("PR4");
       assert pr != null : "PR4 not created";
       System.out.println("\nData Node: Sleeping forever. Ctrl-C to stop.");
       Thread.sleep(Integer.MAX_VALUE);
@@ -98,7 +98,7 @@ public class PRConcurrentMapOpsJUnitTest {
     RegionAttributes ra = af.create();
 
     PartitionedRegion pr = null;
-    pr = (PartitionedRegion) cache.createRegion("PR4", ra);
+    pr = (PartitionedRegion) cache.createRegionFactory(ra).create("PR4");
     assertNotNull("PR4 not created", pr);
 
     int start = 1;

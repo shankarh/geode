@@ -258,7 +258,7 @@ public class EventIDVerificationDUnitTest extends JUnit4DistributedTestCase {
      */
 
     RegionAttributes attrs = factory.create();
-    Region r = cache.createRegion(REGION_NAME, attrs);
+    Region r = cache.createRegionFactory(attrs).create(REGION_NAME);
     r.registerInterest("ALL_KEYS");
   }
 
@@ -326,7 +326,7 @@ public class EventIDVerificationDUnitTest extends JUnit4DistributedTestCase {
     });
 
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     CacheServer server1 = cache.addCacheServer();
     server1.setPort(port);

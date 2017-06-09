@@ -117,7 +117,7 @@ public class TestSubscriptionsDUnitTest extends ManagementTestBase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(dataPolicy);
 
-    cache.createRegion(REGION_NAME, factory.create());
+    cache.createRegionFactory(factory.create()).create(REGION_NAME);
 
     CacheServer server1 = cache.addCacheServer();
     server1.setPort(0);
@@ -149,7 +149,7 @@ public class TestSubscriptionsDUnitTest extends ManagementTestBase {
     factory.setPoolName(p.getName());
 
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
     return cache;
   }

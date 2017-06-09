@@ -244,7 +244,7 @@ public class CQListGIIDUnitTest extends JUnit4DistributedTestCase {
       fac.setRegionIdleTimeout(expiration);
       fac.setEntryIdleTimeout(expiration);
       rootAttrs = fac.create();
-      root = cache.createRegion(rootName, rootAttrs);
+      root = cache.createRegionFactory(rootAttrs).create(rootName);
     }
 
     return createSubregion(root, name, attrs, null);

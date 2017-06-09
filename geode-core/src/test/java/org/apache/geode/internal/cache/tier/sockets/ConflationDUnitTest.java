@@ -250,8 +250,8 @@ public class ConflationDUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.LOCAL);
     factory.setPoolName(createPool(host, "p1", port, true).getName());
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME1, attrs);
-    cache.createRegion(REGION_NAME2, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME1);
+    cache.createRegionFactory(attrs).create(REGION_NAME2);
   }
 
   /**
@@ -269,8 +269,8 @@ public class ConflationDUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.LOCAL);
     factory.setPoolName(createPool(host, "p1", port, false).getName());
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME1, attrs);
-    cache.createRegion(REGION_NAME2, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME1);
+    cache.createRegionFactory(attrs).create(REGION_NAME2);
   }
 
   /**
@@ -317,8 +317,8 @@ public class ConflationDUnitTest extends JUnit4DistributedTestCase {
       }
     });
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME1, attrs);
-    cache.createRegion(REGION_NAME2, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME1);
+    cache.createRegionFactory(attrs).create(REGION_NAME2);
   }
 
   public static void createClientCache2CommonWriterTest3(String host, Integer port)
@@ -361,8 +361,8 @@ public class ConflationDUnitTest extends JUnit4DistributedTestCase {
       }
     });
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME1, attrs);
-    cache.createRegion(REGION_NAME2, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME1);
+    cache.createRegionFactory(attrs).create(REGION_NAME2);
   }
 
 
@@ -379,10 +379,10 @@ public class ConflationDUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.LOCAL);
     factory.setPoolName(createPool(host, "p1", port, true).getName());
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME1, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME1);
     factory.setPoolName(createPool(host, "p2", port, true).getName());
     attrs = factory.create();
-    cache.createRegion(REGION_NAME2, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME2);
   }
 
   /**
@@ -427,10 +427,10 @@ public class ConflationDUnitTest extends JUnit4DistributedTestCase {
       }
     });
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME1, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME1);
     factory.setPoolName(createPool(host, "p2", port, true).getName());
     attrs = factory.create();
-    cache.createRegion(REGION_NAME2, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME2);
   }
 
   /**
@@ -625,8 +625,8 @@ public class ConflationDUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setEnableConflation(true);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME1, attrs);
-    cache.createRegion(REGION_NAME2, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME1);
+    cache.createRegionFactory(attrs).create(REGION_NAME2);
     CacheServer server = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server.setPort(port);

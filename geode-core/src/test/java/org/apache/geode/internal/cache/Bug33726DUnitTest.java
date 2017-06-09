@@ -83,7 +83,7 @@ public class Bug33726DUnitTest extends JUnit4DistributedTestCase {
       factory.setScope(Scope.GLOBAL);
       factory.setDataPolicy(DataPolicy.REPLICATE);
       RegionAttributes attr = factory.create();
-      Region region = cache.createRegion("testRegion", attr);
+      Region region = cache.createRegionFactory(attr).create("testRegion");
       Region subRegion = region.createSubregion("testSubRegion", attr);
       for (int i = 1; i < 100; i++) {
         region.put(new Integer(i), new Integer(i));
@@ -104,7 +104,7 @@ public class Bug33726DUnitTest extends JUnit4DistributedTestCase {
       factory.setScope(Scope.GLOBAL);
       factory.setDataPolicy(DataPolicy.REPLICATE);
       RegionAttributes attr = factory.create();
-      Region region = cache.createRegion("testRegion", attr);
+      Region region = cache.createRegionFactory(attr).create("testRegion");
       region.createSubregion("testSubRegion", attr);
     } catch (Exception ex) {
       fail("failed due to " + ex);

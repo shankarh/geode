@@ -422,7 +422,7 @@ public class PartitionedRegionBucketCreationDistributionDUnitTest
     createVMs(host);
     Invoke.invokeInEveryVM(new SerializableRunnable("Create PR") {
       public void run() {
-        getCache().createRegion(regionName, createRegionAttrs(0, 10, maxBuckets));
+        getCache().basicCreateRegion(regionName, createRegionAttrs(0, 10, maxBuckets));
 
       }
     });
@@ -464,7 +464,7 @@ public class PartitionedRegionBucketCreationDistributionDUnitTest
       PartitionAttributes prAttr = paf.create();
       attr.setPartitionAttributes(prAttr);
       RegionAttributes regionAttribs = attr.create();
-      Region region = myCache.createRegion("PR1", regionAttribs);
+      Region region = myCache.createRegionFactory(regionAttribs).create("PR1");
 
       for (int i = 0; i < 113; i++) {
         region.put("Key_" + i, new Integer(i));
@@ -1241,8 +1241,8 @@ public class PartitionedRegionBucketCreationDistributionDUnitTest
           public void run2() throws CacheException {
             Cache cache = getCache();
             for (int i = startIndexForRegion; i < endIndexForRegion; i++) {
-              cache.createRegion(prPrefix + i,
-                  createRegionAttrs(redundancy, localMaxMem, numBuckets));
+              cache.createRegionFactory(createRegionAttrs(redundancy, localMaxMem, numBuckets))
+                  .create(prPrefix + i);
             }
             LogWriterUtils.getLogWriter().info(
                 "createMultiplePartitionRegion() - Partition Regions Successfully Completed ");

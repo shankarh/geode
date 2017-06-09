@@ -129,7 +129,7 @@ public class Bug36853EventsExpiryDUnitTest extends JUnit4CacheTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
     CacheServer server = cache.addCacheServer();
     assertNotNull(server);
@@ -174,7 +174,7 @@ public class Bug36853EventsExpiryDUnitTest extends JUnit4CacheTestCase {
       }
     });
     RegionAttributes attrs = factory.create();
-    Region region = cache.createRegion(REGION_NAME, attrs);
+    Region region = cache.createRegionFactory(attrs).create(REGION_NAME);
 
     region.registerInterest("ALL_KEYS");
   }

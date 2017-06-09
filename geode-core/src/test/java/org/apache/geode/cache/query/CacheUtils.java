@@ -112,7 +112,7 @@ public class CacheUtils {
         attributesFactory.setScope(scope);
       }
       RegionAttributes regionAttributes = attributesFactory.create();
-      return cache.createRegion(regionName, regionAttributes);
+      return cache.basicCreateRegion(regionName, regionAttributes);
     } catch (Exception e) {
       throw new AssertionError(e);
     }
@@ -122,7 +122,7 @@ public class CacheUtils {
   public static Region createRegion(String regionName, RegionAttributes regionAttributes,
       boolean flag) {
     try {
-      return cache.createRegion(regionName, regionAttributes);
+      return cache.basicCreateRegion(regionName, regionAttributes);
     } catch (Exception e) {
       throw new AssertionError(e);
     }
@@ -139,7 +139,7 @@ public class CacheUtils {
       attributesFactory.setValueConstraint(valueConstraint);
       attributesFactory.setIndexMaintenanceSynchronous(indexMaintenanceSynchronous);
       RegionAttributes regionAttributes = attributesFactory.create();
-      return cache.createRegion(regionName, regionAttributes);
+      return cache.basicCreateRegion(regionName, regionAttributes);
     } catch (Exception e) {
       throw new AssertionError(e);
     }

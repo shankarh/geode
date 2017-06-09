@@ -548,7 +548,7 @@ public class HAStartupAndFailoverDUnitTest extends JUnit4DistributedTestCase {
     factory.setPoolName(p.getName());
 
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
     pool = p;
     conn = pool.acquireConnection();
@@ -572,7 +572,7 @@ public class HAStartupAndFailoverDUnitTest extends JUnit4DistributedTestCase {
     factory.setPoolName(p.getName());
 
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
     pool = p;
     conn = pool.acquireConnection();
@@ -602,7 +602,7 @@ public class HAStartupAndFailoverDUnitTest extends JUnit4DistributedTestCase {
     factory.setPoolName(p.getName());
 
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
     pool = p;
     // since the default minConnections is 1 we currently have a connection to
@@ -632,7 +632,7 @@ public class HAStartupAndFailoverDUnitTest extends JUnit4DistributedTestCase {
     factory.setPoolName(p.getName());
 
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
     pool = p;
     conn = pool.acquireConnection();
@@ -646,7 +646,7 @@ public class HAStartupAndFailoverDUnitTest extends JUnit4DistributedTestCase {
     factory.setEnableBridgeConflation(true);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
     CacheServer server1 = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);

@@ -45,7 +45,7 @@ public class ExceptionHandlingJUnitTest {
     AttributesFactory factory = new AttributesFactory();
     factory.setScope(Scope.GLOBAL);
     RegionAttributes regionAttributes = factory.create();
-    testRegion = cache.createRegion("TestRegion", regionAttributes);
+    testRegion = cache.createRegionFactory(regionAttributes).create("TestRegion");
   }
 
   @AfterClass

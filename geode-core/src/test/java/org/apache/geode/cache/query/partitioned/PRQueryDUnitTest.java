@@ -66,7 +66,6 @@ public class PRQueryDUnitTest extends PartitionedRegionDUnitTestCase
   /**
    * constructor *
    *
-   * @param name
    */
 
   public PRQueryDUnitTest() {
@@ -343,7 +342,7 @@ public class PRQueryDUnitTest extends PartitionedRegionDUnitTestCase
         PartitionAttributes prAttr = new PartitionAttributesFactory().setRedundantCopies(redCop)
             .setTotalNumBuckets(totalBuckets).create();
         attr.setPartitionAttributes(prAttr);
-        getCache().createRegion(rName, attr.create());
+        getCache().createRegionFactory(attr.create()).create(rName);
       }
     };
     datastore1.invoke(createPR);
@@ -354,7 +353,8 @@ public class PRQueryDUnitTest extends PartitionedRegionDUnitTestCase
     PartitionAttributes prAttr = new PartitionAttributesFactory().setRedundantCopies(redCop)
         .setTotalNumBuckets(totalBuckets).setLocalMaxMemory(0).create();
     attr.setPartitionAttributes(prAttr);
-    PartitionedRegion pr = (PartitionedRegion) getCache().createRegion(rName, attr.create());
+    PartitionedRegion pr =
+        (PartitionedRegion) getCache().createRegionFactory(attr.create()).create(rName);
     // Create bucket zero, one and two
     pr.put(new Integer(0), "zero");
     pr.put(new Integer(1), "one");
@@ -420,7 +420,7 @@ public class PRQueryDUnitTest extends PartitionedRegionDUnitTestCase
         PartitionAttributes prAttr = new PartitionAttributesFactory().setRedundantCopies(redCop)
             .setTotalNumBuckets(totalBuckets).create();
         attr.setPartitionAttributes(prAttr);
-        getCache().createRegion(rName, attr.create());
+        getCache().createRegionFactory(attr.create()).create(rName);
       }
     };
     datastore1.invoke(createPR);
@@ -431,7 +431,8 @@ public class PRQueryDUnitTest extends PartitionedRegionDUnitTestCase
     PartitionAttributes prAttr = new PartitionAttributesFactory().setRedundantCopies(redCop)
         .setTotalNumBuckets(totalBuckets).create();
     attr.setPartitionAttributes(prAttr);
-    PartitionedRegion pr = (PartitionedRegion) getCache().createRegion(rName, attr.create());
+    PartitionedRegion pr =
+        (PartitionedRegion) getCache().createRegionFactory(attr.create()).create(rName);
 
 
     // Create bucket zero, one and two
@@ -522,7 +523,7 @@ public class PRQueryDUnitTest extends PartitionedRegionDUnitTestCase
         PartitionAttributes prAttr = new PartitionAttributesFactory().setRedundantCopies(redCop)
             .setTotalNumBuckets(totalBuckets).create();
         attr.setPartitionAttributes(prAttr);
-        getCache().createRegion(rName, attr.create());
+        getCache().createRegionFactory(attr.create()).create(rName);
       }
     };
     datastore1.invoke(createPR);
@@ -533,7 +534,8 @@ public class PRQueryDUnitTest extends PartitionedRegionDUnitTestCase
     PartitionAttributes prAttr = new PartitionAttributesFactory().setRedundantCopies(redCop)
         .setTotalNumBuckets(totalBuckets).setLocalMaxMemory(0).create();
     attr.setPartitionAttributes(prAttr);
-    PartitionedRegion pr = (PartitionedRegion) getCache().createRegion(rName, attr.create());
+    PartitionedRegion pr =
+        (PartitionedRegion) getCache().createRegionFactory(attr.create()).create(rName);
 
 
     // Create bucket zero, one and two
@@ -634,7 +636,7 @@ public class PRQueryDUnitTest extends PartitionedRegionDUnitTestCase
         PartitionAttributes prAttr = new PartitionAttributesFactory().setRedundantCopies(1)
             .setTotalNumBuckets(totalBuckets).create();
         attr.setPartitionAttributes(prAttr);
-        getCache().createRegion(rName, attr.create());
+        getCache().createRegionFactory(attr.create()).create(rName);
       }
     };
     datastore1.invoke(createPR);
@@ -647,7 +649,7 @@ public class PRQueryDUnitTest extends PartitionedRegionDUnitTestCase
         PartitionAttributes prAttr = new PartitionAttributesFactory().setRedundantCopies(1)
             .setTotalNumBuckets(totalBuckets).setLocalMaxMemory(0).create();
         attr.setPartitionAttributes(prAttr);
-        getCache().createRegion(rName, attr.create());
+        getCache().createRegionFactory(attr.create()).create(rName);
       }
     });
 

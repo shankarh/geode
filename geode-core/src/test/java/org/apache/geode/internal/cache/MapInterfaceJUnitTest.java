@@ -58,7 +58,7 @@ public class MapInterfaceJUnitTest {
       cache = CacheFactory.create(ds);
       factory = new AttributesFactory();
       factory.setScope(Scope.LOCAL);
-      region = cache.createRegion("testingRegion", factory.create());
+      region = cache.createRegionFactory(factory.create()).create("testingRegion");
     } catch (Exception e) {
       throw new AssertionError(" failed due to ", e);
     }
@@ -72,7 +72,7 @@ public class MapInterfaceJUnitTest {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     try {
-      region = cache.createRegion("testingRegion", factory.create());
+      region = cache.createRegionFactory(factory.create()).create("testingRegion");
     } catch (Exception e) {
       throw new AssertionError(" failed in creating region due to ", e);
     }
@@ -106,7 +106,7 @@ public class MapInterfaceJUnitTest {
       cache = CacheFactory.create(ds);
       factory = new AttributesFactory();
       factory.setScope(Scope.LOCAL);
-      region = cache.createRegion("testingRegion", factory.create());
+      region = cache.createRegionFactory(factory.create()).create("testingRegion");
     } catch (Exception e) {
       throw new AssertionError(" failed due to ", e);
     }
@@ -126,7 +126,7 @@ public class MapInterfaceJUnitTest {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     try {
-      region = cache.createRegion("testingRegion", factory.create());
+      region = cache.createRegionFactory(factory.create()).create("testingRegion");
     } catch (Exception e) {
       throw new AssertionError(" failed in creating region due to ", e);
     }
@@ -167,7 +167,7 @@ public class MapInterfaceJUnitTest {
           }
         }
       });
-      region = cache.createRegion("testingRegion", factory.create());
+      region = cache.createRegionFactory(factory.create()).create("testingRegion");
       DoesClear doesClear = new DoesClear(region);
       new Thread(doesClear).start();
       synchronized (this) {
@@ -191,7 +191,7 @@ public class MapInterfaceJUnitTest {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     try {
-      region = cache.createRegion("testingRegion", factory.create());
+      region = cache.createRegionFactory(factory.create()).create("testingRegion");
     } catch (Exception e) {
       throw new AssertionError(" failed in creating region due to ", e);
     }
@@ -234,7 +234,7 @@ public class MapInterfaceJUnitTest {
         }
 
       });
-      region2 = cache.createRegion("testingRegion", factory.create());
+      region2 = cache.createRegionFactory(factory.create()).create("testingRegion");
       region2.put(new Integer(2), new Integer(2));
       this.hasBeenNotified = false;
       DoesPut doesPut = new DoesPut();

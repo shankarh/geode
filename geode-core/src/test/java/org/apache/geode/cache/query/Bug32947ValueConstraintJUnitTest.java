@@ -60,7 +60,7 @@ public class Bug32947ValueConstraintJUnitTest {
     AttributesFactory factory = new AttributesFactory();
     factory.setValueConstraint(Portfolio.class);
     RegionAttributes regionAttributes = factory.create();
-    Region portolioRegion = cache.createRegion("portfolios", regionAttributes);
+    Region portolioRegion = cache.createRegionFactory(regionAttributes).create("portfolios");
 
     portolioRegion.put("key1", new Portfolio(1));
     try {
@@ -88,11 +88,11 @@ public class Bug32947ValueConstraintJUnitTest {
 
     factory.setValueConstraint(Manager.class);
     regionAttributes = factory.create();
-    Region managerRegion = cache.createRegion("managers", regionAttributes);
+    Region managerRegion = cache.createRegionFactory(regionAttributes).create("managers");
 
     factory.setValueConstraint(Employee.class);
     regionAttributes = factory.create();
-    Region employeeRegion = cache.createRegion("employees", regionAttributes);
+    Region employeeRegion = cache.createRegionFactory(regionAttributes).create("employees");
 
     employeeRegion.put("key1", manager); // This is perfectly valid, as Manager is Derived from
                                          // Employee

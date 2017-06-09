@@ -73,8 +73,9 @@ public class DistTXPersistentDebugDUnitTest extends DistTXDebugDUnitTest {
 
   public static void createPersistentPR(String regionName) {
     assertNotNull(basicGetCache());
-    basicGetCache().createRegion(regionName,
-        getPersistentPRAttributes(1, -1, basicGetCache(), 113, true));
+    basicGetCache()
+        .createRegionFactory(getPersistentPRAttributes(1, -1, basicGetCache(), 113, true))
+        .create(regionName);
   }
 
   private static RegionAttributes getPersistentPRAttributes(final int redundancy,

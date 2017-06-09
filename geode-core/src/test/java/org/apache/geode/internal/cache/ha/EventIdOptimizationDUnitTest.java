@@ -191,12 +191,12 @@ public class EventIdOptimizationDUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setMirrorType(MirrorType.KEYS_VALUES);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
     // create multiple dummy regions to use them in destroyRegion case for
     // testing eventIDs
     for (int i = 0; i < eventIds.length; i++) {
-      cache.createRegion(REGION_NAME + i, attrs);
+      cache.createRegionFactory(attrs).create(REGION_NAME + i);
     }
     CacheServer server = cache.addCacheServer();
     assertNotNull(server);
@@ -268,10 +268,10 @@ public class EventIdOptimizationDUnitTest extends JUnit4DistributedTestCase {
 
     });
     RegionAttributes attrs = factory.create();
-    Region region = cache.createRegion(REGION_NAME, attrs);
+    Region region = cache.createRegionFactory(attrs).create(REGION_NAME);
     region.registerInterest("ALL_KEYS");
     for (int i = 0; i < eventIds.length; i++) {
-      region = cache.createRegion(REGION_NAME + i, attrs);
+      region = cache.createRegionFactory(attrs).create(REGION_NAME + i);
       region.registerInterest("ALL_KEYS");
     }
 

@@ -82,7 +82,7 @@ public class MapClearGIIDUnitTest extends JUnit4CacheTestCase {
     factory.setConcurrencyChecksEnabled(true);
     RegionAttributes attr = factory.create();
 
-    region = new MapClearGIIDUnitTest().getCache().createRegion("map", attr);
+    region = new MapClearGIIDUnitTest().getCache().basicCreateRegion("map", attr);
 
     LogWriterUtils.getLogWriter().info("Region in VM0 created ");
   }

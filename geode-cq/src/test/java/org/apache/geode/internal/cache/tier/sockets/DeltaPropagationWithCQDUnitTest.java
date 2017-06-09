@@ -291,7 +291,7 @@ public class DeltaPropagationWithCQDUnitTest extends JUnit4DistributedTestCase {
       }
     });
     RegionAttributes attr = factory.create();
-    Region region = ((Cache) cache).createRegion(regionName, attr);
+    Region region = ((Cache) cache).createRegionFactory(attr).create(regionName);
     if (doRI) {
       region.registerInterest("ALL_KEYS");
     }

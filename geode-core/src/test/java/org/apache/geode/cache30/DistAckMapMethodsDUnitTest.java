@@ -100,7 +100,7 @@ public class DistAckMapMethodsDUnitTest extends JUnit4DistributedTestCase { // T
       AttributesFactory factory = new AttributesFactory();
       factory.setScope(Scope.DISTRIBUTED_ACK);
       RegionAttributes attr = factory.create();
-      region = cache.createRegion("map", attr);
+      region = cache.createRegionFactory(attr).create("map");
     } catch (Exception ex) {
       ex.printStackTrace();
     }
@@ -122,7 +122,7 @@ public class DistAckMapMethodsDUnitTest extends JUnit4DistributedTestCase { // T
       factory1.setScope(Scope.DISTRIBUTED_ACK);
       factory1.setDataPolicy(DataPolicy.REPLICATE);
       RegionAttributes attr1 = factory1.create();
-      mirroredRegion = cache.createRegion("mirrored", attr1);
+      mirroredRegion = cache.createRegionFactory(attr1).create("mirrored");
 
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -138,7 +138,7 @@ public class DistAckMapMethodsDUnitTest extends JUnit4DistributedTestCase { // T
       factory2.setCacheWriter(cacheWriter);
       factory2.setCacheListener(cacheListener);
       RegionAttributes attr2 = factory2.create();
-      remRegion = cache.createRegion("remove", attr2);
+      remRegion = cache.createRegionFactory(attr2).create("remove");
 
     } catch (Exception ex) {
       ex.printStackTrace();

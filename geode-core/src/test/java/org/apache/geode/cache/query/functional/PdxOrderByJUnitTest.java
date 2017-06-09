@@ -226,7 +226,7 @@ public class PdxOrderByJUnitTest {
 
   public Region createRootRegion(String rootName, RegionAttributes attrs)
       throws RegionExistsException, TimeoutException {
-    return ((GemFireCacheImpl) CacheUtils.getCache()).createRegion(rootName, attrs);
+    return ((GemFireCacheImpl) CacheUtils.getCache()).basicCreateRegion(rootName, attrs);
   }
 
   private void checkForPdxString(List results, String query) {

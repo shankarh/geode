@@ -177,8 +177,8 @@ public class RegionJUnitTest {
     attributesFactory.setValueConstraint(Portfolio.class);
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    cache.createRegion("p_os", regionAttributes);
-    cache.createRegion("p-os", regionAttributes);
+    cache.createRegionFactory(regionAttributes).create("p_os");
+    cache.createRegionFactory(regionAttributes).create("p-os");
 
     for (int i = 0; i < queryStrs.length; ++i) {
       Query q = CacheUtils.getQueryService().newQuery(queryStrs[i]);
@@ -199,7 +199,7 @@ public class RegionJUnitTest {
     attributesFactory.setValueConstraint(Portfolio.class);
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    region = cache.createRegion("pos", regionAttributes);
+    region = cache.createRegionFactory(regionAttributes).create("pos");
     region.put("0", new Portfolio(0));
     region.put("1", new Portfolio(1));
     region.put("2", new Portfolio(2));

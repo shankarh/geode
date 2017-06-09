@@ -64,7 +64,7 @@ public class Bug40751DUnitTest extends JUnit4CacheTestCase {
           attr.setScope(Scope.DISTRIBUTED_ACK);
           attr.setDataPolicy(DataPolicy.REPLICATE);
           attr.setMulticastEnabled(true);
-          cache.createRegion("region1", attr.create());
+          cache.createRegionFactory(attr.create()).create("region1");
         }
       };
 
@@ -76,7 +76,7 @@ public class Bug40751DUnitTest extends JUnit4CacheTestCase {
           AttributesFactory attr = new AttributesFactory();
           attr.setScope(Scope.DISTRIBUTED_ACK);
           attr.setDataPolicy(DataPolicy.EMPTY);
-          Region region = cache.createRegion("region1", attr.create());
+          Region region = cache.createRegionFactory(attr.create()).create("region1");
           try {
             region.put("A", new MyClass());
             fail("expected ToDataException");

@@ -101,7 +101,7 @@ public class FilterProfileIntegrationJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     attributesFactory.setDataPolicy(DataPolicy.NORMAL);
     RegionAttributes regionAttributes = attributesFactory.create();
-    Region region = cache.createRegion(regionName, regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create(regionName);
   }
 
 }

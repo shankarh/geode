@@ -113,7 +113,7 @@ public class LocalFunctionExecutionDUnitTest extends JUnit4DistributedTestCase {
     attr.setPartitionAttributes(prAttr);
     assertNotNull(cache);
 
-    region = cache.createRegion(partitionedRegionName, attr.create());
+    region = cache.createRegionFactory(attr.create()).create(partitionedRegionName);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region " + partitionedRegionName + " created Successfully :" + region);
@@ -125,7 +125,7 @@ public class LocalFunctionExecutionDUnitTest extends JUnit4DistributedTestCase {
     attr.setScope(Scope.DISTRIBUTED_ACK);
     attr.setDataPolicy(dataPolicy);
     assertNotNull(cache);
-    region = cache.createRegion(distributedRegionName, attr.create());
+    region = cache.createRegionFactory(attr.create()).create(distributedRegionName);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region " + distributedRegionName + " created Successfully :" + region);

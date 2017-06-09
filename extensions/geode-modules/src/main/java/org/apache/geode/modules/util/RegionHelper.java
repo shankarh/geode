@@ -48,7 +48,8 @@ public class RegionHelper {
   public static Region createRegion(Cache cache, RegionConfiguration configuration) {
     // Use the createRegion method so that the RegionAttributes creation can be reused by validate.
     RegionAttributes requestedRegionAttributes = getRegionAttributes(cache, configuration);
-    Region region = cache.createRegion(configuration.getRegionName(), requestedRegionAttributes);
+    Region region =
+        cache.createRegionFactory(requestedRegionAttributes).create(configuration.getRegionName());
 
     // Log the cache xml if debugging is enabled. I'd like to be able to just
     // log the region, but that API is not available.

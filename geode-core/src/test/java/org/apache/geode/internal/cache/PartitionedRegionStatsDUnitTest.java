@@ -92,9 +92,11 @@ public class PartitionedRegionStatsDUnitTest extends PartitionedRegionDUnitTestC
     CacheSerializableRunnable createPR = new CacheSerializableRunnable("createPrRegions") {
       public void run2() throws CacheException {
         Cache cache = getCache();
-        cache.createRegion(PR_PREFIX, createRegionAttributesForPR(REDUNDANT_COPIES, 200));
+        cache.createRegionFactory(createRegionAttributesForPR(REDUNDANT_COPIES, 200))
+            .create(PR_PREFIX);
 
-        cache.createRegion(PR_PREFIX + "1", createRegionAttributesForPR(REDUNDANT_COPIES, 200));
+        cache.createRegionFactory(createRegionAttributesForPR(REDUNDANT_COPIES, 200))
+            .create(PR_PREFIX + "1");
       }
     };
 
@@ -104,8 +106,10 @@ public class PartitionedRegionStatsDUnitTest extends PartitionedRegionDUnitTestC
     CacheSerializableRunnable createAccessor = new CacheSerializableRunnable("createAccessor") {
       public void run2() throws CacheException {
         Cache cache = getCache();
-        cache.createRegion(PR_PREFIX, createRegionAttributesForPR(REDUNDANT_COPIES, 0));
-        cache.createRegion(PR_PREFIX + "1", createRegionAttributesForPR(REDUNDANT_COPIES, 0));
+        cache.createRegionFactory(createRegionAttributesForPR(REDUNDANT_COPIES, 0))
+            .create(PR_PREFIX);
+        cache.createRegionFactory(createRegionAttributesForPR(REDUNDANT_COPIES, 0))
+            .create(PR_PREFIX + "1");
       }
     };
 
@@ -341,7 +345,7 @@ public class PartitionedRegionStatsDUnitTest extends PartitionedRegionDUnitTestC
         paf.setRedundantCopies(0);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
         RebalanceOperation op = cache.getResourceManager().createRebalanceFactory().start();
         try {
           RebalanceResults results = op.getResults();
@@ -387,7 +391,7 @@ public class PartitionedRegionStatsDUnitTest extends PartitionedRegionDUnitTestC
         paf.setRedundantCopies(0);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
         RebalanceOperation op = cache.getResourceManager().createRebalanceFactory().start();
         try {
           RebalanceResults results = op.getResults();
@@ -443,7 +447,7 @@ public class PartitionedRegionStatsDUnitTest extends PartitionedRegionDUnitTestC
         paf.setRedundantCopies(2);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
 
@@ -553,7 +557,7 @@ public class PartitionedRegionStatsDUnitTest extends PartitionedRegionDUnitTestC
         paf.setRedundantCopies(2);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
 

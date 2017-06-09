@@ -151,7 +151,7 @@ public class ConnectionProxyJUnitTest {
         }
       });
       RegionAttributes attrs = factory.create();
-      testRegion = cache.createRegion("testregion", attrs);
+      testRegion = cache.createRegionFactory(attrs).create("testregion");
 
     } catch (Exception ex) {
       ex.printStackTrace();

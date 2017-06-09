@@ -438,7 +438,7 @@ public class PRClientServerRegionFunctionExecutionFailoverDUnitTest extends PRCl
 
     AttributesFactory attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    region = cache.createRegion(regionName, attr.create());
+    region = cache.createRegionFactory(attr.create()).create(regionName);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region " + regionName + " created Successfully :" + region.toString());
@@ -467,7 +467,7 @@ public class PRClientServerRegionFunctionExecutionFailoverDUnitTest extends PRCl
     factory.setPoolName(p.getName());
     factory.setDataPolicy(DataPolicy.EMPTY);
     RegionAttributes attrs = factory.create();
-    region = cache.createRegion(regionName, attrs);
+    region = cache.createRegionFactory(attrs).create(regionName);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region " + regionName + " created Successfully :" + region.toString());

@@ -91,7 +91,7 @@ public class RemoveAllMultiVmDUnitTest extends JUnit4DistributedTestCase { // TO
       AttributesFactory factory = new AttributesFactory();
       factory.setScope(Scope.DISTRIBUTED_ACK);
       RegionAttributes attr = factory.create();
-      region = cache.createRegion("map", attr);
+      region = cache.createRegionFactory(attr).create("map");
 
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -104,7 +104,7 @@ public class RemoveAllMultiVmDUnitTest extends JUnit4DistributedTestCase { // TO
       factory.setDataPolicy(DataPolicy.REPLICATE);
       factory.setScope(Scope.DISTRIBUTED_ACK);
       RegionAttributes attr = factory.create();
-      mirroredRegion = cache.createRegion("mirrored", attr);
+      mirroredRegion = cache.createRegionFactory().create("mirrored");
     } catch (Exception ex) {
       ex.printStackTrace();
     }

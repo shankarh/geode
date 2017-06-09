@@ -76,7 +76,7 @@ public class MapIndexStoreJUnitTest {
     attributesFactory.setDataPolicy(DataPolicy.NORMAL);
     attributesFactory.setIndexMaintenanceSynchronous(true);
     RegionAttributes regionAttributes = attributesFactory.create();
-    region = (LocalRegion) cache.createRegion("portfolios", regionAttributes);
+    region = (LocalRegion) cache.createRegionFactory(regionAttributes).create("portfolios");
 
     IndexStore indexStorage =
         new MapIndexStore(region.getIndexMap("testIndex", "p.ID", "/portfolios p"), region);

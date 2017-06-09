@@ -62,7 +62,6 @@ public class TransactionsWithDeltaDUnitTest extends JUnit4CacheTestCase {
   private static final String ORDER = "Order";
 
   /**
-   * @param name
    */
   public TransactionsWithDeltaDUnitTest() {
     super();
@@ -89,7 +88,7 @@ public class TransactionsWithDeltaDUnitTest extends JUnit4CacheTestCase {
     af.setScope(Scope.DISTRIBUTED_ACK);
     af.setDataPolicy(DataPolicy.REPLICATE);
     af.setCloningEnabled(true);
-    getCache().createRegion(D_REFERENCE, af.create());
+    getCache().createRegionFactory(af.create()).create(D_REFERENCE);
     af = new AttributesFactory();
     af.setCloningEnabled(true);
     if (interestPolicy != null) {
@@ -99,12 +98,12 @@ public class TransactionsWithDeltaDUnitTest extends JUnit4CacheTestCase {
         .setTotalNumBuckets(4).setLocalMaxMemory(accessor ? 0 : 1)
         .setPartitionResolver(new CustomerIDPartitionResolver("resolver1"))
         .setRedundantCopies(redundantCopies).create());
-    getCache().createRegion(CUSTOMER, af.create());
+    getCache().createRegionFactory(af.create()).create(CUSTOMER);
     af.setPartitionAttributes(new PartitionAttributesFactory<OrderId, Order>().setTotalNumBuckets(4)
         .setLocalMaxMemory(accessor ? 0 : 1)
         .setPartitionResolver(new CustomerIDPartitionResolver("resolver2"))
         .setRedundantCopies(redundantCopies).setColocatedWith(CUSTOMER).create());
-    getCache().createRegion(ORDER, af.create());
+    getCache().createRegionFactory(af.create()).create(ORDER);
   }
 
   private void createClientRegion(VM vm, final int port, final boolean isEmpty, final boolean ri) {
@@ -243,7 +242,7 @@ public class TransactionsWithDeltaDUnitTest extends JUnit4CacheTestCase {
 
     SerializableCallable createRegion = new SerializableCallable() {
       public Object call() throws Exception {
-        getCache().createRegion(regionName, attr);
+        getCache().basicCreateRegion(regionName, attr);
         return null;
       }
     };
@@ -279,7 +278,7 @@ public class TransactionsWithDeltaDUnitTest extends JUnit4CacheTestCase {
 
     SerializableCallable createRegion = new SerializableCallable() {
       public Object call() throws Exception {
-        getCache().createRegion(regionName, regionAttr);
+        getCache().basicCreateRegion(regionName, regionAttr);
         return null;
       }
     };

@@ -406,11 +406,11 @@ public class PdxClientServerDUnitTest extends JUnit4CacheTestCase {
 
         AttributesFactory af = new AttributesFactory();
         af.setPoolName("pool1");
-        cache.createRegion("region1", af.create());
+        cache.createRegionFactory(af.create()).create("region1");
 
         af = new AttributesFactory();
         af.setPoolName("pool2");
-        cache.createRegion("region2", af.create());
+        cache.createRegionFactory(af.create()).create("region2");
         return null;
       }
     };
@@ -500,7 +500,7 @@ public class PdxClientServerDUnitTest extends JUnit4CacheTestCase {
 
         AttributesFactory af = new AttributesFactory();
         af.setPoolName("pool");
-        cache.createRegion("testSimplePdx", af.create());
+        cache.createRegionFactory(af.create()).create("testSimplePdx");
         return null;
       }
     };

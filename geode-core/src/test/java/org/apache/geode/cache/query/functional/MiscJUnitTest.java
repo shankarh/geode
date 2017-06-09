@@ -322,7 +322,7 @@ public class MiscJUnitTest {
     final Cache cache = CacheUtils.getCache();
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes ra = attributesFactory.create();
-    final Region region = cache.createRegion("new_pos", ra);
+    final Region region = cache.createRegionFactory(ra).create("new_pos");
     String queryStr = " select distinct r.name, pVal, r.\"type\"  "
         + " from /new_pos r , r.positions.values pVal where "
         + "  (r.name='name_11' OR r.name='name_12') AND pVal.mktValue >=1.00";
@@ -344,7 +344,7 @@ public class MiscJUnitTest {
     PartitionAttributes pa = paf.create();
     attributesFactory.setPartitionAttributes(pa);
     RegionAttributes ra = attributesFactory.create();
-    final Region region = cache.createRegion("new_pos", ra);
+    final Region region = cache.createRegionFactory(ra).create("new_pos");
     String queryStr = " select distinct r.name, pVal, r.\"type\"  "
         + " from /new_pos r , r.positions.values pVal where "
         + "  (r.name='name_11' OR r.name='name_12') AND pVal.mktValue < 1.00";
@@ -360,7 +360,7 @@ public class MiscJUnitTest {
     final Cache cache = CacheUtils.getCache();
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes ra = attributesFactory.create();
-    final Region region = cache.createRegion("new_pos", ra);
+    final Region region = cache.createRegionFactory(ra).create("new_pos");
     String queryStr = " select distinct r.name, pVal, r.\"type\"  "
         + " from /new_pos r , r.positions.values pVal where "
         + " ( r.name IN Set('name_11' , 'name_12') OR false ) AND pVal.mktValue = 1.00";
@@ -382,7 +382,7 @@ public class MiscJUnitTest {
     PartitionAttributes pa = paf.create();
     attributesFactory.setPartitionAttributes(pa);
     RegionAttributes ra = attributesFactory.create();
-    final Region region = cache.createRegion("new_pos", ra);
+    final Region region = cache.createRegionFactory(ra).create("new_pos");
     String queryStr = " select distinct r.name, pVal, r.\"type\"  "
         + " from /new_pos r , r.positions.values pVal where "
         + " ( r.name IN Set('name_11' , 'name_12') OR false ) AND pVal.mktValue < 1.00";
@@ -497,7 +497,7 @@ public class MiscJUnitTest {
     final Cache cache = CacheUtils.getCache();
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes ra = attributesFactory.create();
-    final Region region = cache.createRegion("new_pos", ra);
+    final Region region = cache.createRegionFactory(ra).create("new_pos");
     String queryStr1 = " select distinct r.name, pVal, r.\"type\"  "
         + " from /new_pos r , r.positions.values pVal where "
         + " ( r.undefinedTestField.toString = UNDEFINED  OR false ) ";// AND pVal.mktValue = 1.00";

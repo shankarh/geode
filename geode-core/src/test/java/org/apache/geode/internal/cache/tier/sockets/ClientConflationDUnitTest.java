@@ -196,7 +196,7 @@ public class ClientConflationDUnitTest extends JUnit4DistributedTestCase {
       }
     });
     RegionAttributes attrs = factory.create();
-    cacheClient.createRegion(REGION_NAME1, attrs);
+    cacheClient.createRegionFactory(attrs).create(REGION_NAME1);
     createPool2(host, factory, port);
     factory.setCacheListener(new CacheListenerAdapter() {
       public void afterCreate(EntryEvent event) {
@@ -212,7 +212,7 @@ public class ClientConflationDUnitTest extends JUnit4DistributedTestCase {
       }
     });
     attrs = factory.create();
-    cacheClient.createRegion(REGION_NAME2, attrs);
+    cacheClient.createRegionFactory(attrs).create(REGION_NAME2);
   }
 
   public static void createClientCacheFeeder(String host, Integer port) throws Exception {
@@ -223,9 +223,9 @@ public class ClientConflationDUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.LOCAL);
     createPool2(host, factory, port);
     RegionAttributes attrs = factory.create();
-    cacheFeeder.createRegion(REGION_NAME1, attrs);
+    cacheFeeder.createRegionFactory(attrs).create(REGION_NAME1);
     attrs = factory.create();
-    cacheFeeder.createRegion(REGION_NAME2, attrs);
+    cacheFeeder.createRegionFactory(attrs).create(REGION_NAME2);
   }
 
   /**
@@ -396,8 +396,8 @@ public class ClientConflationDUnitTest extends JUnit4DistributedTestCase {
     RegionAttributes attrs1 = factory.create();
     factory.setEnableConflation(false);
     RegionAttributes attrs2 = factory.create();
-    cacheServer.createRegion(REGION_NAME1, attrs1);
-    cacheServer.createRegion(REGION_NAME2, attrs2);
+    cacheServer.createRegionFactory(attrs1).create(REGION_NAME1);
+    cacheServer.createRegionFactory(attrs2).create(REGION_NAME2);
     CacheServer server = cacheServer.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server.setPort(port);

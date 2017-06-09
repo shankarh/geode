@@ -84,7 +84,7 @@ public class DiskInstantiatorsJUnitTest {
     factory.setDiskStoreName(
         this.c.createDiskStoreFactory().create("DiskInstantiatorsJUnitTest").getName());
 
-    this.r = this.c.createRegion("DiskInstantiatorsJUnitTest", factory.create());
+    this.r = this.c.createRegionFactory(factory.create()).create("DiskInstantiatorsJUnitTest");
   }
 
   private void disconnect() throws CacheException {

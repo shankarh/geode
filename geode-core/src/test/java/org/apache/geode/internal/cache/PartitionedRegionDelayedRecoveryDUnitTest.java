@@ -79,7 +79,7 @@ public class PartitionedRegionDelayedRecoveryDUnitTest extends JUnit4CacheTestCa
         paf.setRedundantCopies(1);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
 
@@ -161,7 +161,7 @@ public class PartitionedRegionDelayedRecoveryDUnitTest extends JUnit4CacheTestCa
           paf.setRedundantCopies(1);
           PartitionAttributes prAttr = paf.create();
           attr.setPartitionAttributes(prAttr);
-          cache.createRegion("region1", attr.create());
+          cache.createRegionFactory(attr.create()).create("region1");
           if (!rebalancingFinished.await(60000, TimeUnit.MILLISECONDS)) {
             fail("Redundancy recovery did not happen within 60 seconds");
           }
@@ -225,7 +225,7 @@ public class PartitionedRegionDelayedRecoveryDUnitTest extends JUnit4CacheTestCa
         paf.setRedundantCopies(1);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
 

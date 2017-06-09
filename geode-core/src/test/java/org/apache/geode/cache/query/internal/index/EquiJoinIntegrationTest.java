@@ -320,7 +320,7 @@ public class EquiJoinIntegrationTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     attributesFactory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes regionAttributes = attributesFactory.create();
-    return cache.createRegion(regionName, regionAttributes);
+    return cache.createRegionFactory(regionAttributes).create(regionName);
   }
 
   protected void executeQueriesWithIndexCombinations(String[] queries)

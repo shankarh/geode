@@ -69,7 +69,7 @@ public class CQJUnitTest {
     RegionAttributes regionAttributes = attributesFactory.create();
     // The order by query computes dependency after compilation so the region has to be present
     // for the query to progress further to throw UnsupportedOperationException
-    cache.createRegion("region", regionAttributes);
+    cache.createRegionFactory(regionAttributes).create("region");
 
     // default attributes
     CqAttributes attrs = new CqAttributesFactory().create();

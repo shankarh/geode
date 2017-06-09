@@ -122,7 +122,7 @@ public class HASlowReceiverDUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(regionName, attrs);
+    cache.createRegionFactory(attrs).create(regionName);
     logger = cache.getLogger();
 
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
@@ -173,7 +173,7 @@ public class HASlowReceiverDUnitTest extends JUnit4DistributedTestCase {
       });
     }
     RegionAttributes attrs = factory.create();
-    cache.createRegion(regionName, attrs);
+    cache.createRegionFactory(attrs).create(regionName);
     pool = p;
   }
 

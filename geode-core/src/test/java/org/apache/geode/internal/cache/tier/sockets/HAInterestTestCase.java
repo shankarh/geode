@@ -932,7 +932,7 @@ public class HAInterestTestCase extends JUnit4DistributedTestCase {
     factory.setConcurrencyChecksEnabled(true);
     factory.setPoolName(p.getName());
 
-    cache.createRegion(REGION_NAME, factory.create());
+    cache.createRegionFactory(factory.create()).create(REGION_NAME);
     pool = p;
     conn = pool.acquireConnection();
     assertNotNull(conn);
@@ -961,7 +961,7 @@ public class HAInterestTestCase extends JUnit4DistributedTestCase {
     factory.setConcurrencyChecksEnabled(true);
     factory.setPoolName(p.getName());
 
-    cache.createRegion(REGION_NAME, factory.create());
+    cache.createRegionFactory(factory.create()).create(REGION_NAME);
 
     pool = p;
     conn = pool.acquireConnection();
@@ -983,7 +983,7 @@ public class HAInterestTestCase extends JUnit4DistributedTestCase {
     factory.setConcurrencyChecksEnabled(true);
     factory.setPoolName(p.getName());
 
-    cache.createRegion(REGION_NAME, factory.create());
+    cache.createRegionFactory(factory.create()).create(REGION_NAME);
 
     pool = p;
     conn = pool.acquireConnection();
@@ -997,7 +997,7 @@ public class HAInterestTestCase extends JUnit4DistributedTestCase {
     factory.setEnableBridgeConflation(true);
     factory.setMirrorType(MirrorType.KEYS_VALUES);
     factory.setConcurrencyChecksEnabled(true);
-    cache.createRegion(REGION_NAME, factory.create());
+    cache.createRegionFactory(factory.create()).create(REGION_NAME);
 
     CacheServer server = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
@@ -1015,7 +1015,7 @@ public class HAInterestTestCase extends JUnit4DistributedTestCase {
     factory.setScope(Scope.LOCAL);
     factory.setConcurrencyChecksEnabled(true);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
     CacheServer server = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);

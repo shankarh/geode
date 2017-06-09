@@ -61,7 +61,7 @@ class Utils {
     attributesFactory.setValueConstraint(valueConstraint);
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = _cache.createRegion(regionName, regionAttributes);
+    Region region = _cache.createRegionFactory(regionAttributes).create(regionName);
     return region;
   }
 

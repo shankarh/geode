@@ -68,7 +68,7 @@ public class DiskRegionClearJUnitTest {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
     RegionAttributes regionAttributes = factory.create();
-    testRegion = cache.createRegion("TestRegion1", regionAttributes);
+    testRegion = cache.createRegionFactory(regionAttributes).create("TestRegion1");
     CacheObserverHolder.setInstance(new CacheObserverListener());
   }
 
@@ -185,7 +185,7 @@ public class DiskRegionClearJUnitTest {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
     RegionAttributes regionAttributes = factory.create();
-    testRegion = cache.createRegion("TestRegion1", regionAttributes);
+    testRegion = cache.createRegionFactory(regionAttributes).create("TestRegion1");
 
     System.out.println("keySet after recovery = " + testRegion.keySet());
     assertEquals(0, testRegion.size());
@@ -213,7 +213,7 @@ public class DiskRegionClearJUnitTest {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
     RegionAttributes regionAttributes = factory.create();
-    testRegion = cache.createRegion("TestRegion1", regionAttributes);
+    testRegion = cache.createRegionFactory(regionAttributes).create("TestRegion1");
     assertEquals(1000, testRegion.size());
   }
 

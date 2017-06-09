@@ -2122,7 +2122,7 @@ public class WANTestBase extends JUnit4DistributedTestCase {
     factory.setPoolName("pool");
     factory.setDataPolicy(DataPolicy.NORMAL);
     RegionAttributes attrs = factory.create();
-    region = cache.createRegion(regionName, attrs);
+    region = cache.createRegionFactory(attrs).create(regionName);
     region.registerInterest("ALL_KEYS");
     assertNotNull(region);
     LogWriterUtils.getLogWriter()

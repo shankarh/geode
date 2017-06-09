@@ -162,7 +162,7 @@ public class Bug37210DUnitTest extends JUnit4DistributedTestCase {
 
     RegionAttributes attrs = factory.create();
 
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
     CacheServer server = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server.setPort(port);
@@ -199,7 +199,7 @@ public class Bug37210DUnitTest extends JUnit4DistributedTestCase {
     factory.setPoolName(p.getName());
 
     RegionAttributes attrs = factory.create();
-    Region region = cache.createRegion(REGION_NAME, attrs);
+    Region region = cache.createRegionFactory(attrs).create(REGION_NAME);
     region.registerInterest("ALL_KEYS");
   }
 

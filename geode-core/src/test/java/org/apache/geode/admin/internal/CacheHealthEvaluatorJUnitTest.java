@@ -64,7 +64,7 @@ public class CacheHealthEvaluatorJUnitTest extends HealthEvaluatorTestCase {
     });
 
     RegionAttributes attrs = factory.create();
-    Region region = cache.createRegion(getName(), attrs);
+    Region region = cache.createRegionFactory(attrs).create(getName());
 
     GemFireHealthConfig config = new GemFireHealthConfigImpl(null);
     config.setMaxLoadTime(100);
@@ -161,7 +161,7 @@ public class CacheHealthEvaluatorJUnitTest extends HealthEvaluatorTestCase {
     });
 
     RegionAttributes attrs = factory.create();
-    Region region = cache.createRegion(getName(), attrs);
+    Region region = cache.createRegionFactory(attrs).create(getName());
 
     GemFireHealthConfig config = new GemFireHealthConfigImpl(null);
     config.setMinHitRatio(0.5);

@@ -443,7 +443,7 @@ public class ServerLauncherLocalIntegrationTest extends AbstractServerLauncherIn
     final RegionAttributesCreation attrs = new RegionAttributesCreation(creation);
     attrs.setScope(Scope.DISTRIBUTED_ACK);
     attrs.setDataPolicy(DataPolicy.REPLICATE);
-    creation.createRegion(getUniqueName(), attrs);
+    creation.createRegionFactory(attrs).create(getUniqueName());
     creation.addCacheServer().setPort(freeTCPPorts[0]);
 
     File cacheXmlFile = this.temporaryFolder.newFile(getUniqueName() + ".xml");
@@ -509,7 +509,7 @@ public class ServerLauncherLocalIntegrationTest extends AbstractServerLauncherIn
     final RegionAttributesCreation attrs = new RegionAttributesCreation(creation);
     attrs.setScope(Scope.DISTRIBUTED_ACK);
     attrs.setDataPolicy(DataPolicy.REPLICATE);
-    creation.createRegion(getUniqueName(), attrs);
+    creation.createRegionFactory(attrs).create(getUniqueName());
     creation.addCacheServer();
 
     File cacheXmlFile = this.temporaryFolder.newFile(getUniqueName() + ".xml");

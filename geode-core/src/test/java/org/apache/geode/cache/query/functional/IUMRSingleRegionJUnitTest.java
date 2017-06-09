@@ -115,7 +115,7 @@ public class IUMRSingleRegionJUnitTest {
     AttributesFactory factory = new AttributesFactory();
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setValueConstraint(Country.class);
-    region = cache.createRegion("Countries", factory.create());
+    region = cache.createRegionFactory(factory.create()).create("Countries");
 
     populateData();
   }// end of setUp

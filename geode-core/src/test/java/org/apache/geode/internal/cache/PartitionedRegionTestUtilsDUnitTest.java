@@ -71,7 +71,7 @@ public class PartitionedRegionTestUtilsDUnitTest extends PartitionedRegionDUnitT
         AttributesFactory attr = new AttributesFactory();
         attr.setPartitionAttributes(
             new PartitionAttributesFactory().setTotalNumBuckets(totalNumBuckets).create());
-        Region p = cache.createRegion(r, attr.create());
+        Region p = cache.createRegionFactory(attr.create()).create(r);
         assertNotNull(p);
         assertTrue(!p.isDestroyed());
         assertNull(p.get("Key"));
@@ -177,7 +177,8 @@ public class PartitionedRegionTestUtilsDUnitTest extends PartitionedRegionDUnitT
             AttributesFactory attr = new AttributesFactory();
             attr.setPartitionAttributes(
                 new PartitionAttributesFactory().setTotalNumBuckets(totalNumBuckets).create());
-            PartitionedRegion p = (PartitionedRegion) cache.createRegion(r, attr.create());
+            PartitionedRegion p =
+                (PartitionedRegion) cache.createRegionFactory(attr.create()).create(r);
             assertNotNull(p);
             assertTrue(!p.isDestroyed());
 
@@ -254,7 +255,8 @@ public class PartitionedRegionTestUtilsDUnitTest extends PartitionedRegionDUnitT
         attr.setPartitionAttributes(new PartitionAttributesFactory()
             .setTotalNumBuckets(totalNumBuckets).setLocalMaxMemory(8).create());
 
-        PartitionedRegion p = (PartitionedRegion) cache.createRegion(r, attr.create());
+        PartitionedRegion p =
+            (PartitionedRegion) cache.createRegionFactory(attr.create()).create(r);
         assertNotNull(p);
       }
     });
@@ -272,7 +274,7 @@ public class PartitionedRegionTestUtilsDUnitTest extends PartitionedRegionDUnitT
     // .setLocalProperties(lp)
     // .createPartitionAttributes());
     //
-    // PartitionedRegion p = (PartitionedRegion) cache.createRegion(r, attr.create());
+    // PartitionedRegion p = (PartitionedRegion) cache.createRegionFactory(attr.create()).create(r);
     // assertNotNull(p);
     //
     // final String key1 = "lcKey1"; final String val1 = "lcVal1";
@@ -309,7 +311,8 @@ public class PartitionedRegionTestUtilsDUnitTest extends PartitionedRegionDUnitT
         attr.setPartitionAttributes(new PartitionAttributesFactory()
             .setTotalNumBuckets(totalNumBuckets).setLocalMaxMemory(0).create());
 
-        PartitionedRegion p = (PartitionedRegion) cache.createRegion(r, attr.create());
+        PartitionedRegion p =
+            (PartitionedRegion) cache.createRegionFactory(attr.create()).create(r);
         assertNotNull(p);
 
         final String key3 = "lcKey3";
@@ -362,7 +365,8 @@ public class PartitionedRegionTestUtilsDUnitTest extends PartitionedRegionDUnitT
         AttributesFactory attr = new AttributesFactory();
         attr.setPartitionAttributes(
             new PartitionAttributesFactory().setTotalNumBuckets(totalNumBuckets).create());
-        PartitionedRegion p = (PartitionedRegion) cache.createRegion(r, attr.create());
+        PartitionedRegion p =
+            (PartitionedRegion) cache.createRegionFactory(attr.create()).create(r);
         assertNotNull(p);
       }
     };
@@ -376,7 +380,7 @@ public class PartitionedRegionTestUtilsDUnitTest extends PartitionedRegionDUnitT
 
     attr.setPartitionAttributes(new PartitionAttributesFactory().setTotalNumBuckets(totalNumBuckets)
         .setLocalMaxMemory(0).create());
-    PartitionedRegion p = (PartitionedRegion) cache.createRegion(r, attr.create());
+    PartitionedRegion p = (PartitionedRegion) cache.createRegionFactory(attr.create()).create(r);
     assertNotNull(p);
     final int totalBucks = p.getTotalNumberOfBuckets();
 
@@ -471,8 +475,8 @@ public class PartitionedRegionTestUtilsDUnitTest extends PartitionedRegionDUnitT
         for (int redundancy = 0; redundancy < regions.length; redundancy++) {
           paf.setRedundantCopies(redundancy);
           attr.setPartitionAttributes(paf.create());
-          PartitionedRegion p =
-              (PartitionedRegion) cache.createRegion(regions[redundancy], attr.create());
+          PartitionedRegion p = (PartitionedRegion) cache.createRegionFactory(attr.create())
+              .create(regions[redundancy]);
           assertNotNull(p);
           assertEquals(0, p.size());
         }
@@ -493,8 +497,8 @@ public class PartitionedRegionTestUtilsDUnitTest extends PartitionedRegionDUnitT
         for (int redundancy = 0; redundancy < regions.length; redundancy++) {
           paf.setRedundantCopies(redundancy);
           attr.setPartitionAttributes(paf.create());
-          PartitionedRegion p =
-              (PartitionedRegion) cache.createRegion(regions[redundancy], attr.create());
+          PartitionedRegion p = (PartitionedRegion) cache.createRegionFactory(attr.create())
+              .create(regions[redundancy]);
           assertNotNull(p);
           assertEquals(0, p.size());
         }

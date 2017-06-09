@@ -1205,7 +1205,7 @@ public class PartitionedRegionCqQueryDUnitTest extends JUnit4CacheTestCase {
       }
 
       private Region createRegionWithoutRoot(String regionName, RegionAttributes create) {
-        getCache().createRegion(regionName, create);
+        getCache().basicCreateRegion(regionName, create);
         return null;
       }
     };

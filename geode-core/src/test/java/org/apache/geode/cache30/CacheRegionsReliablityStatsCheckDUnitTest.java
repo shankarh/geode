@@ -66,7 +66,7 @@ public class CacheRegionsReliablityStatsCheckDUnitTest extends JUnit4CacheTestCa
     fac.setDataPolicy(DataPolicy.REPLICATE);
 
     RegionAttributes attr = fac.create();
-    myCache.createRegion(regionNoAccess, attr);
+    myCache.createRegionFactory(attr).create(regionNoAccess);
 
     ra = new MembershipAttributes(requiredRoles, LossAction.LIMITED_ACCESS, ResumptionAction.NONE);
     fac = new AttributesFactory();
@@ -74,7 +74,7 @@ public class CacheRegionsReliablityStatsCheckDUnitTest extends JUnit4CacheTestCa
     fac.setScope(Scope.DISTRIBUTED_ACK);
     fac.setDataPolicy(DataPolicy.REPLICATE);
     attr = fac.create();
-    myCache.createRegion(regionLimitedAccess, attr);
+    myCache.createRegionFactory().create(regionLimitedAccess);
 
     ra = new MembershipAttributes(requiredRoles, LossAction.FULL_ACCESS, ResumptionAction.NONE);
     fac = new AttributesFactory();
@@ -82,7 +82,7 @@ public class CacheRegionsReliablityStatsCheckDUnitTest extends JUnit4CacheTestCa
     fac.setScope(Scope.DISTRIBUTED_ACK);
     fac.setDataPolicy(DataPolicy.REPLICATE);
     attr = fac.create();
-    myCache.createRegion(regionFullAccess, attr);
+    myCache.createRegionFactory().create(regionFullAccess);
 
     CachePerfStats stats = ((GemFireCacheImpl) myCache).getCachePerfStats();
 
@@ -110,9 +110,9 @@ public class CacheRegionsReliablityStatsCheckDUnitTest extends JUnit4CacheTestCa
         fac.setDataPolicy(DataPolicy.REPLICATE);
 
         RegionAttributes attr = fac.create();
-        cache.createRegion(regionNoAccess, attr);
-        cache.createRegion(regionLimitedAccess, attr);
-        cache.createRegion(regionFullAccess, attr);
+        cache.createRegionFactory().create(regionNoAccess);
+        cache.createRegionFactory().create(regionLimitedAccess);
+        cache.createRegionFactory().create(regionFullAccess);
 
       }
 

@@ -118,7 +118,7 @@ public class DataSerializerPropogationDUnitTest extends JUnit4DistributedTestCas
     AttributesFactory factory = new AttributesFactory();
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setPoolName(p.getName());
-    Region r = cache.createRegion(REGION_NAME, factory.create());
+    Region r = cache.createRegionFactory(factory.create()).create(REGION_NAME);
     r.registerInterest("ALL_KEYS");
   }
 
@@ -138,7 +138,7 @@ public class DataSerializerPropogationDUnitTest extends JUnit4DistributedTestCas
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setMirrorType(MirrorType.KEYS_VALUES);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     CacheServer server1 = cache.addCacheServer();
     server1.setPort(port);
@@ -823,7 +823,7 @@ public class DataSerializerPropogationDUnitTest extends JUnit4DistributedTestCas
     factory.setMirrorType(MirrorType.KEYS_VALUES);
 
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     CacheServer server1 = cache.addCacheServer();
     server1.setPort(port);
@@ -846,7 +846,7 @@ public class DataSerializerPropogationDUnitTest extends JUnit4DistributedTestCas
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setMirrorType(MirrorType.KEYS_VALUES);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     CacheServer server1 = cache.addCacheServer();
     server1.setPort(port);

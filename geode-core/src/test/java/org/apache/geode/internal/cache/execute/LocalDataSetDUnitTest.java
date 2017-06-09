@@ -302,14 +302,14 @@ public class LocalDataSetDUnitTest extends JUnit4CacheTestCase {
     assertNotNull(basicGetCache());
 
     if (partitionedRegionName.equals("CustomerPR")) {
-      customerPR = basicGetCache().createRegion(partitionedRegionName, attr.create());
+      customerPR = basicGetCache().createRegionFactory(attr.create()).create(partitionedRegionName);
       assertNotNull(customerPR);
       LogWriterUtils.getLogWriter().info(
           "Partitioned Region " + partitionedRegionName + " created Successfully :" + customerPR);
 
     }
     if (partitionedRegionName.equals("OrderPR")) {
-      orderPR = basicGetCache().createRegion(partitionedRegionName, attr.create());
+      orderPR = basicGetCache().createRegionFactory(attr.create()).create(partitionedRegionName);
       assertNotNull(orderPR);
       LogWriterUtils.getLogWriter().info(
           "Partitioned Region " + partitionedRegionName + " created Successfully :" + orderPR);
@@ -317,7 +317,7 @@ public class LocalDataSetDUnitTest extends JUnit4CacheTestCase {
     }
 
     if (partitionedRegionName.equals("ShipmentPR")) {
-      shipmentPR = basicGetCache().createRegion(partitionedRegionName, attr.create());
+      shipmentPR = basicGetCache().createRegionFactory(attr.create()).create(partitionedRegionName);
       assertNotNull(shipmentPR);
       LogWriterUtils.getLogWriter().info(
           "Partitioned Region " + partitionedRegionName + " created Successfully :" + shipmentPR);

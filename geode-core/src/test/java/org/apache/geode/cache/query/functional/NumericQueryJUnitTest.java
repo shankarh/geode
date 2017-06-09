@@ -264,7 +264,7 @@ public class NumericQueryJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     attributesFactory.setDataPolicy(DataPolicy.NORMAL);
     RegionAttributes regionAttributes = attributesFactory.create();
-    return cache.createRegion(regionName, regionAttributes);
+    return cache.createRegionFactory(regionAttributes).create(regionName);
   }
 
   private Region createReplicatedRegion(String regionName) throws ParseException {
@@ -272,7 +272,7 @@ public class NumericQueryJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     attributesFactory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes regionAttributes = attributesFactory.create();
-    return cache.createRegion(regionName, regionAttributes);
+    return cache.createRegionFactory(regionAttributes).create(regionName);
   }
 
   private Region createPartitionedRegion(String regionName) throws ParseException {
@@ -281,7 +281,7 @@ public class NumericQueryJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     attributesFactory.setPartitionAttributes(prAttFactory.create());
     RegionAttributes regionAttributes = attributesFactory.create();
-    return cache.createRegion(regionName, regionAttributes);
+    return cache.createRegionFactory(regionAttributes).create(regionName);
   }
 
   private void populateRegion(Region region) throws Exception {

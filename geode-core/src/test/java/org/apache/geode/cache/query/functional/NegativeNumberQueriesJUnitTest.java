@@ -60,7 +60,7 @@ public class NegativeNumberQueriesJUnitTest {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setValueConstraint(Numbers.class);
     factory.setIndexMaintenanceSynchronous(true);
-    region = cache.createRegion("numbers", factory.create());
+    region = cache.createRegionFactory(factory.create()).create("numbers");
   }
 
   @After

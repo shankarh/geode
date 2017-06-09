@@ -174,7 +174,7 @@ public class RegisterInterestKeysDUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setPoolName(p.getName());
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
   }
 
@@ -182,7 +182,7 @@ public class RegisterInterestKeysDUnitTest extends JUnit4DistributedTestCase {
     new RegisterInterestKeysDUnitTest().createCache(new Properties());
 
     RegionAttributes attrs = impl.createServerCacheAttributes();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
     CacheServer server = cache.addCacheServer();
     assertNotNull(server);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);

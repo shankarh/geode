@@ -87,7 +87,7 @@ public class CacheMapTxnDUnitTest extends JUnit4DistributedTestCase { // TODO: r
       factory.setScope(Scope.DISTRIBUTED_ACK);
       factory.setDataPolicy(DataPolicy.REPLICATE);
       RegionAttributes attr = factory.create();
-      region = cache.createRegion("map", attr);
+      region = cache.createRegionFactory(attr).create("map");
 
     } catch (Exception ex) {
       throw new AssertionError(ex);

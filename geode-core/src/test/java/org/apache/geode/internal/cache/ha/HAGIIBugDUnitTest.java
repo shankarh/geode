@@ -157,7 +157,7 @@ public class HAGIIBugDUnitTest extends JUnit4DistributedTestCase {
           CacheListener regionListener = new vmListenerToCheckHARegionQueue();
           factory.setCacheListener(regionListener);
           RegionAttributes attrs = factory.create();
-          Region region = cache.createRegion(REGION_NAME, attrs);
+          Region region = cache.createRegionFactory(attrs).create(REGION_NAME);
           LogWriterUtils.getLogWriter().info("Name of the region is : " + region.getFullPath());
 
           HARegionQueueAttributes hattr = new HARegionQueueAttributes();
@@ -328,7 +328,7 @@ public class HAGIIBugDUnitTest extends JUnit4DistributedTestCase {
     CacheListener regionListener = new vmListenerToPutInHARegionQueue();
     factory.setCacheListener(regionListener);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
   }
 

@@ -97,7 +97,7 @@ public class PutAllCallBkSingleVMDUnitTest extends JUnit4DistributedTestCase {
       factory.setCacheListener(aListener);
       RegionAttributes attr = factory.create();
 
-      region = cache.createRegion("map", attr);
+      region = cache.createRegionFactory(attr).create("map");
 
 
     } catch (Exception ex) {
@@ -153,7 +153,7 @@ public class PutAllCallBkSingleVMDUnitTest extends JUnit4DistributedTestCase {
         factory.setCacheWriter(bWriter);
         factory.setCacheListener(bListener);
         RegionAttributes attr = factory.create();
-        Region tempRegion = cache.createRegion("temp", attr);
+        Region tempRegion = cache.createRegionFactory(attr).create("temp");
 
         // to invoke afterUpdate we should make sure that entries are already present
         for (int i = 0; i < 5; i++) {

@@ -166,7 +166,7 @@ public abstract class MultiVMRegionTestCase extends RegionTestCase {
       public void run2() throws CacheException {
         Cache cache = getCache();
         RegionAttributes regionAttribs = getRegionAttributes();
-        cache.createRegion("R1", regionAttribs);
+        cache.createRegionFactory(regionAttribs).create("R1");
       }
     };
 

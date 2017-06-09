@@ -37,7 +37,7 @@ public class TestHeapLRU {
     factory.setDiskStoreName(cache.createDiskStoreFactory()
         .setDiskDirs(new java.io.File[] {new java.io.File(System.getProperty("user.dir"))})
         .create("TestHeapLRU").getName());
-    Region region = cache.createRegion("TestDiskRegion", factory.create());
+    Region region = cache.createRegionFactory(factory.create()).create("TestDiskRegion");
 
     ThreadGroup tg = LoggingThreadGroup.createThreadGroup("Annoying threads");
     Thread thread = new Thread(tg, "Annoying thread") {

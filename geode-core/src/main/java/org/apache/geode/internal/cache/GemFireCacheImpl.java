@@ -2838,12 +2838,6 @@ public class GemFireCacheImpl implements InternalCache, InternalClientCache, Has
     }
   }
 
-  @Override
-  public <K, V> Region<K, V> createVMRegion(String name, RegionAttributes<K, V> aRegionAttributes)
-      throws RegionExistsException, TimeoutException {
-    return createRegion(name, aRegionAttributes);
-  }
-
   private PoolFactory createDefaultPF() {
     PoolFactory defaultPoolFactory = PoolManager.createFactory();
     try {
@@ -2979,15 +2973,6 @@ public class GemFireCacheImpl implements InternalCache, InternalClientCache, Has
       }
     }
     return pool;
-  }
-
-  @Override
-  public <K, V> Region<K, V> createRegion(String name, RegionAttributes<K, V> aRegionAttributes)
-      throws RegionExistsException, TimeoutException {
-    if (isClient()) {
-      throw new UnsupportedOperationException("operation is not supported on a client cache");
-    }
-    return basicCreateRegion(name, aRegionAttributes);
   }
 
   public <K, V> Region<K, V> basicCreateRegion(String name, RegionAttributes<K, V> attrs)

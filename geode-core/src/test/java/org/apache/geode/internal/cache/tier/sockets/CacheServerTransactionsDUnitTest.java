@@ -666,7 +666,7 @@ public class CacheServerTransactionsDUnitTest extends JUnit4DistributedTestCase 
         }
       }
     });
-    Region region1 = cache.createRegion(REGION_NAME, factory.create());
+    Region region1 = cache.createRegionFactory(factory.create()).create(REGION_NAME);
     assertNotNull(region1);
     pool = p;
     registerKeys();
@@ -700,7 +700,7 @@ public class CacheServerTransactionsDUnitTest extends JUnit4DistributedTestCase 
         }
       }
     });
-    Region region1 = cache.createRegion(REGION_NAME, factory.create());
+    Region region1 = cache.createRegionFactory(factory.create()).create(REGION_NAME);
     assertNotNull(region1);
     pool = p;
     registerKeys();
@@ -736,7 +736,7 @@ public class CacheServerTransactionsDUnitTest extends JUnit4DistributedTestCase 
         }
       }
     });
-    Region r1 = cache.createRegion(REGION_NAME, factory.create());
+    Region r1 = cache.createRegionFactory(factory.create()).create(REGION_NAME);
     assertNotNull(r1);
     CacheServer server1 = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);

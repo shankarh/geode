@@ -708,7 +708,7 @@ public class PartitionedRegionWithSameNameDUnitTest extends PartitionedRegionDUn
             if (firstCreationFlag) {
               for (int i = innerStartIndexForRegion; i < innerEndIndexForRegion; i++) {
                 try {
-                  cache.createRegion(innerPrPrefix + i, ra);
+                  cache.createRegionFactory(ra).create(innerPrPrefix + i);
                 } catch (RegionExistsException ex) {
                   Assert.fail(
                       "Got incorrect exception because the partition region being created prior to local region",
@@ -719,7 +719,7 @@ public class PartitionedRegionWithSameNameDUnitTest extends PartitionedRegionDUn
               for (int i = innerStartIndexForRegion; i < innerEndIndexForRegion; i++) {
                 if (!multipleVMFlag) {
                   try {
-                    cache.createRegion(innerPrPrefix + i, ra);
+                    cache.createRegionFactory(ra).create(innerPrPrefix + i);
                     fail(
                         "test failed : Distributed region with same name as Partitioned region gets created");
                   } catch (RegionExistsException expected) {
@@ -734,7 +734,7 @@ public class PartitionedRegionWithSameNameDUnitTest extends PartitionedRegionDUn
                   getCache().getLogger().info("<ExpectedException action=add>" + expectedExceptions
                       + "</ExpectedException>");
                   try {
-                    cache.createRegion(innerPrPrefix + i, ra);
+                    cache.createRegionFactory(ra).create(innerPrPrefix + i);
                     fail(
                         "test failed : Distributed region with same name as Partitioned region gets created");
                   } catch (IllegalStateException expected) {
@@ -786,15 +786,17 @@ public class PartitionedRegionWithSameNameDUnitTest extends PartitionedRegionDUn
         Cache cache = getCache();
         if (firstCreationFlag) {
           for (int i = startIndexForRegion; i < endIndexForRegion; i++) {
-            cache.createRegion(innerPRPrefix + i,
-                createRegionAttrsForPR(innerRedundancy, innerlocalmaxMemory));
+            cache.createRegionFactory(createRegionAttrsForPR(innerRedundancy, innerlocalmaxMemory))
+                .create(innerPRPrefix + i);
           }
         } else {
           for (int i = startIndexForRegion; i < endIndexForRegion; i++) {
             if (!multipleVMFlag) {
               try {
-                cache.createRegion(innerPRPrefix + i,
-                    createRegionAttrsForPR(innerRedundancy, innerlocalmaxMemory));
+                cache
+                    .createRegionFactory(
+                        createRegionAttrsForPR(innerRedundancy, innerlocalmaxMemory))
+                    .create(innerPRPrefix + i);
                 fail("test failed : partition region with same name as local region is created");
               } catch (RegionExistsException expected) {
                 // getLogWriter()
@@ -808,8 +810,10 @@ public class PartitionedRegionWithSameNameDUnitTest extends PartitionedRegionDUn
               getCache().getLogger().info(
                   "<ExpectedException action=add>" + expectedExceptions + "</ExpectedException>");
               try {
-                cache.createRegion(innerPRPrefix + i,
-                    createRegionAttrsForPR(innerRedundancy, innerlocalmaxMemory));
+                cache
+                    .createRegionFactory(
+                        createRegionAttrsForPR(innerRedundancy, innerlocalmaxMemory))
+                    .create(innerPRPrefix + i);
                 fail(
                     "test failed : partition region with same name as distributed region is created");
               } catch (IllegalStateException expected) {

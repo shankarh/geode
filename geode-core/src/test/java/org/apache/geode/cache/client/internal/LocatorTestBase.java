@@ -229,7 +229,7 @@ public abstract class LocatorTestBase extends JUnit4DistributedTestCase {
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
     for (int i = 0; i < regions.length; i++) {
-      cache.createRegion(regions[i], attrs);
+      cache.createRegionFactory(attrs).create(regions[i]);
     }
     CacheServer server = cache.addCacheServer();
     server.setPort(0);
@@ -258,7 +258,7 @@ public abstract class LocatorTestBase extends JUnit4DistributedTestCase {
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
     for (int i = 0; i < regions.length; i++) {
-      cache.createRegion(regions[i], attrs);
+      cache.createRegionFactory(attrs).create(regions[i]);
     }
     CacheServer server = cache.addCacheServer();
     server.setGroups(groups);
@@ -340,7 +340,7 @@ public abstract class LocatorTestBase extends JUnit4DistributedTestCase {
 
     RegionAttributes attrs = factory.create();
     for (int i = 0; i < regions.length; i++) {
-      cache.createRegion(regions[i], attrs);
+      cache.createRegionFactory(attrs).create(regions[i]);
     }
 
     remoteObjects.put(CACHE_KEY, cache);

@@ -223,7 +223,8 @@ public class EvictionTestBase extends JUnit4CacheTestCase {
     factory.setDataPolicy(DataPolicy.NORMAL);
     factory.setEvictionAttributes(
         EvictionAttributes.createLRUHeapAttributes(null, EvictionAction.LOCAL_DESTROY));
-    DistributedRegion distRegion = (DistributedRegion) cache.createRegion("DR1", factory.create());
+    DistributedRegion distRegion =
+        (DistributedRegion) cache.createRegionFactory(factory.create()).create("DR1");
     assertNotNull(distRegion);
 
   }
@@ -233,7 +234,8 @@ public class EvictionTestBase extends JUnit4CacheTestCase {
     factory.setDataPolicy(DataPolicy.NORMAL);
     factory.setEvictionAttributes(EvictionAttributes.createLRUMemoryAttributes(ObjectSizer.DEFAULT,
         EvictionAction.LOCAL_DESTROY));
-    DistributedRegion distRegion = (DistributedRegion) cache.createRegion("DR1", factory.create());
+    DistributedRegion distRegion =
+        (DistributedRegion) cache.createRegionFactory(factory.create()).create("DR1");
     assertNotNull(distRegion);
 
   }
@@ -347,7 +349,7 @@ public class EvictionTestBase extends JUnit4CacheTestCase {
       }
     }
 
-    region = cache.createRegion(regionName, factory.create());
+    region = cache.createRegionFactory(factory.create()).create(regionName);
     assertNotNull(region);
     LogWriterUtils.getLogWriter().info("Partitioned Region created Successfully :" + region);
   }

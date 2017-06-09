@@ -176,6 +176,7 @@ public class CacheXml70DUnitTest extends CacheXml66DUnitTest {
     attrs.addAsyncEventQueueId(asyncEventQueue.getId());
     cache.createRegion("UserRegion", attrs);
 
+
     testXml(cache);
     Cache c = getCache();
     assertNotNull(c);

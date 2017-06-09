@@ -77,7 +77,7 @@ public class PartitionedRegionCacheCloseDUnitTest extends PartitionedRegionDUnit
       public void run2() throws CacheException {
         Cache cache = getCache();
         for (int i = 0; i < MAX_REGIONS; i++) {
-          cache.createRegion(rName + i, createRegionAttributesForPR(1, 20));
+          cache.createRegionFactory(createRegionAttributesForPR(1, 20)).create(rName + i);
         }
       }
     };

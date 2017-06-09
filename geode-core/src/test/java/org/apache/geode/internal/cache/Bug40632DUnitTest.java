@@ -44,7 +44,7 @@ public class Bug40632DUnitTest extends JUnit4CacheTestCase {
     attr.setEntryIdleTimeout(new ExpirationAttributes(1000, ExpirationAction.LOCAL_DESTROY));
     attr.setPartitionAttributes(prAttr);
     try {
-      cache.createRegion("region1", attr.create());
+      cache.createRegionFactory(attr.create()).create("region1");
       fail("We should not have been able to create the region");
     } catch (IllegalStateException expected) {
     }
@@ -63,7 +63,7 @@ public class Bug40632DUnitTest extends JUnit4CacheTestCase {
     attr.setEntryTimeToLive(new ExpirationAttributes(1000, ExpirationAction.LOCAL_DESTROY));
     attr.setPartitionAttributes(prAttr);
     try {
-      cache.createRegion("region1", attr.create());
+      cache.createRegionFactory(attr.create()).create("region1");
       fail("We should not have been able to create the region");
     } catch (IllegalStateException expected) {
     }
@@ -82,7 +82,7 @@ public class Bug40632DUnitTest extends JUnit4CacheTestCase {
     attr.setEntryIdleTimeout(new ExpirationAttributes(1000, ExpirationAction.LOCAL_INVALIDATE));
     attr.setPartitionAttributes(prAttr);
     try {
-      cache.createRegion("region1", attr.create());
+      cache.createRegionFactory(attr.create()).create("region1");
       fail("We should not have been able to create the region");
     } catch (IllegalStateException expected) {
     }
@@ -101,7 +101,7 @@ public class Bug40632DUnitTest extends JUnit4CacheTestCase {
     attr.setEntryTimeToLive(new ExpirationAttributes(1000, ExpirationAction.LOCAL_INVALIDATE));
     attr.setPartitionAttributes(prAttr);
     try {
-      cache.createRegion("region1", attr.create());
+      cache.createRegionFactory(attr.create()).create("region1");
       fail("We should not have been able to create the region");
     } catch (IllegalStateException expected) {
     }

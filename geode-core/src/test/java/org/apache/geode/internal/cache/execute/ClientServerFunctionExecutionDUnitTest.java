@@ -531,7 +531,7 @@ public class ClientServerFunctionExecutionDUnitTest extends PRClientServerTestBa
     factory.setDataPolicy(DataPolicy.EMPTY);
     factory.setPoolName(pool.getName());
     RegionAttributes attrs = factory.create();
-    metaDataRegion = cache.createRegion(retryRegionName, attrs);
+    metaDataRegion = cache.createRegionFactory(attrs).create(retryRegionName);
     assertNotNull(metaDataRegion);
   }
 

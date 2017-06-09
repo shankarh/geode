@@ -273,7 +273,7 @@ public class SecurityTestUtils {
 
     RegionAttributes attrs = factory.create();
 
-    Region region = cache.createRegion(REGION_NAME, attrs);
+    Region region = cache.createRegionFactory(attrs).create(REGION_NAME);
     int port = serverPort <= 0 ? 0 : serverPort;
 
     CacheServer server1 = cache.addCacheServer();
@@ -524,7 +524,7 @@ public class SecurityTestUtils {
       factory.setDataPolicy(DataPolicy.EMPTY);
       RegionAttributes attrs = factory.create();
 
-      cache.createRegion(REGION_NAME, attrs);
+      cache.createRegionFactory(attrs).create(REGION_NAME);
 
       if (expectedResult != NO_EXCEPTION && expectedResult != NOFORCE_AUTHREQ_EXCEPTION) {
         if (!multiUserAuthMode) {

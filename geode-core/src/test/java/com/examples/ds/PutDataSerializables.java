@@ -33,7 +33,7 @@ public class PutDataSerializables {
     DistributedSystem system = DistributedSystem.connect(props);
     Cache cache = CacheFactory.create(system);
     AttributesFactory factory = new AttributesFactory();
-    Region region = cache.createRegion("DataSerializable", factory.create());
+    Region region = cache.createRegionFactory(factory.create()).create("DataSerializable");
     region.put("User", new User("Fred", 42));
 
     new CompanySerializer();

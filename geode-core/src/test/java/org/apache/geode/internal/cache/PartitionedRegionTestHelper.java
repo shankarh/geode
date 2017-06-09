@@ -63,7 +63,7 @@ public class PartitionedRegionTestHelper
     attribFactory.setPartitionAttributes(prattribs);
     RegionAttributes regionAttribs = attribFactory.create();
 
-    Region partitionedregion = createCache().createRegion(regionname, regionAttribs);
+    Region partitionedregion = createCache().createRegionFactory(regionAttribs).create(regionname);
     return partitionedregion;
   }
 
@@ -78,7 +78,7 @@ public class PartitionedRegionTestHelper
     AttributesFactory attr = new AttributesFactory();
 
     attr.setScope(Scope.LOCAL);
-    Region localRegion = createCache().createRegion(regionName, attr.create());
+    Region localRegion = createCache().createRegionFactory(attr.create()).create(regionName);
 
     return localRegion;
   }
@@ -168,7 +168,7 @@ public class PartitionedRegionTestHelper
     ra = af.create();
     cache = createCache();
     try {
-      pr = cache.createRegion(regionName, ra);
+      pr = cache.createRegionFactory(ra).create(regionName);
     } catch (RegionExistsException rex) {
       pr = cache.getRegion(regionName);
     }

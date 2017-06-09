@@ -89,7 +89,7 @@ public class INOperatorJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
 
     region.put("6", new Integer(6));
     region.put("10", new Integer(10));
@@ -274,7 +274,7 @@ public class INOperatorJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
 
     region.put("6", new Integer(6));
     region.put("10", new Integer(10));

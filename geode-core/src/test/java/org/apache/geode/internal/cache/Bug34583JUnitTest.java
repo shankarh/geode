@@ -57,7 +57,7 @@ public class Bug34583JUnitTest {
       Cache cache = null;
       cache = CacheFactory.create(ds);
 
-      Region r = cache.createRegion("testRegion", factory.create());
+      Region r = cache.createRegionFactory(factory.create()).create("testRegion");
       final int ENTRY_COUNT = 25000;
       {
         for (int i = 1; i <= ENTRY_COUNT; i++) {

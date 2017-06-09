@@ -557,7 +557,7 @@ public class MemoryThresholdsOffHeapDUnitTest extends ClientServerTestCase {
             af.setScope(Scope.DISTRIBUTED_ACK);
             af.setDataPolicy(DataPolicy.REPLICATE);
             af.setOffHeap(true);
-            Region region = getCache().createRegion(rName, af.create());
+            Region region = getCache().basicCreateRegion(rName, af.create());
           }
         };
     replicate1.invoke(createRegion);
@@ -1184,7 +1184,7 @@ public class MemoryThresholdsOffHeapDUnitTest extends ClientServerTestCase {
           af.setPartitionAttributes(new PartitionAttributesFactory().setLocalMaxMemory(0).create());
         }
         af.setOffHeap(true);
-        getCache().createRegion(rName, af.create());
+        getCache().basicCreateRegion(rName, af.create());
       }
     };
   }
@@ -1220,7 +1220,7 @@ public class MemoryThresholdsOffHeapDUnitTest extends ClientServerTestCase {
 
           public void close() {}
         });
-        final LocalRegion r = (LocalRegion) getCache().createRegion(rName, af.create());
+        final LocalRegion r = (LocalRegion) getCache().basicCreateRegion(rName, af.create());
 
         assertFalse(ohmm.getState().isCritical());
         int expectedInvocations = 0;

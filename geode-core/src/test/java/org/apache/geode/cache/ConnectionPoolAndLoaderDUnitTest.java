@@ -70,7 +70,7 @@ public class ConnectionPoolAndLoaderDUnitTest extends JUnit4CacheTestCase {
         Cache cache = getCache();
         AttributesFactory af = new AttributesFactory();
         RegionAttributes attrs = af.create();
-        cache.createRegion(regionName, attrs);
+        cache.createRegionFactory(attrs).create(regionName);
 
         startBridgeServer(serverPort, true);
         return null;
@@ -90,7 +90,7 @@ public class ConnectionPoolAndLoaderDUnitTest extends JUnit4CacheTestCase {
         af.setPoolName("pool1");
         af.setCacheLoader(new MyCacheLoader("loaded"));
         RegionAttributes attrs = af.create();
-        cache.createRegion(regionName, attrs);
+        cache.createRegionFactory(attrs).create(regionName);
 
         return null;
       }
@@ -147,7 +147,7 @@ public class ConnectionPoolAndLoaderDUnitTest extends JUnit4CacheTestCase {
         Cache cache = getCache();
         AttributesFactory af = new AttributesFactory();
         RegionAttributes attrs = af.create();
-        cache.createRegion(regionName, attrs);
+        cache.createRegionFactory(attrs).create(regionName);
 
         startBridgeServer(serverPort, true);
         return null;
@@ -167,7 +167,7 @@ public class ConnectionPoolAndLoaderDUnitTest extends JUnit4CacheTestCase {
         af.setPoolName("pool1");
         af.setCacheWriter(new MyCacheWriter());
         RegionAttributes attrs = af.create();
-        cache.createRegion(regionName, attrs);
+        cache.createRegionFactory(attrs).create(regionName);
 
         return null;
       }
@@ -246,7 +246,7 @@ public class ConnectionPoolAndLoaderDUnitTest extends JUnit4CacheTestCase {
         AttributesFactory af = new AttributesFactory();
         RegionAttributes attrs = af.create();
 
-        cache.createRegion(regionName, attrs);
+        cache.createRegionFactory(attrs).create(regionName);
 
         startBridgeServer(serverPort, true);
         return null;
@@ -268,7 +268,7 @@ public class ConnectionPoolAndLoaderDUnitTest extends JUnit4CacheTestCase {
         af.setPoolName("pool1");
         af.setCacheLoader(new MyCacheLoader("loaded1"));
         RegionAttributes attrs = af.create();
-        cache.createRegion(regionName, attrs);
+        cache.createRegionFactory(attrs).create(regionName);
         return null;
       }
     };
@@ -289,7 +289,7 @@ public class ConnectionPoolAndLoaderDUnitTest extends JUnit4CacheTestCase {
         af.setCacheLoader(new MyCacheLoader("loaded2"));
         af.setPoolName("pool1");
         RegionAttributes attrs = af.create();
-        cache.createRegion(regionName, attrs);
+        cache.createRegionFactory(attrs).create(regionName);
         return null;
       }
     };

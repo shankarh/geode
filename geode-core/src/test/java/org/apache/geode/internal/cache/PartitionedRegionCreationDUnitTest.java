@@ -170,7 +170,7 @@ public class PartitionedRegionCreationDUnitTest extends PartitionedRegionDUnitTe
         AttributesFactory attr = new AttributesFactory();
         attr.setScope(Scope.DISTRIBUTED_ACK);
         attr.setDataPolicy(DataPolicy.REPLICATE);
-        cache.createRegion(replRegion, attr.create());
+        cache.createRegionFactory(attr.create()).create(replRegion);
       }
     };
     createRepl.run2();
@@ -200,7 +200,7 @@ public class PartitionedRegionCreationDUnitTest extends PartitionedRegionDUnitTe
         }
         for (int index = 0; index < MAX_REGIONS; ++index) {
           final String regionName = regionNamePrefix + String.valueOf(index);
-          partitionedregion = cache.createRegion(regionName, attr.create());
+          partitionedregion = cache.createRegionFactory(attr.create()).create(regionName);
           assertNotNull("Partitioned Region ref null", partitionedregion);
           assertNotNull("Cache does not contain PR " + regionName, cache.getRegion(regionName));
           assertTrue("Partitioned Region ref claims to be destroyed",
@@ -231,7 +231,7 @@ public class PartitionedRegionCreationDUnitTest extends PartitionedRegionDUnitTe
             }
             for (int index = 0; index < MAX_REGIONS; ++index) {
               final String regionName = regionNamePrefix + String.valueOf(index);
-              partitionedregion = cache.createRegion(regionName, attr.create());
+              partitionedregion = cache.createRegionFactory(attr.create()).create(regionName);
               assertNotNull("Partitioned Region ref null", partitionedregion);
               assertNotNull("Cache does not contain PR " + regionName, cache.getRegion(regionName));
               assertTrue("Partitioned Region ref claims to be destroyed",
@@ -290,7 +290,7 @@ public class PartitionedRegionCreationDUnitTest extends PartitionedRegionDUnitTe
         AttributesFactory attr = new AttributesFactory();
         attr.setPartitionAttributes(
             new PartitionAttributesFactory().setRedundantCopies(0).create());
-        partitionedregion = cache.createRegion(rName, attr.create());
+        partitionedregion = cache.createRegionFactory(attr.create()).create(rName);
         assertNotNull("Partitioned Region ref null", partitionedregion);
         assertNotNull("Cache does not contain PR " + rName, cache.getRegion(rName));
         assertTrue("Partitioned Region ref claims to be destroyed",
@@ -309,7 +309,7 @@ public class PartitionedRegionCreationDUnitTest extends PartitionedRegionDUnitTe
         try {
           cache.getLogger()
               .info("<ExpectedException action=add>" + "IllegalStateException</ExpectedException>");
-          partitionedregion = cache.createRegion(rName, attr.create());
+          partitionedregion = cache.createRegionFactory(attr.create()).create(rName);
           fail("Expected exception upon creation with invalid redundancy");
         } catch (IllegalStateException expected) {
         } finally {
@@ -332,7 +332,7 @@ public class PartitionedRegionCreationDUnitTest extends PartitionedRegionDUnitTe
         try {
           cache.getLogger()
               .info("<ExpectedException action=add>" + "IllegalStateException</ExpectedException>");
-          partitionedregion = cache.createRegion(rName, attr.create());
+          partitionedregion = cache.createRegionFactory(attr.create()).create(rName);
           fail("Expected exception upon creation with invalid redundancy");
         } catch (IllegalStateException expected) {
         } finally {
@@ -355,7 +355,7 @@ public class PartitionedRegionCreationDUnitTest extends PartitionedRegionDUnitTe
         try {
           cache.getLogger()
               .info("<ExpectedException action=add>" + "IllegalStateException</ExpectedException>");
-          partitionedregion = cache.createRegion(rName, attr.create());
+          partitionedregion = cache.createRegionFactory(attr.create()).create(rName);
           fail("Expected exception upon creation with invalid redundancy");
         } catch (IllegalStateException expected) {
         } finally {
@@ -631,7 +631,7 @@ public class PartitionedRegionCreationDUnitTest extends PartitionedRegionDUnitTe
               paf.setRedundantCopies(redundancy);
             PartitionAttributes prAttr = paf.create();
             attr.setPartitionAttributes(prAttr);
-            partitionedregion = cache.createRegion(regionName, attr.create());
+            partitionedregion = cache.createRegionFactory(attr.create()).create(regionName);
           } catch (IllegalStateException ex) {
             getCache().getLogger().warning("Creation caught IllegalStateException", ex);
             if (exceptionType.equals("GLOBAL"))
@@ -667,7 +667,7 @@ public class PartitionedRegionCreationDUnitTest extends PartitionedRegionDUnitTe
           for (int i = 0; i < cnt; i++) {
             try {
               rName = regionName + i;
-              partitionedregion = cache.createRegion(rName, attr.create());
+              partitionedregion = cache.createRegionFactory(attr.create()).create(rName);
             } catch (IllegalStateException ex) {
               getCache().getLogger().warning("Creation caught IllegalStateException", ex);
               if (exceptionType.equals("GLOBAL"))
@@ -715,7 +715,7 @@ public class PartitionedRegionCreationDUnitTest extends PartitionedRegionDUnitTe
           } else {
             attr.setDataPolicy(DataPolicy.PARTITION);
           }
-          partitionedregion = cache.createRegion(regionName, attr.create());
+          partitionedregion = cache.createRegionFactory(attr.create()).create(regionName);
           if (expectException) {
             fail("Expect exception but it did not");
           }
@@ -775,13 +775,13 @@ public class PartitionedRegionCreationDUnitTest extends PartitionedRegionDUnitTe
       PartitionAttributes prAttr = paf.create();
       attr.setPartitionAttributes(prAttr);
       RegionAttributes regionAttribs = attr.create();
-      cache.createRegion("PR1", regionAttribs);
+      cache.createRegionFactory(regionAttribs).create("PR1");
 
       paf.setTotalNumBuckets(totalNumBuckets);
       prAttr = paf.create();
       attr.setPartitionAttributes(prAttr);
       regionAttribs = attr.create();
-      cache.createRegion("PR2", regionAttribs);
+      cache.createRegionFactory(regionAttribs).create("PR2");
 
     }
   };
@@ -801,14 +801,15 @@ public class PartitionedRegionCreationDUnitTest extends PartitionedRegionDUnitTe
           PartitionAttributes prAttr = paf.setLocalMaxMemory(0).create();
           attr.setPartitionAttributes(prAttr);
           RegionAttributes regionAttribs = attr.create();
-          PartitionedRegion accessor = (PartitionedRegion) cache.createRegion("PR1", regionAttribs);
+          PartitionedRegion accessor =
+              (PartitionedRegion) cache.createRegionFactory(regionAttribs).create("PR1");
           LogWriterUtils.getLogWriter().info("Region created in VM1.");
           assertEquals(accessor.getTotalNumberOfBuckets(),
               PartitionAttributesFactory.GLOBAL_MAX_BUCKETS_DEFAULT);
           try {
             cache.getLogger().info(
                 "<ExpectedException action=add>" + "IllegalStateException</ExpectedException>");
-            accessor = (PartitionedRegion) cache.createRegion("PR2", regionAttribs);
+            accessor = (PartitionedRegion) cache.createRegionFactory(regionAttribs).create("PR2");
             fail(
                 "Creation of a Partitioned Region was allowed with incompatible GLOBAL_MAX_BUCKETS setting");
           } catch (IllegalStateException expected) {
@@ -823,7 +824,7 @@ public class PartitionedRegionCreationDUnitTest extends PartitionedRegionDUnitTe
               "" + totalNumBuckets);
           paf.setGlobalProperties(globalProps);
           attr.setPartitionAttributes(paf.create());
-          accessor = (PartitionedRegion) cache.createRegion("PR2", attr.create());
+          accessor = (PartitionedRegion) cache.createRegionFactory(attr.create()).create("PR2");
           assertEquals(accessor.getTotalNumberOfBuckets(), totalNumBuckets);
 
         }

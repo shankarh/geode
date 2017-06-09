@@ -72,7 +72,7 @@ public class QueryAndJtaJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     attributesFactory.setValueConstraint(Portfolio.class);
     RegionAttributes regionAttributes = attributesFactory.create();
-    currRegion = cache.createRegion("portfolios", regionAttributes);
+    currRegion = cache.createRegionFactory(regionAttributes).create("portfolios");
     qs = CacheUtils.getQueryService();
   }
 
@@ -273,7 +273,7 @@ public class QueryAndJtaJUnitTest {
   public void testIndexOnCommitForPut() throws Exception {
     AttributesFactory af = new AttributesFactory();
     af.setDataPolicy(DataPolicy.REPLICATE);
-    Region region = cache.createRegion("sample", af.create());
+    Region region = cache.createRegionFactory(af.create()).create("sample");
     qs.createIndex("foo", IndexType.FUNCTIONAL, "age", "/sample");
     Context ctx = cache.getJNDIContext();
     UserTransaction utx = (UserTransaction) ctx.lookup("java:/UserTransaction");
@@ -296,7 +296,7 @@ public class QueryAndJtaJUnitTest {
   public void testIndexOnCommitForInvalidate() throws Exception {
     AttributesFactory af = new AttributesFactory();
     af.setDataPolicy(DataPolicy.REPLICATE);
-    Region region = cache.createRegion("sample", af.create());
+    Region region = cache.createRegionFactory(af.create()).create("sample");
     qs.createIndex("foo", IndexType.FUNCTIONAL, "age", "/sample");
     Context ctx = cache.getJNDIContext();
     UserTransaction utx = (UserTransaction) ctx.lookup("java:/UserTransaction");
@@ -320,7 +320,7 @@ public class QueryAndJtaJUnitTest {
     // create region
     AttributesFactory af = new AttributesFactory();
     af.setDataPolicy(DataPolicy.REPLICATE);
-    Region region = cache.createRegion("sample", af.create());
+    Region region = cache.createRegionFactory(af.create()).create("sample");
 
     // put data
     for (int i = 0; i < 10; i++) {
@@ -376,7 +376,7 @@ public class QueryAndJtaJUnitTest {
   public void testIndexOnCommitForDestroy() throws Exception {
     AttributesFactory af = new AttributesFactory();
     af.setDataPolicy(DataPolicy.REPLICATE);
-    Region region = cache.createRegion("sample", af.create());
+    Region region = cache.createRegionFactory(af.create()).create("sample");
     qs.createIndex("foo", IndexType.FUNCTIONAL, "age", "/sample");
     Context ctx = cache.getJNDIContext();
     UserTransaction utx = (UserTransaction) ctx.lookup("java:/UserTransaction");
@@ -404,7 +404,7 @@ public class QueryAndJtaJUnitTest {
     Person.THROW_ON_INDEX = true;
     AttributesFactory af = new AttributesFactory();
     af.setDataPolicy(DataPolicy.REPLICATE);
-    Region region = cache.createRegion("sample", af.create());
+    Region region = cache.createRegionFactory(af.create()).create("sample");
     qs.createIndex("foo", IndexType.FUNCTIONAL, "index", "/sample");
     Context ctx = cache.getJNDIContext();
     UserTransaction utx = (UserTransaction) ctx.lookup("java:/UserTransaction");
@@ -426,7 +426,7 @@ public class QueryAndJtaJUnitTest {
     af.setDataPolicy(DataPolicy.REPLICATE);
     SimpleListener sl = new SimpleListener();
     af.setCacheListener(sl);
-    Region region = cache.createRegion("sample", af.create());
+    Region region = cache.createRegionFactory(af.create()).create("sample");
     qs.createIndex("foo", IndexType.FUNCTIONAL, "index", "/sample");
     Context ctx = cache.getJNDIContext();
 

@@ -51,7 +51,7 @@ public class DistTXWriterJUnitTest extends TXWriterJUnitTest {
     attributesFactory.setScope(Scope.DISTRIBUTED_NO_ACK);
     attributesFactory.setIndexMaintenanceSynchronous(true);
 
-    this.region = this.cache.createRegion("TXTest", attributesFactory.create());
+    this.region = this.cache.basicCreateRegion("TXTest", attributesFactory.create());
     this.txMgr = this.cache.getCacheTransactionManager();
 
     assertTrue(this.txMgr.isDistributed());

@@ -72,12 +72,13 @@ public class TXRestrictionsDUnitTest extends JUnit4CacheTestCase {
   public void testPersistentRestriction() throws Exception {
     final CacheTransactionManager txMgr = this.getCache().getCacheTransactionManager();
     final String misConfigRegionName = getUniqueName();
-    Region misConfigRgn = getCache().createRegion(misConfigRegionName, getDiskRegionAttributes());
+    Region misConfigRgn =
+        getCache().basicCreateRegion(misConfigRegionName, getDiskRegionAttributes());
     Invoke.invokeInEveryVM(
         new SerializableRunnable("testPersistentRestriction: Illegal Region Configuration") {
           public void run() {
             try {
-              getCache().createRegion(misConfigRegionName, getDiskRegionAttributes());
+              getCache().basicCreateRegion(misConfigRegionName, getDiskRegionAttributes());
               // rgn1.put("misConfigKey", "oldmisConfigVal");
             } catch (CacheException e) {
               Assert.fail("While creating region", e);

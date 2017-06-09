@@ -442,7 +442,7 @@ public class ProxyJUnitTest {
     clearCallbackState();
     ExpectedRegionEvent expre = new ExpectedRegionEvent();
     assertEquals(0, getStats().getRegions());
-    Region r = this.c.createRegion("r", af.create());
+    Region r = this.c.createRegionFactory(af.create()).create("r");
     assertEquals(1, getStats().getRegions());
     expre.r = r;
     expre.op = Operation.REGION_CREATE;
@@ -491,7 +491,7 @@ public class ProxyJUnitTest {
     checkCW(expre);
     checkCL(expre);
 
-    r = this.c.createRegion("r", af.create());
+    r = this.c.createRegionFactory(af.create()).create("r");
     expre.r = r;
     expre.op = Operation.REGION_CREATE;
     expre.cbArg = null;
@@ -506,7 +506,7 @@ public class ProxyJUnitTest {
     checkCW(expre);
     checkCL(expre);
 
-    r = this.c.createRegion("r", af.create());
+    r = this.c.createRegionFactory(af.create()).create("r");
     expre.r = r;
     expre.op = Operation.REGION_CREATE;
     expre.cbArg = null;
@@ -523,7 +523,7 @@ public class ProxyJUnitTest {
     checkCLClosed();
     checkCL(expre);
 
-    r = this.c.createRegion("r", af.create());
+    r = this.c.createRegionFactory(af.create()).create("r");
     expre.r = r;
     expre.op = Operation.REGION_CREATE;
     expre.cbArg = null;
@@ -540,7 +540,7 @@ public class ProxyJUnitTest {
     checkCLClosed();
     checkCL(expre);
 
-    r = this.c.createRegion("r", af.create());
+    r = this.c.createRegionFactory(af.create()).create("r");
     expre.r = r;
     expre.op = Operation.REGION_CREATE;
     expre.cbArg = null;
@@ -558,7 +558,7 @@ public class ProxyJUnitTest {
     checkCL(expre);
 
 
-    r = this.c.createRegion("r", af.create());
+    r = this.c.createRegionFactory(af.create()).create("r");
     assertEquals(1, getStats().getRegions());
     expre.r = r;
     expre.op = Operation.REGION_CREATE;
@@ -791,7 +791,7 @@ public class ProxyJUnitTest {
     clearCallbackState();
     ExpectedRegionEvent expre = new ExpectedRegionEvent();
 
-    Region r = this.c.createRegion("r", af.create());
+    Region r = this.c.createRegionFactory(af.create()).create("r");
     expre.r = r;
     expre.cbArg = null;
     expre.op = Operation.REGION_CREATE;
@@ -882,7 +882,7 @@ public class ProxyJUnitTest {
     CacheTransactionManager ctm = this.c.getCacheTransactionManager();
     ExpectedRegionEvent expre = new ExpectedRegionEvent();
 
-    Region r = this.c.createRegion("r", af.create());
+    Region r = this.c.createRegionFactory(af.create()).create("r");
     expre.r = r;
     expre.cbArg = null;
     expre.op = Operation.REGION_CREATE;
@@ -1030,7 +1030,7 @@ public class ProxyJUnitTest {
     // // on a non-proxy lru
     // {
     // af.setDataPolicy(DataPolicy.NORMAL);
-    // Region r = this.c.createRegion("rLRU", af.create());
+    // Region r = this.c.createRegionFactory(af.create()).create("rLRU");
     // clearCallbackState();
     // assertTrue(clInvokeCount == 0);
     // for (int i=0; i < 10; i++) {
@@ -1047,7 +1047,7 @@ public class ProxyJUnitTest {
         fail("expected IllegalStateException");
       } catch (IllegalStateException expected) {
       }
-      // Region r = this.c.createRegion("rEMPTY", af.create());
+      // Region r = this.c.createRegionFactory(af.create()).create("rEMPTY");
       // clearCallbackState();
       // assertTrue(clInvokeCount == 0);
       // for (int i=0; i < 10; i++) {
@@ -1097,7 +1097,7 @@ public class ProxyJUnitTest {
         af.addCacheListener(cl1);
         af.setDataPolicy(DataPolicy.EMPTY);
         clearCallbackState();
-        Region r = this.c.createRegion("rEMPTY", af.create());
+        Region r = this.c.createRegionFactory(af.create()).create("rEMPTY");
         assertTrue(clInvokeCount == 0);
         r.put("key", "value");
         long endTime = System.currentTimeMillis() + (EXPIRE_MS * 2);
@@ -1136,7 +1136,7 @@ public class ProxyJUnitTest {
         af.addCacheListener(cl1);
         af.setDataPolicy(DataPolicy.EMPTY);
         clearCallbackState();
-        Region r = this.c.createRegion("rEMPTY", af.create());
+        Region r = this.c.createRegionFactory(af.create()).create("rEMPTY");
         assertTrue(clInvokeCount == 0);
         r.put("key", "value");
         long endTime = System.currentTimeMillis() + (EXPIRE_MS * 2);
@@ -1187,7 +1187,7 @@ public class ProxyJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setDataPolicy(DataPolicy.EMPTY);
     af.setStatisticsEnabled(true);
-    Region r = this.c.createRegion("rEMPTY", af.create());
+    Region r = this.c.createRegionFactory(af.create()).create("rEMPTY");
     CacheStatistics stats = r.getStatistics();
     long lastModifiedTime = stats.getLastModifiedTime();
     long lastAccessedTime = stats.getLastAccessedTime();

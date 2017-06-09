@@ -83,7 +83,7 @@ public class Bug40396DUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
-    Region region = cache.createRegion(REGION_NAME, attrs);
+    Region region = cache.createRegionFactory(attrs).create(REGION_NAME);
     region.getAttributesMutator().setCloningEnabled(false);
     CacheServer server = cache.addCacheServer();
     addExceptions();

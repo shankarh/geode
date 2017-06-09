@@ -100,7 +100,7 @@ public class Bug40299DUnitTest extends JUnit4CacheTestCase {
           factory.setEvictionAttributes(
               EvictionAttributes.createLRUEntryAttributes(2, EvictionAction.OVERFLOW_TO_DISK));
           RegionAttributes attr = factory.create();
-          cache.createRegion(regionName, attr);
+          cache.createRegionFactory(attr).create(regionName);
         } catch (Exception ex) {
           ex.printStackTrace();
           fail("Error Creating cache / region ");

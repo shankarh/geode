@@ -127,7 +127,7 @@ public class PartitionedRegionCreationJUnitTest {
       af.setDataPolicy(DataPolicy.PARTITION);
       RegionAttributes ra = af.create();
       Cache cache = PartitionedRegionTestHelper.createCache();
-      pr = (PartitionedRegion) cache.createRegion(regionname, ra);
+      pr = (PartitionedRegion) cache.createRegionFactory(ra).create(regionname);
     } finally {
       pr.destroyRegion();
     }
@@ -142,7 +142,7 @@ public class PartitionedRegionCreationJUnitTest {
         af.setScope(scopes[i]);
         RegionAttributes ra = af.create();
         Cache cache = PartitionedRegionTestHelper.createCache();
-        pr = (PartitionedRegion) cache.createRegion(regionname, ra);
+        pr = (PartitionedRegion) cache.createRegionFactory(ra).create(regionname);
         fail("testpartionedRegionCreate() Expected IllegalStateException not thrown for Scope "
             + scopes[i]);
       } catch (IllegalStateException expected) {
@@ -204,7 +204,7 @@ public class PartitionedRegionCreationJUnitTest {
       af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
       RegionAttributes ra = af.create();
       Cache cache = PartitionedRegionTestHelper.createCache();
-      pr = (PartitionedRegion) cache.createRegion(regionname, ra);
+      pr = (PartitionedRegion) cache.createRegionFactory(ra).create(regionname);
     } finally {
       if (pr != null) {
         pr.destroyRegion();
@@ -219,7 +219,7 @@ public class PartitionedRegionCreationJUnitTest {
 
       RegionAttributes ra = af.create();
       Cache cache = PartitionedRegionTestHelper.createCache();
-      pr = (PartitionedRegion) cache.createRegion(regionname, ra);
+      pr = (PartitionedRegion) cache.createRegionFactory(ra).create(regionname);
       fail("testpartionedRegionCreate() Expected IllegalStateException not thrown");
     } catch (IllegalStateException expected) {
       assertEquals("Persistence is not allowed when local-max-memory is zero.",
@@ -234,7 +234,7 @@ public class PartitionedRegionCreationJUnitTest {
       af.setDiskStoreName("nonexistentDiskStore");
       RegionAttributes ra = af.create();
       Cache cache = PartitionedRegionTestHelper.createCache();
-      pr = (PartitionedRegion) cache.createRegion(regionname, ra);
+      pr = (PartitionedRegion) cache.createRegionFactory(ra).create(regionname);
       fail("testpartionedRegionCreate() Expected IllegalStateException not thrown");
     } catch (RuntimeException expected) {
       assertTrue(expected.getMessage().contains(LocalizedStrings.CacheCreation_DISKSTORE_NOTFOUND_0
@@ -249,7 +249,7 @@ public class PartitionedRegionCreationJUnitTest {
       af.setDataPolicy(DataPolicy.PARTITION);
       af.setDiskStoreName("existentDiskStore");
       RegionAttributes ra = af.create();
-      pr = (PartitionedRegion) cache.createRegion(regionname, ra);
+      pr = (PartitionedRegion) cache.createRegionFactory(ra).create(regionname);
       fail("testpartionedRegionCreate() Expected IllegalStateException not thrown");
     } catch (IllegalStateException expected) {
       assertEquals("Only regions with persistence or overflow to disk can specify DiskStore",
@@ -266,7 +266,7 @@ public class PartitionedRegionCreationJUnitTest {
         af.setScope(scopes[i]);
         RegionAttributes ra = af.create();
         Cache cache = PartitionedRegionTestHelper.createCache();
-        pr = (PartitionedRegion) cache.createRegion(regionname, ra);
+        pr = (PartitionedRegion) cache.createRegionFactory(ra).create(regionname);
         fail("testpartionedRegionCreate() Expected IllegalStateException not thrown for Scope "
             + scopes[i]);
       } catch (IllegalStateException expected) {

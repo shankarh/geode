@@ -63,7 +63,7 @@ public class ProgRegionCreationIndexUpdateTypeJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     attributesFactory.setIndexMaintenanceSynchronous(true);
     RegionAttributes regionAttributes = attributesFactory.create();
-    Region region = cache.createRegion("region1", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("region1");
     IndexManager im = IndexUtils.getIndexManager(region, true);
 
     if (!im.isIndexMaintenanceTypeSynchronous())
@@ -74,7 +74,7 @@ public class ProgRegionCreationIndexUpdateTypeJUnitTest {
     attributesFactory = new AttributesFactory();
     attributesFactory.setIndexMaintenanceSynchronous(false);
     regionAttributes = attributesFactory.create();
-    region = cache.createRegion("region2", regionAttributes);
+    region = cache.createRegionFactory(regionAttributes).create("region2");
     im = IndexUtils.getIndexManager(region, true);
     if (im.isIndexMaintenanceTypeSynchronous())
       fail(
@@ -84,7 +84,7 @@ public class ProgRegionCreationIndexUpdateTypeJUnitTest {
     // synchronous
     attributesFactory = new AttributesFactory();
     regionAttributes = attributesFactory.create();
-    region = cache.createRegion("region3", regionAttributes);
+    region = cache.createRegionFactory(regionAttributes).create("region3");
     im = IndexUtils.getIndexManager(region, true);
     if (!im.isIndexMaintenanceTypeSynchronous())
       fail(

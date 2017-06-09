@@ -279,7 +279,7 @@ public class EvictionObjectSizerDUnitTest extends JUnit4CacheTestCase {
       }
     }
 
-    region = cache.createRegion(regionName, factory.create());
+    region = cache.createRegionFactory(factory.create()).create(regionName);
     assertNotNull(region);
     LogWriterUtils.getLogWriter().info("Partitioned Region created Successfully :" + region);
   }

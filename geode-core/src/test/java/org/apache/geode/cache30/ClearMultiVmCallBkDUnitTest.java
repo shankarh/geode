@@ -88,7 +88,7 @@ public class ClearMultiVmCallBkDUnitTest extends JUnit4DistributedTestCase { // 
     factory.setCacheListener(aListener);
     RegionAttributes attr = factory.create();
 
-    region = cache.createRegion("map", attr);
+    region = cache.createRegionFactory(attr).create("map");
   }
 
   public static void closeCache() {

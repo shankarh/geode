@@ -690,7 +690,7 @@ public class ServerLauncherRemoteIntegrationTest
     final RegionAttributesCreation attrs = new RegionAttributesCreation(creation);
     attrs.setScope(Scope.DISTRIBUTED_ACK);
     attrs.setDataPolicy(DataPolicy.REPLICATE);
-    creation.createRegion(getUniqueName(), attrs);
+    creation.basicCreateRegion(getUniqueName(), attrs);
     creation.addCacheServer().setPort(freeTCPPorts[0]);
 
     File cacheXmlFile = new File(this.temporaryFolder.getRoot(), getUniqueName() + ".xml");
@@ -784,7 +784,7 @@ public class ServerLauncherRemoteIntegrationTest
     final RegionAttributesCreation attrs = new RegionAttributesCreation(creation);
     attrs.setScope(Scope.DISTRIBUTED_ACK);
     attrs.setDataPolicy(DataPolicy.REPLICATE);
-    creation.createRegion(getUniqueName(), attrs);
+    creation.basicCreateRegion(getUniqueName(), attrs);
     creation.addCacheServer();
 
     File cacheXmlFile = new File(this.temporaryFolder.getRoot(), getUniqueName() + ".xml");

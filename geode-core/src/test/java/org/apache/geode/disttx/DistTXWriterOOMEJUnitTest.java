@@ -51,7 +51,7 @@ public class DistTXWriterOOMEJUnitTest extends TXWriterOOMEJUnitTest {
     attributesFactory.setScope(Scope.DISTRIBUTED_NO_ACK);
     attributesFactory.setIndexMaintenanceSynchronous(true);
 
-    this.region = this.cache.createRegion("TXTest", attributesFactory.create());
+    this.region = this.cache.createRegionFactory(attributesFactory.create()).create("TXTest");
     this.txMgr = this.cache.getCacheTransactionManager();
 
     assertTrue(this.txMgr.isDistributed());

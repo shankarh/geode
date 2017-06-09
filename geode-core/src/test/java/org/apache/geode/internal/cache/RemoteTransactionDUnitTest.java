@@ -159,7 +159,7 @@ public class RemoteTransactionDUnitTest extends JUnit4CacheTestCase {
     af.setScope(Scope.DISTRIBUTED_ACK);
     af.setDataPolicy(DataPolicy.REPLICATE);
     af.setConcurrencyChecksEnabled(getConcurrencyChecksEnabled());
-    getCache().createRegion(D_REFERENCE, af.create());
+    getCache().basicCreateRegion(D_REFERENCE, af.create());
     af = new AttributesFactory();
     af.setConcurrencyChecksEnabled(getConcurrencyChecksEnabled());
     if (interestPolicy != null) {
@@ -169,12 +169,12 @@ public class RemoteTransactionDUnitTest extends JUnit4CacheTestCase {
         .setTotalNumBuckets(4).setLocalMaxMemory(accessor ? 0 : 1)
         .setPartitionResolver(new CustomerIDPartitionResolver("resolver1"))
         .setRedundantCopies(redundantCopies).create());
-    getCache().createRegion(CUSTOMER, af.create());
+    getCache().basicCreateRegion(CUSTOMER, af.create());
     af.setPartitionAttributes(new PartitionAttributesFactory<OrderId, Order>().setTotalNumBuckets(4)
         .setLocalMaxMemory(accessor ? 0 : 1)
         .setPartitionResolver(new CustomerIDPartitionResolver("resolver2"))
         .setRedundantCopies(redundantCopies).setColocatedWith(CUSTOMER).create());
-    getCache().createRegion(ORDER, af.create());
+    getCache().basicCreateRegion(ORDER, af.create());
   }
 
   protected boolean getConcurrencyChecksEnabled() {
@@ -2679,7 +2679,7 @@ public class RemoteTransactionDUnitTest extends JUnit4CacheTestCase {
         af.setDataPolicy(isAccessor ? DataPolicy.EMPTY : DataPolicy.REPLICATE);
         af.setScope(Scope.DISTRIBUTED_ACK);
         af.setConcurrencyChecksEnabled(getConcurrencyChecksEnabled());
-        getCache().createRegion(CUSTOMER, af.create());
+        getCache().basicCreateRegion(CUSTOMER, af.create());
         if (isAccessor) {
           Region custRegion = getCache().getRegion(CUSTOMER);
           for (int i = 0; i < 5; i++) {
@@ -4284,7 +4284,8 @@ public class RemoteTransactionDUnitTest extends JUnit4CacheTestCase {
         AttributesFactory af = new AttributesFactory();
         af.setDataPolicy(DataPolicy.EMPTY);
         af.setScope(Scope.DISTRIBUTED_ACK);
-        DistributedRegion r = (DistributedRegion) getCache().createRegion(regionName, af.create());
+        DistributedRegion r =
+            (DistributedRegion) getCache().basicCreateRegion(regionName, af.create());
         r.cache.getLogger().info("SWAP:sending:remoteTagRequest");
         VersionTag remote = r.fetchRemoteVersionTag("key");
         r.cache.getLogger().info("SWAP:remoteTag:" + remote);
@@ -4327,7 +4328,7 @@ public class RemoteTransactionDUnitTest extends JUnit4CacheTestCase {
         AttributesFactory af = new AttributesFactory();
         af.setDataPolicy(DataPolicy.NORMAL);
         af.setScope(Scope.DISTRIBUTED_ACK);
-        Region n = getCache().createRegion(regionNameNormal, af.create());
+        Region n = getCache().basicCreateRegion(regionNameNormal, af.create());
         TXManagerImpl mgr = getGemfireCache().getTxManager();
         mgr.begin();
         r.put("key", "value");

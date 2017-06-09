@@ -428,7 +428,7 @@ public class DurableResponseMatrixDUnitTest extends JUnit4DistributedTestCase {
       factory.setPoolName(p.getName());
 
       RegionAttributes attrs = factory.create();
-      Region r = cache.createRegion(REGION_NAME, attrs);
+      Region r = cache.createRegionFactory(attrs).create(REGION_NAME);
       assertNotNull(r);
 
       cache.readyForEvents();
@@ -446,7 +446,7 @@ public class DurableResponseMatrixDUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
-    Region r = cache.createRegion(REGION_NAME, attrs);
+    Region r = cache.createRegionFactory(attrs).create(REGION_NAME);
     assertNotNull(r);
     CacheServer server1 = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);

@@ -283,7 +283,7 @@ public class TXManagerImplJUnitTest {
     af.setStatisticsEnabled(true);
     af.setEntryIdleTimeout(new ExpirationAttributes(5));
     // region.getAttributesMutator().setEntryTimeToLive(new ExpirationAttributes(5));
-    region = cache.createRegion(name.getMethodName(), af.create());
+    region = cache.createRegionFactory(af.create()).create(name.getMethodName());
     region.put("key", "value");
     mgr.begin();
     region.put("key", "value");

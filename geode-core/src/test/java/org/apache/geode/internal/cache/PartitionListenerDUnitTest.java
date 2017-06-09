@@ -189,7 +189,7 @@ public class PartitionListenerDUnitTest extends JUnit4CacheTestCase {
         paf.addPartitionListener(new TestPartitionListener());
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion(regionName, attr.create());
+        cache.createRegionFactory(attr.create()).create(regionName);
         return cache.getDistributedSystem().getDistributedMember();
       }
     };

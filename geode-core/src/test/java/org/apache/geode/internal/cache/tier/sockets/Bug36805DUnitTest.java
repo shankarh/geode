@@ -113,7 +113,7 @@ public class Bug36805DUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setPoolName(p.getName());
     RegionAttributes attrs = factory.create();
-    cache.createRegion(regionName, attrs);
+    cache.createRegionFactory(attrs).create(regionName);
     pool = p;
 
   }

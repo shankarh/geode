@@ -80,7 +80,7 @@ public class Bug39356DUnitTest extends JUnit4CacheTestCase {
         pf.setRecoveryDelay(0);
         af.setDataPolicy(DataPolicy.PARTITION);
         af.setPartitionAttributes(pf.create());
-        cache.createRegion(REGION_NAME, af.create());
+        cache.createRegionFactory(af.create()).create(REGION_NAME);
       }
     };
     vm1.invoke(createParReg);
@@ -95,7 +95,7 @@ public class Bug39356DUnitTest extends JUnit4CacheTestCase {
         pf.setLocalMaxMemory(0);
         af.setDataPolicy(DataPolicy.PARTITION);
         af.setPartitionAttributes(pf.create());
-        Region r = cache.createRegion(REGION_NAME, af.create());
+        Region r = cache.createRegionFactory(af.create()).create(REGION_NAME);
 
         // trigger the creation of a bucket, which should trigger the destruction of this VM.
         try {
@@ -190,7 +190,7 @@ public class Bug39356DUnitTest extends JUnit4CacheTestCase {
         paf.setStartupRecoveryDelay(-1);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
 

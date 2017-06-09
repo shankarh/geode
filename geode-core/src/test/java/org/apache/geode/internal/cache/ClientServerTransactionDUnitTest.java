@@ -156,7 +156,7 @@ public class ClientServerTransactionDUnitTest extends RemoteTransactionDUnitTest
         props.remove(LOCATORS);
         InternalDistributedSystem system = getSystem(props);
         Cache cache = CacheFactory.create(system);
-        cache.createRegion(OTHER_REGION, af.create());
+        cache.createRegionFactory(af.create()).create(OTHER_REGION);
         TXManagerImpl txMgr = (TXManagerImpl) cache.getCacheTransactionManager();
         txMgr.setTransactionTimeToLiveForTest(10);
         if (startServer) {
@@ -259,7 +259,7 @@ public class ClientServerTransactionDUnitTest extends RemoteTransactionDUnitTest
     if (isOffHeap) {
       attr.setOffHeap(isOffHeap);
     }
-    Region offheapRegion = getCache().createRegion(regionName, attr.create());
+    Region offheapRegion = getCache().createRegionFactory(attr.create()).create(regionName);
     assertNotNull(offheapRegion);
   }
 

@@ -56,7 +56,7 @@ public class PutAllGlobalLockJUnitTest { // TODO: reformat
     factory.setScope(Scope.GLOBAL);
     factory.setCacheListener(new Listener());
     RegionAttributes regionAttributes = factory.create();
-    testRegion = cache.createRegion("TestRegion", regionAttributes);
+    testRegion = cache.createRegionFactory(regionAttributes).create("TestRegion");
   }
 
 

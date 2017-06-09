@@ -476,7 +476,7 @@ public class ClientServerMiscDUnitTest extends JUnit4CacheTestCase {
     // pause(5000);
     server1.invoke(() -> ClientServerMiscDUnitTest.verifyNoCacheClientProxyOnServer());
     try {
-      getCache().createRegion(REGION_NAME2, attrs);
+      getCache().basicCreateRegion(REGION_NAME2, attrs);
       fail("expected IllegalStateException");
     } catch (IllegalStateException expected) {
     }
@@ -593,8 +593,8 @@ public class ClientServerMiscDUnitTest extends JUnit4CacheTestCase {
     // factory.setPoolName(p.getName());
 
     attrs = factory.create();
-    final Region region1 = getCache().createRegion(REGION_NAME1, attrs);
-    final Region region2 = getCache().createRegion(REGION_NAME2, attrs);
+    final Region region1 = getCache().basicCreateRegion(REGION_NAME1, attrs);
+    final Region region2 = getCache().basicCreateRegion(REGION_NAME2, attrs);
     assertNotNull(region1);
     assertNotNull(region2);
     pool = p;
@@ -660,8 +660,8 @@ public class ClientServerMiscDUnitTest extends JUnit4CacheTestCase {
     factory.setPoolName(p.getName());
 
     RegionAttributes myAttrs = factory.create();
-    Region region1 = cache.createRegion(REGION_NAME1, myAttrs);
-    Region region2 = cache.createRegion(REGION_NAME2, myAttrs);
+    Region region1 = cache.createRegionFactory(myAttrs).create(REGION_NAME1);
+    Region region2 = cache.createRegionFactory(myAttrs).create(REGION_NAME2);
     assertNotNull(region1);
     assertNotNull(region2);
     // region1.registerInterest(CacheClientProxy.ALL_KEYS);
@@ -708,8 +708,8 @@ public class ClientServerMiscDUnitTest extends JUnit4CacheTestCase {
     factory.setPoolName(p.getName());
 
     RegionAttributes myAttrs = factory.create();
-    Region region1 = cache.createRegion(REGION_NAME1, myAttrs);
-    Region region2 = cache.createRegion(REGION_NAME2, myAttrs);
+    Region region1 = cache.createRegionFactory(myAttrs).create(REGION_NAME1);
+    Region region2 = cache.createRegionFactory(myAttrs).create(REGION_NAME2);
     assertNotNull(region1);
     assertNotNull(region2);
 
@@ -731,7 +731,7 @@ public class ClientServerMiscDUnitTest extends JUnit4CacheTestCase {
 
     RegionAttributes attrs1 = factory1.create();
     try {
-      cache.createRegion(REGION_NAME1, attrs1);
+      cache.createRegionFactory(attrs1).create(REGION_NAME1);
       fail("expected ShutdownException");
     } catch (IllegalStateException expected) {
     } catch (DistributedSystemDisconnectedException expected) {
@@ -803,9 +803,9 @@ public class ClientServerMiscDUnitTest extends JUnit4CacheTestCase {
     factory.setPoolName(p.getName());
 
     attrs = factory.create();
-    Region region1 = cache.createRegion(REGION_NAME1, attrs);
-    Region region2 = cache.createRegion(REGION_NAME2, attrs);
-    Region prRegion = cache.createRegion(PR_REGION_NAME, attrs);
+    Region region1 = cache.createRegionFactory(attrs).create(REGION_NAME1);
+    Region region2 = cache.createRegionFactory(attrs).create(REGION_NAME2);
+    Region prRegion = cache.createRegionFactory(attrs).create(PR_REGION_NAME);
     assertNotNull(region1);
     assertNotNull(region2);
     assertNotNull(prRegion);
@@ -874,8 +874,8 @@ public class ClientServerMiscDUnitTest extends JUnit4CacheTestCase {
     factory.setEnableConflation(true);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes myAttrs = factory.create();
-    Region r1 = cache.createRegion(REGION_NAME1, myAttrs);
-    Region r2 = cache.createRegion(REGION_NAME2, myAttrs);
+    Region r1 = cache.createRegionFactory(myAttrs).create(REGION_NAME1);
+    Region r2 = cache.createRegionFactory(myAttrs).create(REGION_NAME2);
     factory = new AttributesFactory();
     factory.setDataPolicy(DataPolicy.PARTITION);
     if (isHA) {
@@ -884,7 +884,7 @@ public class ClientServerMiscDUnitTest extends JUnit4CacheTestCase {
     }
     RegionAttributes prAttrs = factory.create();
 
-    Region pr = cache.createRegion(PR_REGION_NAME, prAttrs);
+    Region pr = cache.createRegionFactory(prAttrs).create(PR_REGION_NAME);
     assertNotNull(r1);
     assertNotNull(r2);
     assertNotNull(pr);

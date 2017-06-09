@@ -85,8 +85,8 @@ public class Bug33359DUnitTest extends JUnit4DistributedTestCase { // TODO: refo
       DistributedSystem.setThreadsSocketPolicy(false);
       RegionAttributes attr = factory.create();
 
-      region = cache.createRegion("map", attr);
-      paperWork = cache.createRegion("paperWork", attr);
+      region = cache.createRegionFactory(attr).create("map");
+      paperWork = cache.createRegionFactory(attr).create("paperWork");
     } catch (Exception ex) {
       ex.printStackTrace();
     }
@@ -105,8 +105,8 @@ public class Bug33359DUnitTest extends JUnit4DistributedTestCase { // TODO: refo
 
       RegionAttributes attr = factory.create();
 
-      region = cache.createRegion("map", attr);
-      paperWork = cache.createRegion("paperWork", attr);
+      region = cache.createRegionFactory(attr).create("map");
+      paperWork = cache.createRegionFactory(attr).create("paperWork");
     } catch (Exception ex) {
       ex.printStackTrace();
     }

@@ -771,7 +771,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
     paf.setRedundantCopies(redundantCopies).setTotalNumBuckets(totalNoofBuckets);
     AttributesFactory attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    region = cache.createRegion(PR_NAME, attr.create());
+    region = cache.createRegionFactory(attr.create()).create(PR_NAME);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region " + PR_NAME + " created Successfully :" + region.toString());
@@ -782,7 +782,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
         .setPartitionResolver(new CustomerIDPartitionResolver("CustomerIDPartitionResolver"));
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    customerRegion = cache.createRegion("CUSTOMER", attr.create());
+    customerRegion = cache.createRegionFactory(attr.create()).create("CUSTOMER");
     assertNotNull(customerRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region CUSTOMER created Successfully :" + customerRegion.toString());
@@ -793,7 +793,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
         .setPartitionResolver(new CustomerIDPartitionResolver("CustomerIDPartitionResolver"));
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    orderRegion = cache.createRegion("ORDER", attr.create());
+    orderRegion = cache.createRegionFactory(attr.create()).create("ORDER");
     assertNotNull(orderRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region ORDER created Successfully :" + orderRegion.toString());
@@ -804,7 +804,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
         .setPartitionResolver(new CustomerIDPartitionResolver("CustomerIDPartitionResolver"));
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    shipmentRegion = cache.createRegion("SHIPMENT", attr.create());
+    shipmentRegion = cache.createRegionFactory(attr.create()).create("SHIPMENT");
     assertNotNull(shipmentRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region SHIPMENT created Successfully :" + shipmentRegion.toString());
@@ -851,7 +851,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
         .setTotalNumBuckets(totalNoofBuckets);
     AttributesFactory attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    region = cache.createRegion(PR_NAME, attr.create());
+    region = cache.createRegionFactory(attr.create()).create(PR_NAME);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region " + PR_NAME + " created Successfully :" + region.toString());
@@ -863,7 +863,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
         .setPartitionResolver(new CustomerIDPartitionResolver("CustomerIDPartitionResolver"));
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    customerRegion = cache.createRegion("CUSTOMER", attr.create());
+    customerRegion = cache.createRegionFactory(attr.create()).create("CUSTOMER");
     assertNotNull(customerRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region CUSTOMER created Successfully :" + customerRegion.toString());
@@ -874,7 +874,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
         .setPartitionResolver(new CustomerIDPartitionResolver("CustomerIDPartitionResolver"));
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    orderRegion = cache.createRegion("ORDER", attr.create());
+    orderRegion = cache.createRegionFactory(attr.create()).create("ORDER");
     assertNotNull(orderRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region ORDER created Successfully :" + orderRegion.toString());
@@ -885,7 +885,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
         .setPartitionResolver(new CustomerIDPartitionResolver("CustomerIDPartitionResolver"));
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    shipmentRegion = cache.createRegion("SHIPMENT", attr.create());
+    shipmentRegion = cache.createRegionFactory(attr.create()).create("SHIPMENT");
     assertNotNull(shipmentRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region SHIPMENT created Successfully :" + shipmentRegion.toString());
@@ -931,7 +931,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
         .setTotalNumBuckets(totalNoofBuckets);
     AttributesFactory attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    region = cache.createRegion(PR_NAME, attr.create());
+    region = cache.createRegionFactory(attr.create()).create(PR_NAME);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region " + PR_NAME + " created Successfully :" + region.toString());
@@ -943,7 +943,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
         .setPartitionResolver(new CustomerIDPartitionResolver("CustomerIDPartitionResolver"));
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    customerRegion = cache.createRegion("CUSTOMER", attr.create());
+    customerRegion = cache.createRegionFactory(attr.create()).create("CUSTOMER");
     assertNotNull(customerRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region CUSTOMER created Successfully :" + customerRegion.toString());
@@ -954,7 +954,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
         .setPartitionResolver(new CustomerIDPartitionResolver("CustomerIDPartitionResolver"));
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    orderRegion = cache.createRegion("ORDER", attr.create());
+    orderRegion = cache.createRegionFactory(attr.create()).create("ORDER");
     assertNotNull(orderRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region ORDER created Successfully :" + orderRegion.toString());
@@ -965,7 +965,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
         .setPartitionResolver(new CustomerIDPartitionResolver("CustomerIDPartitionResolver"));
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    shipmentRegion = cache.createRegion("SHIPMENT", attr.create());
+    shipmentRegion = cache.createRegionFactory(attr.create()).create("SHIPMENT");
     assertNotNull(shipmentRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region SHIPMENT created Successfully :" + shipmentRegion.toString());
@@ -975,7 +975,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
         .setTotalNumBuckets(totalNoofBuckets);
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    region2 = cache.createRegion(PR_NAME2, attr.create());
+    region2 = cache.createRegionFactory(attr.create()).create(PR_NAME2);
     assertNotNull(region2);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region " + PR_NAME2 + " created Successfully :" + region2.toString());
@@ -986,7 +986,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
         .setPartitionResolver(new CustomerIDPartitionResolver("CustomerIDPartitionResolver"));
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    customerRegion2 = cache.createRegion(CUSTOMER2, attr.create());
+    customerRegion2 = cache.createRegionFactory(attr.create()).create(CUSTOMER2);
     assertNotNull(customerRegion2);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region CUSTOMER2 created Successfully :" + customerRegion2.toString());
@@ -997,7 +997,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
         .setPartitionResolver(new CustomerIDPartitionResolver("CustomerIDPartitionResolver"));
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    orderRegion2 = cache.createRegion(ORDER2, attr.create());
+    orderRegion2 = cache.createRegionFactory(attr.create()).create(ORDER2);
     assertNotNull(orderRegion2);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region ORDER2 created Successfully :" + orderRegion2.toString());
@@ -1008,7 +1008,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
         .setPartitionResolver(new CustomerIDPartitionResolver("CustomerIDPartitionResolver"));
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    shipmentRegion2 = cache.createRegion(SHIPMENT2, attr.create());
+    shipmentRegion2 = cache.createRegionFactory(attr.create()).create(SHIPMENT2);
     assertNotNull(shipmentRegion2);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region SHIPMENT2 created Successfully :" + shipmentRegion2.toString());
@@ -1104,7 +1104,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
     factory.setPoolName(poolName);
     factory.setDataPolicy(DataPolicy.EMPTY);
     RegionAttributes attrs = factory.create();
-    region = cache.createRegion(PR_NAME, attrs);
+    region = cache.createRegionFactory(attrs).create(PR_NAME);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region " + PR_NAME + " created Successfully :" + region.toString());
@@ -1112,7 +1112,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
     factory = new AttributesFactory();
     factory.setPoolName(poolName);
     attrs = factory.create();
-    customerRegion = cache.createRegion("CUSTOMER", attrs);
+    customerRegion = cache.createRegionFactory(attrs).create("CUSTOMER");
     assertNotNull(customerRegion);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region CUSTOMER created Successfully :" + customerRegion.toString());
@@ -1120,7 +1120,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
     factory = new AttributesFactory();
     factory.setPoolName(poolName);
     attrs = factory.create();
-    orderRegion = cache.createRegion("ORDER", attrs);
+    orderRegion = cache.createRegionFactory(attrs).create("ORDER");
     assertNotNull(orderRegion);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region ORDER created Successfully :" + orderRegion.toString());
@@ -1128,7 +1128,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
     factory = new AttributesFactory();
     factory.setPoolName(poolName);
     attrs = factory.create();
-    shipmentRegion = cache.createRegion("SHIPMENT", attrs);
+    shipmentRegion = cache.createRegionFactory(attrs).create("SHIPMENT");
     assertNotNull(shipmentRegion);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region SHIPMENT created Successfully :" + shipmentRegion.toString());
@@ -1139,7 +1139,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
     factory.setPoolName(poolName1);
     factory.setDataPolicy(DataPolicy.EMPTY);
     RegionAttributes attrs = factory.create();
-    region = cache.createRegion(PR_NAME, attrs);
+    region = cache.createRegionFactory(attrs).create(PR_NAME);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region " + PR_NAME + " created Successfully :" + region.toString());
@@ -1147,7 +1147,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
     factory = new AttributesFactory();
     factory.setPoolName(poolName1);
     attrs = factory.create();
-    customerRegion = cache.createRegion("CUSTOMER", attrs);
+    customerRegion = cache.createRegionFactory(attrs).create("CUSTOMER");
     assertNotNull(customerRegion);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region CUSTOMER created Successfully :" + customerRegion.toString());
@@ -1155,7 +1155,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
     factory = new AttributesFactory();
     factory.setPoolName(poolName1);
     attrs = factory.create();
-    orderRegion = cache.createRegion("ORDER", attrs);
+    orderRegion = cache.createRegionFactory(attrs).create("ORDER");
     assertNotNull(orderRegion);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region ORDER created Successfully :" + orderRegion.toString());
@@ -1163,7 +1163,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
     factory = new AttributesFactory();
     factory.setPoolName(poolName1);
     attrs = factory.create();
-    shipmentRegion = cache.createRegion("SHIPMENT", attrs);
+    shipmentRegion = cache.createRegionFactory(attrs).create("SHIPMENT");
     assertNotNull(shipmentRegion);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region SHIPMENT created Successfully :" + shipmentRegion.toString());
@@ -1173,7 +1173,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
     factory.setPoolName(poolName2);
     factory.setDataPolicy(DataPolicy.EMPTY);
     attrs = factory.create();
-    region2 = cache.createRegion(PR_NAME2, attrs);
+    region2 = cache.createRegionFactory(attrs).create(PR_NAME2);
     assertNotNull(region2);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region " + PR_NAME2 + " created Successfully :" + region2.toString());
@@ -1181,7 +1181,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
     factory = new AttributesFactory();
     factory.setPoolName(poolName2);
     attrs = factory.create();
-    customerRegion2 = cache.createRegion(CUSTOMER2, attrs);
+    customerRegion2 = cache.createRegionFactory(attrs).create(CUSTOMER2);
     assertNotNull(customerRegion2);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region CUSTOMER2 created Successfully :" + customerRegion2.toString());
@@ -1189,7 +1189,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
     factory = new AttributesFactory();
     factory.setPoolName(poolName2);
     attrs = factory.create();
-    orderRegion2 = cache.createRegion(ORDER2, attrs);
+    orderRegion2 = cache.createRegionFactory(attrs).create(ORDER2);
     assertNotNull(orderRegion2);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region ORDER2 created Successfully :" + orderRegion2.toString());
@@ -1197,7 +1197,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
     factory = new AttributesFactory();
     factory.setPoolName(poolName2);
     attrs = factory.create();
-    shipmentRegion2 = cache.createRegion(SHIPMENT2, attrs);
+    shipmentRegion2 = cache.createRegionFactory(attrs).create(SHIPMENT2);
     assertNotNull(shipmentRegion2);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region SHIPMENT2 created Successfully :" + shipmentRegion2.toString());
@@ -1209,7 +1209,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
     factory.setPoolName(poolName1);
     factory.setDataPolicy(DataPolicy.EMPTY);
     RegionAttributes attrs = factory.create();
-    region = cache.createRegion(PR_NAME, attrs);
+    region = cache.createRegionFactory(attrs).create(PR_NAME);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region " + PR_NAME + " created Successfully :" + region.toString());
@@ -1217,7 +1217,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
     factory = new AttributesFactory();
     factory.setPoolName(poolName1);
     attrs = factory.create();
-    customerRegion = cache.createRegion("CUSTOMER", attrs);
+    customerRegion = cache.createRegionFactory(attrs).create("CUSTOMER");
     assertNotNull(customerRegion);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region CUSTOMER created Successfully :" + customerRegion.toString());
@@ -1225,7 +1225,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
     factory = new AttributesFactory();
     factory.setPoolName(poolName2);
     attrs = factory.create();
-    orderRegion = cache.createRegion("ORDER", attrs);
+    orderRegion = cache.createRegionFactory(attrs).create("ORDER");
     assertNotNull(orderRegion);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region ORDER created Successfully :" + orderRegion.toString());
@@ -1233,7 +1233,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
     factory = new AttributesFactory();
     factory.setPoolName(poolName3);
     attrs = factory.create();
-    shipmentRegion = cache.createRegion("SHIPMENT", attrs);
+    shipmentRegion = cache.createRegionFactory(attrs).create("SHIPMENT");
     assertNotNull(shipmentRegion);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region SHIPMENT created Successfully :" + shipmentRegion.toString());
@@ -1260,7 +1260,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
     paf.setRedundantCopies(redundantCopies).setTotalNumBuckets(numBuckets).setLocalMaxMemory(0);
     AttributesFactory attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    region = cache.createRegion(PR_NAME, attr.create());
+    region = cache.createRegionFactory(attr.create()).create(PR_NAME);
 
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
@@ -1272,7 +1272,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
         .setPartitionResolver(new CustomerIDPartitionResolver("CustomerIDPartitionResolver"));
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    customerRegion = cache.createRegion("CUSTOMER", attr.create());
+    customerRegion = cache.createRegionFactory(attr.create()).create("CUSTOMER");
     assertNotNull(customerRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region CUSTOMER created Successfully :" + customerRegion.toString());
@@ -1283,7 +1283,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
         .setPartitionResolver(new CustomerIDPartitionResolver("CustomerIDPartitionResolver"));
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    orderRegion = cache.createRegion("ORDER", attr.create());
+    orderRegion = cache.createRegionFactory(attr.create()).create("ORDER");
     assertNotNull(orderRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region ORDER created Successfully :" + orderRegion.toString());
@@ -1294,7 +1294,7 @@ public class PartitionedRegionSingleHopWithServerGroupDUnitTest extends JUnit4Ca
         .setPartitionResolver(new CustomerIDPartitionResolver("CustomerIDPartitionResolver"));
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    shipmentRegion = cache.createRegion("SHIPMENT", attr.create());
+    shipmentRegion = cache.createRegionFactory(attr.create()).create("SHIPMENT");
     assertNotNull(shipmentRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region SHIPMENT created Successfully :" + shipmentRegion.toString());

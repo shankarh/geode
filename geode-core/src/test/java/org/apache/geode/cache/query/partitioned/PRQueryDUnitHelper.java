@@ -110,7 +110,7 @@ public class PRQueryDUnitHelper implements Serializable {
           AttributesFactory attr = new AttributesFactory();
           attr.setValueConstraint(constraint);
           attr.setScope(Scope.LOCAL);
-          localRegion = cache.createRegion(regionName, attr.create());
+          localRegion = cache.createRegionFactory(attr.create()).create(regionName);
         } catch (IllegalStateException ex) {
           org.apache.geode.test.dunit.LogWriterUtils.getLogWriter().warning(
               "PRQueryDUnitHelper#getCacheSerializableRunnableForPRCreate: Creation caught IllegalStateException",
@@ -145,7 +145,7 @@ public class PRQueryDUnitHelper implements Serializable {
           attr.setValueConstraint(constraint);
           attr.setScope(Scope.LOCAL);
           attr.setIndexMaintenanceSynchronous(false);
-          localRegion = cache.createRegion(regionName, attr.create());
+          localRegion = cache.createRegionFactory(attr.create()).create(regionName);
         } catch (IllegalStateException ex) {
           org.apache.geode.test.dunit.LogWriterUtils.getLogWriter().warning(
               "PRQueryDUnitHelper#getCacheSerializableRunnableForPRCreate: Creation caught IllegalStateException",
@@ -223,7 +223,7 @@ public class PRQueryDUnitHelper implements Serializable {
 
         attr.setPartitionAttributes(prAttr);
 
-        partitionedregion = cache.createRegion(regionName, attr.create());
+        partitionedregion = cache.createRegionFactory(attr.create()).create(regionName);
         assertNotNull(
             "PRQueryDUnitHelper#getCacheSerializableRunnableForPRCreateWithRedundancy: Partitioned Region "
                 + regionName + " not in cache",
@@ -284,7 +284,7 @@ public class PRQueryDUnitHelper implements Serializable {
         attr.setPartitionAttributes(paf.create());
 
         // parent region
-        partitionedregion = cache.createRegion(regionName, attr.create());
+        partitionedregion = cache.createRegionFactory(attr.create()).create(regionName);
         assertNotNull(
             "PRQueryDUnitHelper#getCacheSerializableRunnableForPRCreateWithRedundancy: Partitioned Region "
                 + regionName + " not in cache",
@@ -300,7 +300,7 @@ public class PRQueryDUnitHelper implements Serializable {
         attr.setValueConstraint(constraint);
         paf.setColocatedWith(regionName);
         attr.setPartitionAttributes(paf.create());
-        childRegion = cache.createRegion(childRegionName, attr.create());
+        childRegion = cache.createRegionFactory(attr.create()).create(childRegionName);
       }
     };
 
@@ -351,7 +351,7 @@ public class PRQueryDUnitHelper implements Serializable {
         attr.setPartitionAttributes(paf.create());
 
         // parent region
-        partitionedregion = cache.createRegion(regionName, attr.create());
+        partitionedregion = cache.createRegionFactory(attr.create()).create(regionName);
         assertNotNull(
             "PRQueryDUnitHelper#getCacheSerializableRunnableForPRCreateWithRedundancy: Partitioned Region "
                 + regionName + " not in cache",
@@ -420,7 +420,7 @@ public class PRQueryDUnitHelper implements Serializable {
         attr.setValueConstraint(constraint);
         paf.setColocatedWith(regionName);
         attr.setPartitionAttributes(paf.create());
-        childRegion = cache.createRegion(childRegionName, attr.create());
+        childRegion = cache.createRegionFactory(attr.create()).create(childRegionName);
       }
     };
 
@@ -443,7 +443,7 @@ public class PRQueryDUnitHelper implements Serializable {
           PartitionAttributes prAttr =
               paf.setRedundantCopies(redundancy).setTotalNumBuckets(buckets).create();
           attr.setPartitionAttributes(prAttr);
-          partitionedregion = cache.createRegion(regionName, attr.create());
+          partitionedregion = cache.createRegionFactory(attr.create()).create(regionName);
         } catch (IllegalStateException ex) {
           org.apache.geode.test.dunit.LogWriterUtils.getLogWriter().warning(
               "PRQueryDUnitHelper#getCacheSerializableRunnableForPRCreateWithRedundancy: Creation caught IllegalStateException",
@@ -488,7 +488,7 @@ public class PRQueryDUnitHelper implements Serializable {
 
           attr.setPartitionAttributes(prAttr);
 
-          partitionedregion = cache.createRegion(regionName, attr.create());
+          partitionedregion = cache.createRegionFactory(attr.create()).create(regionName);
         } catch (IllegalStateException ex) {
           org.apache.geode.test.dunit.LogWriterUtils.getLogWriter().warning(
               "PRQueryDUnitHelper#getCacheSerializableRunnableForPRCreateWithRedundancy: Creation caught IllegalStateException",
@@ -539,7 +539,7 @@ public class PRQueryDUnitHelper implements Serializable {
               .setColocatedWith(colocatedRegion.getFullPath()).create();
           attr.setPartitionAttributes(prAttr);
 
-          partitionedregion = cache.createRegion(regionName, attr.create());
+          partitionedregion = cache.createRegionFactory(attr.create()).create(regionName);
         } catch (IllegalStateException ex) {
           org.apache.geode.test.dunit.LogWriterUtils.getLogWriter().warning(
               "PRQueryDUnitHelper#getCacheSerializableRunnableForPRCreateWithRedundancy: Creation caught IllegalStateException",
@@ -1453,7 +1453,7 @@ public class PRQueryDUnitHelper implements Serializable {
         PartitionAttributes prAttr =
             paf.setLocalMaxMemory(maxMem).setRedundantCopies(redundancy).create();
         attr.setPartitionAttributes(prAttr);
-        partitionedregion = cache.createRegion(regionName, attr.create());
+        partitionedregion = cache.createRegionFactory(attr.create()).create(regionName);
         assertNotNull(
             "PRQueryDUnitHelper#getCacheSerializableRunnableForPRAccessorCreate: Partitioned Region "
                 + regionName + " not in cache",
@@ -1606,7 +1606,7 @@ public class PRQueryDUnitHelper implements Serializable {
         PartitionAttributesFactory paf = new PartitionAttributesFactory();
         PartitionAttributes prAttr = paf.setRedundantCopies(redundancy).create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion(regionName, attr.create());
+        cache.createRegionFactory(attr.create()).create(regionName);
         org.apache.geode.test.dunit.LogWriterUtils.getLogWriter().info(
             "PROperationWithQueryDUnitTest#getCacheSerializableRunnableForRegionClose: Region Recreated on VM ");
         getCache().getLogger().info(
@@ -1659,7 +1659,7 @@ public class PRQueryDUnitHelper implements Serializable {
         };
         InternalResourceManager.setResourceObserver(observer);
         try {
-          cache.createRegion(regionName, attr.create());
+          cache.createRegionFactory(attr.create()).create(regionName);
           // Wait for recovery to finish
           cdl.await();
         } catch (InterruptedException e) {

@@ -119,7 +119,7 @@ public class ClearGlobalDUnitTest extends JUnit4DistributedTestCase {
     AttributesFactory factory = new AttributesFactory();
     factory.setScope(Scope.GLOBAL);
     RegionAttributes attr = factory.create();
-    region = cache.createRegion(REGION_NAME, attr);
+    region = cache.createRegionFactory(attr).create(REGION_NAME);
 
   } // end of create cache for VM0
 
@@ -133,7 +133,7 @@ public class ClearGlobalDUnitTest extends JUnit4DistributedTestCase {
     AttributesFactory factory = new AttributesFactory();
     factory.setScope(Scope.GLOBAL);
     RegionAttributes attr = factory.create();
-    region = cache.createRegion(REGION_NAME, attr);
+    region = cache.createRegionFactory(attr).create(REGION_NAME);
     cache.setLockTimeout(3);
 
   } // end of create cache for VM1

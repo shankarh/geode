@@ -796,7 +796,7 @@ public class SizingFlagDUnitTest extends JUnit4CacheTestCase {
         attr.setEvictionAttributes(EvictionAttributes.createLRUMemoryAttributes(1,
             new TestObjectSizer(), EvictionAction.OVERFLOW_TO_DISK));
         attr.setDiskDirs(getMyDiskDirs());
-        Region region = cache.createRegion("region", attr.create());
+        Region region = cache.createRegionFactory(attr.create()).create("region");
       }
     });
 
@@ -859,7 +859,8 @@ public class SizingFlagDUnitTest extends JUnit4CacheTestCase {
         attr.setPartitionAttributes(prAttr);
         attr.setDataPolicy(DataPolicy.PARTITION);
         attr.setSubscriptionAttributes(new SubscriptionAttributes(InterestPolicy.ALL));
-        Region<Integer, TestDelta> region = cache.createRegion("region", attr.create());
+        Region<Integer, TestDelta> region =
+            cache.createRegionFactory(attr.create()).create("region");
       }
     });
 
@@ -879,7 +880,7 @@ public class SizingFlagDUnitTest extends JUnit4CacheTestCase {
         attr.setDataPolicy(DataPolicy.REPLICATE);
         attr.setScope(Scope.DISTRIBUTED_ACK);
         attr.setDiskDirs(getMyDiskDirs());
-        Region region = cache.createRegion("region", attr.create());
+        Region region = cache.createRegionFactory(attr.create()).create("region");
       }
     });
 
@@ -903,7 +904,8 @@ public class SizingFlagDUnitTest extends JUnit4CacheTestCase {
         attr.setPartitionAttributes(prAttr);
         attr.setDataPolicy(DataPolicy.PARTITION);
         attr.setSubscriptionAttributes(new SubscriptionAttributes(InterestPolicy.ALL));
-        Region<Integer, TestDelta> region = cache.createRegion("region", attr.create());
+        Region<Integer, TestDelta> region =
+            cache.createRegionFactory(attr.create()).create("region");
       }
     });
 

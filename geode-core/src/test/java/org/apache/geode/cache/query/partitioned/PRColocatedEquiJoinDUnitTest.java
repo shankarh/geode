@@ -222,7 +222,7 @@ public class PRColocatedEquiJoinDUnitTest extends PartitionedRegionDUnitTestCase
 
           attr.setPartitionAttributes(prAttr);
 
-          partitionedregion = cache.createRegion(coloName, attr.create());
+          partitionedregion = cache.createRegionFactory(attr.create()).create(coloName);
         } catch (IllegalStateException ex) {
           LogWriterUtils.getLogWriter().warning(
               "PRQueryDUnitHelper#getCacheSerializableRunnableForPRCreateWithRedundancy: Creation caught IllegalStateException",

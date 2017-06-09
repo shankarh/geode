@@ -55,9 +55,10 @@ public class JtaNoninvolvementJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setScope(Scope.LOCAL);
     af.setIgnoreJTA(true);
-    this.nonTxRegion = this.cache.createRegion("JtaNoninvolvementJUnitTest", af.create());
+    this.nonTxRegion =
+        this.cache.createRegionFactory(af.create()).create("JtaNoninvolvementJUnitTest");
     af.setIgnoreJTA(false);
-    this.txRegion = this.cache.createRegion("JtaInvolvementTest", af.create());
+    this.txRegion = this.cache.createRegionFactory(af.create()).create("JtaInvolvementTest");
   }
 
   private void closeCache() throws CacheException {

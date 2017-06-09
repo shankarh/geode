@@ -67,7 +67,7 @@ public class Bug42055DUnitTest extends JUnit4CacheTestCase {
         attr.setPartitionAttributes(prAttr);
         attr.setEvictionAttributes(
             EvictionAttributes.createLRUEntryAttributes(1, EvictionAction.OVERFLOW_TO_DISK));
-        Region region = cache.createRegion("region1", attr.create());
+        Region region = cache.createRegionFactory(attr.create()).create("region1");
 
         return null;
       }
@@ -87,7 +87,8 @@ public class Bug42055DUnitTest extends JUnit4CacheTestCase {
         attr.setDataPolicy(DataPolicy.PARTITION);
         attr.setEvictionAttributes(
             EvictionAttributes.createLRUEntryAttributes(1, EvictionAction.OVERFLOW_TO_DISK));
-        Region<Integer, TestDelta> region = cache.createRegion("region1", attr.create());
+        Region<Integer, TestDelta> region =
+            cache.createRegionFactory(attr.create()).create("region1");
       }
     };
 

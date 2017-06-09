@@ -947,7 +947,7 @@ public class DistributedRegionFunctionExecutionDUnitTest extends JUnit4Distribut
     factory.setScope(Scope.LOCAL);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     assertNotNull(cache);
-    region = cache.createRegion(REGION_NAME, factory.create());
+    region = cache.createRegionFactory(factory.create()).create(REGION_NAME);
     try {
       executeInlineFunction();
       ds.disconnect();
@@ -1209,7 +1209,7 @@ public class DistributedRegionFunctionExecutionDUnitTest extends JUnit4Distribut
     factory.setPoolName(p.getName());
     factory.setDataPolicy(policy);
     assertNotNull(cache);
-    region = cache.createRegion(REGION_NAME, factory.create());
+    region = cache.createRegionFactory(factory.create()).create(REGION_NAME);
     LogWriterUtils.getLogWriter().info("Client Region Created :" + region);
     assertNotNull(region);
     for (int i = 1; i <= 200; i++) {
@@ -1232,7 +1232,7 @@ public class DistributedRegionFunctionExecutionDUnitTest extends JUnit4Distribut
     factory.setDataPolicy(DataPolicy.EMPTY);
     factory.setPoolName(p.getName());
     assertNotNull(cache);
-    region = cache.createRegion(REGION_NAME, factory.create());
+    region = cache.createRegionFactory(factory.create()).create(REGION_NAME);
     LogWriterUtils.getLogWriter().info("Client Region Created :" + region);
     assertNotNull(region);
   }
@@ -1242,7 +1242,7 @@ public class DistributedRegionFunctionExecutionDUnitTest extends JUnit4Distribut
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(policy);
     assertNotNull(cache);
-    region = cache.createRegion(REGION_NAME, factory.create());
+    region = cache.createRegionFactory(factory.create()).create(REGION_NAME);
     LogWriterUtils.getLogWriter().info("Region Created :" + region);
     assertNotNull(region);
 
@@ -1264,7 +1264,7 @@ public class DistributedRegionFunctionExecutionDUnitTest extends JUnit4Distribut
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(policy);
     assertNotNull(cache);
-    region = cache.createRegion(REGION_NAME, factory.create());
+    region = cache.createRegionFactory(factory.create()).create(REGION_NAME);
     LogWriterUtils.getLogWriter().info("Region Created :" + region);
     assertNotNull(region);
   }

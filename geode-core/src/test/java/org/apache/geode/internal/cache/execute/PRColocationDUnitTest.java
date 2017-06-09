@@ -689,7 +689,8 @@ public class PRColocationDUnitTest extends JUnit4CacheTestCase {
         AttributesFactory attr = new AttributesFactory();
         attr.setPartitionAttributes(prAttr);
         assertNotNull(basicGetCache());
-        Region pr = basicGetCache().createRegion(partitionedRegionName, attr.create());
+        Region pr =
+            basicGetCache().createRegionFactory(attr.create()).create(partitionedRegionName);
         assertNotNull(pr);
         LogWriterUtils.getLogWriter().info("Partitioned Region " + partitionedRegionName
             + " created Successfully :" + pr.toString());
@@ -722,7 +723,7 @@ public class PRColocationDUnitTest extends JUnit4CacheTestCase {
             attr.setPartitionAttributes(prAttr);
             assertNotNull(basicGetCache());
             try {
-              basicGetCache().createRegion(regionName, attr.create());
+              basicGetCache().createRegionFactory(attr.create()).create(regionName);
               fail("It should have failed with Exception: Colocated regions "
                   + "should have accessors at the same node");
             } catch (Exception Expected) {
@@ -760,7 +761,8 @@ public class PRColocationDUnitTest extends JUnit4CacheTestCase {
         AttributesFactory attr = new AttributesFactory();
         attr.setPartitionAttributes(prAttr);
         assertNotNull(basicGetCache());
-        Region pr = basicGetCache().createRegion(partitionedRegionName, attr.create());
+        Region pr =
+            basicGetCache().createRegionFactory(attr.create()).create(partitionedRegionName);
         assertNotNull(pr);
         LogWriterUtils.getLogWriter().info("Partitioned Region " + partitionedRegionName
             + " created Successfully :" + pr.toString());
@@ -793,7 +795,7 @@ public class PRColocationDUnitTest extends JUnit4CacheTestCase {
             attr.setPartitionAttributes(prAttr);
             assertNotNull(basicGetCache());
             try {
-              basicGetCache().createRegion(regionName, attr.create());
+              basicGetCache().createRegionFactory(attr.create()).create(regionName);
               fail("It should have failed with Exception: Colocated regions "
                   + "should have accessors at the same node");
             } catch (Exception Expected) {
@@ -830,7 +832,8 @@ public class PRColocationDUnitTest extends JUnit4CacheTestCase {
         AttributesFactory attr = new AttributesFactory();
         attr.setPartitionAttributes(prAttr);
         assertNotNull(basicGetCache());
-        Region pr = basicGetCache().createRegion(partitionedRegionName, attr.create());
+        Region pr =
+            basicGetCache().createRegionFactory(attr.create()).create(partitionedRegionName);
         assertNotNull(pr);
         LogWriterUtils.getLogWriter().info("Partitioned Region " + partitionedRegionName
             + " created Successfully :" + pr.toString());
@@ -856,7 +859,8 @@ public class PRColocationDUnitTest extends JUnit4CacheTestCase {
         AttributesFactory attr = new AttributesFactory();
         attr.setPartitionAttributes(prAttr);
         assertNotNull(basicGetCache());
-        Region pr = basicGetCache().createRegion(partitionedRegionName, attr.create());
+        Region pr =
+            basicGetCache().createRegionFactory(attr.create()).create(partitionedRegionName);
         assertNotNull(pr);
         LogWriterUtils.getLogWriter().info("Partitioned Region " + partitionedRegionName
             + " created Successfully :" + pr.toString());
@@ -886,7 +890,7 @@ public class PRColocationDUnitTest extends JUnit4CacheTestCase {
         attr.setPartitionAttributes(prAttr);
         assertNotNull(basicGetCache());
         try {
-          Region r = basicGetCache().createRegion(regionName, attr.create());
+          Region r = basicGetCache().createRegionFactory(attr.create()).create(regionName);
           // fail("It should have failed with Exception : Colocated regions
           // should have accessors at the same node");
           r.put("key", "value");
@@ -921,7 +925,7 @@ public class PRColocationDUnitTest extends JUnit4CacheTestCase {
         attr.setPartitionAttributes(prAttr);
         assertNotNull(basicGetCache());
         try {
-          Region r = basicGetCache().createRegion(regionName, attr.create());
+          Region r = basicGetCache().createRegionFactory(attr.create()).create(regionName);
           r.put("key", "value");
           assertEquals("value", (String) r.get("key"));
         } catch (Exception NotExpected) {
@@ -2512,7 +2516,7 @@ public class PRColocationDUnitTest extends JUnit4CacheTestCase {
     attr.setPartitionAttributes(prAttr);
     attr.setConcurrencyChecksEnabled(concurrencyChecks);
     assertNotNull(basicGetCache());
-    Region pr = basicGetCache().createRegion(partitionedRegionName, attr.create());
+    Region pr = basicGetCache().createRegionFactory(attr.create()).create(partitionedRegionName);
     assertNotNull(pr);
     LogWriterUtils.getLogWriter().info(
         "Partitioned Region " + partitionedRegionName + " created Successfully :" + pr.toString());
@@ -2530,7 +2534,8 @@ public class PRColocationDUnitTest extends JUnit4CacheTestCase {
     PartitionAttributes prAttr = paf.create();
     AttributesFactory attr = new AttributesFactory();
     assertNotNull(basicGetCache());
-    Region root = basicGetCache().createRegion("root" + partitionedRegionName, attr.create());
+    Region root =
+        basicGetCache().createRegionFactory(attr.create()).create("root" + partitionedRegionName);
     attr.setPartitionAttributes(prAttr);
     Region pr = root.createSubregion(partitionedRegionName, attr.create());
     assertNotNull(pr);

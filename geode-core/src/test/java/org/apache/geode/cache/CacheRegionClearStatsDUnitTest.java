@@ -93,7 +93,7 @@ public class CacheRegionClearStatsDUnitTest extends JUnit4DistributedTestCase {
     factory.setPoolName(p.getName());
 
     RegionAttributes attrs = factory.create();
-    Region region = cache.createRegion(REGION_NAME, attrs);
+    Region region = cache.basicCreateRegion(REGION_NAME, attrs);
     // region.registerInterest("ALL_KEYS");
   }
 
@@ -107,7 +107,7 @@ public class CacheRegionClearStatsDUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(dataPolicy);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.basicCreateRegion(REGION_NAME, attrs);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     CacheServer server1 = cache.addCacheServer();
     server1.setPort(port);
@@ -136,7 +136,7 @@ public class CacheRegionClearStatsDUnitTest extends JUnit4DistributedTestCase {
     factory.setPoolName(p.getName());
     factory.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
     RegionAttributes attrs = factory.create();
-    Region region = cache.createRegion(REGION_NAME, attrs);
+    Region region = cache.basicCreateRegion(REGION_NAME, attrs);
     // region.registerInterest("ALL_KEYS");
   }
 

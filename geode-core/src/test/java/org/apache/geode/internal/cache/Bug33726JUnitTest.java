@@ -66,7 +66,7 @@ public class Bug33726JUnitTest {
     try {
       cache = CacheFactory.create(ds);
 
-      Region region = cache.createRegion("testRegion", factory.create());
+      Region region = cache.createRegionFactory(factory.create()).create("testRegion");
       region.createSubregion("testSubRegion", factory.create());
     } catch (Exception e) {
       fail("Failed to create cache due to " + e);

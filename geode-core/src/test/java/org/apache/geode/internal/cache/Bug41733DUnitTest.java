@@ -168,7 +168,7 @@ public class Bug41733DUnitTest extends JUnit4CacheTestCase {
         paf.setRedundantCopies(redundancy);
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PARTITION);
-        cache.createRegion("region", af.create());
+        cache.createRegionFactory(af.create()).create("region");
       }
 
     });

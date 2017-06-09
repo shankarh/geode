@@ -109,7 +109,7 @@ public class Bug36457DUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setPoolName(p.getName());
     RegionAttributes attrs = factory.create();
-    Region r = cache.createRegion(regionName, attrs);
+    Region r = cache.createRegionFactory(attrs).create(regionName);
     List listOfKeys = new ArrayList();
     listOfKeys.add("key-1");
     listOfKeys.add("key-2");
@@ -126,7 +126,7 @@ public class Bug36457DUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(regionName, attrs);
+    cache.createRegionFactory(attrs).create(regionName);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     CacheServer server1 = cache.addCacheServer();
     server1.setPort(port);

@@ -157,7 +157,7 @@ public class IndexTrackingQueryObserverDUnitTest extends JUnit4CacheTestCase {
         AttributesFactory af = new AttributesFactory();
         af.setPartitionAttributes(paf.create());
 
-        Region region = getCache().createRegion("portfolio", af.create());
+        Region region = getCache().basicCreateRegion("portfolio", af.create());
 
       }
     };

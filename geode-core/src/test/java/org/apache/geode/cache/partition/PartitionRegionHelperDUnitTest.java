@@ -83,7 +83,7 @@ public class PartitionRegionHelperDUnitTest extends JUnit4CacheTestCase {
         paf.setTotalNumBuckets(12);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
     vm0.invoke(createPrRegion);
@@ -159,7 +159,7 @@ public class PartitionRegionHelperDUnitTest extends JUnit4CacheTestCase {
         paf.setTotalNumBuckets(12);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
     vm0.invoke(createPrRegion1);
@@ -179,7 +179,7 @@ public class PartitionRegionHelperDUnitTest extends JUnit4CacheTestCase {
         paf.setTotalNumBuckets(12);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
     vm1.invoke(createPrRegion2);
@@ -199,7 +199,7 @@ public class PartitionRegionHelperDUnitTest extends JUnit4CacheTestCase {
         paf.setTotalNumBuckets(12);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
     vm2.invoke(createPrRegion3);
@@ -251,7 +251,7 @@ public class PartitionRegionHelperDUnitTest extends JUnit4CacheTestCase {
         paf.setTotalNumBuckets(12);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        Region region = cache.createRegion("region1", attr.create());
+        Region region = cache.createRegionFactory(attr.create()).create("region1");
         for (Months_Accessor month : Months_Accessor.values()) {
           String dateString = 10 + "-" + month + "-" + "2009";
           String DATE_FORMAT = "dd-MMM-yyyy";
@@ -315,7 +315,7 @@ public class PartitionRegionHelperDUnitTest extends JUnit4CacheTestCase {
         AttributesFactory attr = new AttributesFactory();
         attr.setPartitionAttributes(new PartitionAttributesFactory().setLocalMaxMemory(0)
             .setRedundantCopies(rc).setTotalNumBuckets(tb).create());
-        cache.createRegion(prName, attr.create());
+        cache.createRegionFactory(attr.create()).create(prName);
       }
     });
 
@@ -326,7 +326,7 @@ public class PartitionRegionHelperDUnitTest extends JUnit4CacheTestCase {
         AttributesFactory attr = new AttributesFactory();
         attr.setPartitionAttributes(new PartitionAttributesFactory().setRedundantCopies(rc)
             .setTotalNumBuckets(tb).create());
-        cache.createRegion(prName, attr.create());
+        cache.createRegionFactory(attr.create()).create(prName);
         return cache.getDistributedSystem().getDistributedMember();
       }
     };
@@ -348,7 +348,7 @@ public class PartitionRegionHelperDUnitTest extends JUnit4CacheTestCase {
         AttributesFactory attr = new AttributesFactory();
         {
           attr.setScope(Scope.LOCAL);
-          Region lr = getCache().createRegion(prName + "lr", attr.create());
+          Region lr = getCache().basicCreateRegion(prName + "lr", attr.create());
           try {
             // no-pr check
             nonPRMemberForKey(lr, buk0Key1);
@@ -360,7 +360,7 @@ public class PartitionRegionHelperDUnitTest extends JUnit4CacheTestCase {
         {
           attr = new AttributesFactory();
           attr.setScope(Scope.DISTRIBUTED_ACK);
-          Region dr = getCache().createRegion(prName + "dr", attr.create());
+          Region dr = getCache().basicCreateRegion(prName + "dr", attr.create());
           try {
             // no-pr check
             nonPRMemberForKey(dr, buk0Key1);
@@ -559,7 +559,7 @@ public class PartitionRegionHelperDUnitTest extends JUnit4CacheTestCase {
         paf.setTotalNumBuckets(12);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
         return cache.getDistributedSystem().getDistributedMember();
       }
     };
@@ -656,7 +656,7 @@ public class PartitionRegionHelperDUnitTest extends JUnit4CacheTestCase {
         paf.setTotalNumBuckets(12);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
         return cache.getDistributedSystem().getDistributedMember();
       }
     };

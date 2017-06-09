@@ -54,7 +54,7 @@ public class PartitionedRegionInvalidateDUnitTest extends JUnit4CacheTestCase {
     AttributesFactory af = new AttributesFactory();
     af.setPartitionAttributes(new PartitionAttributesFactory().setLocalMaxMemory(accessor ? 0 : 12)
         .setRedundantCopies(redundantCopies).create());
-    getCache().createRegion(name, af.create());
+    getCache().basicCreateRegion(name, af.create());
   }
 
   @Test

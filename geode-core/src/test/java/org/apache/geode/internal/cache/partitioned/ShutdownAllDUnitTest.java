@@ -662,7 +662,7 @@ public class ShutdownAllDUnitTest extends JUnit4CacheTestCase {
         af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
 
         af.setDiskStoreName(diskStoreName);
-        cache.createRegion(regionName, af.create());
+        cache.createRegionFactory(af.create()).create(regionName);
       }
     };
   }
@@ -745,7 +745,7 @@ public class ShutdownAllDUnitTest extends JUnit4CacheTestCase {
         } else {
           af.setDataPolicy(DataPolicy.PARTITION);
         }
-        cache.createRegion(regionName, af.create());
+        cache.createRegionFactory(af.create()).create(regionName);
         if (recoveryDone != null) {
           try {
             recoveryDone.await();

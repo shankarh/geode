@@ -420,14 +420,14 @@ public class ColocationFailoverDUnitTest extends JUnit4DistributedTestCase {
     assertNotNull(cache);
 
     if (partitionedRegionName.equals(customerPR_Name)) {
-      customerPR = cache.createRegion(partitionedRegionName, attr.create());
+      customerPR = cache.createRegionFactory(attr.create()).create(partitionedRegionName);
       assertNotNull(customerPR);
       LogWriterUtils.getLogWriter().info(
           "Partitioned Region " + partitionedRegionName + " created Successfully :" + customerPR);
 
     }
     if (partitionedRegionName.equals(orderPR_Name)) {
-      orderPR = cache.createRegion(partitionedRegionName, attr.create());
+      orderPR = cache.createRegionFactory(attr.create()).create(partitionedRegionName);
       assertNotNull(orderPR);
       LogWriterUtils.getLogWriter().info(
           "Partitioned Region " + partitionedRegionName + " created Successfully :" + orderPR);
@@ -435,7 +435,7 @@ public class ColocationFailoverDUnitTest extends JUnit4DistributedTestCase {
     }
 
     if (partitionedRegionName.equals(shipmentPR_Name)) {
-      shipmentPR = cache.createRegion(partitionedRegionName, attr.create());
+      shipmentPR = cache.createRegionFactory(attr.create()).create(partitionedRegionName);
       assertNotNull(shipmentPR);
       LogWriterUtils.getLogWriter().info(
           "Partitioned Region " + partitionedRegionName + " created Successfully :" + shipmentPR);

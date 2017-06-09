@@ -51,7 +51,6 @@ public class ConcurrentDestroySubRegionDUnitTest extends JUnit4CacheTestCase {
   }
 
   /**
-   * @param name
    */
   public ConcurrentDestroySubRegionDUnitTest() {
     super();
@@ -72,7 +71,7 @@ public class ConcurrentDestroySubRegionDUnitTest extends JUnit4CacheTestCase {
           AttributesFactory af = new AttributesFactory();
           af.setScope(Scope.DISTRIBUTED_ACK);
           af.setDataPolicy(DataPolicy.REPLICATE);
-          Region region = cache.createRegion("region", af.create());
+          Region region = cache.createRegionFactory(af.create()).create("region");
         }
       };
 
@@ -133,7 +132,7 @@ public class ConcurrentDestroySubRegionDUnitTest extends JUnit4CacheTestCase {
           AttributesFactory af = new AttributesFactory();
           af.setScope(Scope.DISTRIBUTED_ACK);
           af.setDataPolicy(DataPolicy.REPLICATE);
-          Region region = cache.createRegion("region", af.create());
+          Region region = cache.createRegionFactory(af.create()).create("region");
         }
       };
 

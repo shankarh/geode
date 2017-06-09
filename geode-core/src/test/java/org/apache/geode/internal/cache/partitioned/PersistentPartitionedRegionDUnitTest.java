@@ -212,7 +212,7 @@ public class PersistentPartitionedRegionDUnitTest extends PersistentPartitionedR
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
         RegionAttributes attr = af.create();
-        cache.createRegion(PR_REGION_NAME, attr);
+        cache.createRegionFactory(attr).create(PR_REGION_NAME);
       }
     };
 
@@ -1404,7 +1404,7 @@ public class PersistentPartitionedRegionDUnitTest extends PersistentPartitionedR
         paf.setLocalMaxMemory(0);
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PARTITION);
-        cache.createRegion(PR_REGION_NAME, af.create());
+        cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
 
         CacheServer server = cache.addCacheServer();
         server.setPort(AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET));
@@ -1437,7 +1437,7 @@ public class PersistentPartitionedRegionDUnitTest extends PersistentPartitionedR
           af.setDataPolicy(DataPolicy.NORMAL);
           af.setScope(Scope.LOCAL);
           af.setPoolName("pool");
-          Region region = cache.createRegion(PR_REGION_NAME, af.create());
+          Region region = cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
           try {
             region.registerInterestRegex(".*");
           } catch (ServerOperationException e) {
@@ -1833,7 +1833,7 @@ public class PersistentPartitionedRegionDUnitTest extends PersistentPartitionedR
 
           Cache cache = getCache();
           RegionAttributes attr = getPersistentPRAttributes(redundancy, -1, cache, 113, true);
-          cache.createRegion(PR_REGION_NAME, attr);
+          cache.createRegionFactory(attr).create(PR_REGION_NAME);
         }
       };
 

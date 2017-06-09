@@ -476,7 +476,7 @@ public class ClientToServerDeltaDUnitTest extends JUnit4DistributedTestCase {
     }
     factory.setCloningEnabled(clone);
     RegionAttributes attrs = factory.create();
-    region = cache.createRegion(REGION_NAME, attrs);
+    region = cache.createRegionFactory(attrs).create(REGION_NAME);
 
     AttributesMutator am = region.getAttributesMutator();
     if (attachListener) {
@@ -591,7 +591,7 @@ public class ClientToServerDeltaDUnitTest extends JUnit4DistributedTestCase {
 
     // region with empty data policy
     RegionAttributes attrs = factory.create();
-    region = cache.createRegion(REGION_NAME, attrs);
+    region = cache.createRegionFactory(attrs).create(REGION_NAME);
     if (attachListener) {
       region.getAttributesMutator().addCacheListener(new CacheListenerAdapter() {
         @Override

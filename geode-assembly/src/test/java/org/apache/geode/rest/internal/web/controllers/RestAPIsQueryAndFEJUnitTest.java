@@ -621,25 +621,25 @@ public class RestAPIsQueryAndFEJUnitTest {
 
     // Create region, customers
     final RegionAttributes<String, String> regionAttributes = attributesFactory.create();
-    c.createRegion(CUSTOMER_REGION, regionAttributes);
+    c.createRegionFactory(regionAttributes).create(CUSTOMER_REGION);
 
     // Create region, items
     attributesFactory.setDataPolicy(DataPolicy.PARTITION);
-    c.createRegion(ITEM_REGION, regionAttributes);
+    c.createRegionFactory(regionAttributes).create(ITEM_REGION);
 
     // Create region, /orders
     final AttributesFactory<Object, Object> af2 = new AttributesFactory<>();
     af2.setDataPolicy(DataPolicy.PARTITION);
     final RegionAttributes<Object, Object> rAttributes2 = af2.create();
 
-    c.createRegion(ORDER_REGION, rAttributes2);
+    c.createRegionFactory(rAttributes2).create(ORDER_REGION);
 
     // Create region, primitiveKVStore
     final AttributesFactory<Object, Object> af1 = new AttributesFactory<>();
     af1.setDataPolicy(DataPolicy.PARTITION);
     final RegionAttributes<Object, Object> rAttributes = af1.create();
 
-    c.createRegion(PRIMITIVE_KV_STORE_REGION, rAttributes);
+    c.createRegionFactory(regionAttributes).create(PRIMITIVE_KV_STORE_REGION);
 
     RegionFactory<String, Object> rf = c.createRegionFactory(RegionShortcut.REPLICATE);
     rf.setDataPolicy(DataPolicy.EMPTY);

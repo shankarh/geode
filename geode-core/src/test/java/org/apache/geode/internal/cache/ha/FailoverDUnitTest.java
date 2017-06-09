@@ -140,7 +140,7 @@ public class FailoverDUnitTest extends JUnit4DistributedTestCase {
         }
       }
     });
-    cache.createRegion(regionName, factory.create());
+    cache.createRegionFactory(factory.create()).create(regionName);
   }
 
   public static Integer createServerCache() throws Exception {
@@ -149,7 +149,7 @@ public class FailoverDUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(regionName, attrs);
+    cache.createRegionFactory(attrs).create(regionName);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     CacheServer server1 = cache.addCacheServer();
     server1.setPort(port);

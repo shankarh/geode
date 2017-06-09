@@ -902,7 +902,7 @@ public class PRDeltaPropagationDUnitTest extends JUnit4DistributedTestCase {
     }
     // attr.setEvictionAttributes(EvictionAttributes.createLRUEntryAttributes(5));
     assertNotNull(cache);
-    deltaPR = cache.createRegion(partitionedRegionName, attr.create());
+    deltaPR = cache.createRegionFactory(attr.create()).create(partitionedRegionName);
     assertNotNull(deltaPR);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region " + partitionedRegionName + " created Successfully :" + deltaPR);
@@ -946,7 +946,7 @@ public class PRDeltaPropagationDUnitTest extends JUnit4DistributedTestCase {
 
     lastKeyReceived = false;
     RegionAttributes attrs = factory.create();
-    deltaPR = cache.createRegion(REGION_NAME, attrs);
+    deltaPR = cache.createRegionFactory(attrs).create(REGION_NAME);
     AttributesMutator am = deltaPR.getAttributesMutator();
     if (isListAttach.booleanValue()) {
       am.addCacheListener(new CacheListenerAdapter() {
@@ -1018,7 +1018,7 @@ public class PRDeltaPropagationDUnitTest extends JUnit4DistributedTestCase {
     });
 
     RegionAttributes attrs = factory.create();
-    deltaPR = cache.createRegion(REGION_NAME, attrs);
+    deltaPR = cache.createRegionFactory(attrs).create(REGION_NAME);
     if (subscriptionEnable.booleanValue()) {
       deltaPR.registerInterest("ALL_KEYS");
     }
@@ -1093,7 +1093,7 @@ public class PRDeltaPropagationDUnitTest extends JUnit4DistributedTestCase {
     });
 
     RegionAttributes attrs = factory.create();
-    deltaPR = cache.createRegion(REGION_NAME, attrs);
+    deltaPR = cache.createRegionFactory(attrs).create(REGION_NAME);
     // deltaPR.create(DELTA_KEY, new PRDeltaTestImpl());
     deltaPR.registerInterest("ALL_KEYS");
     pool = p;

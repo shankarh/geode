@@ -179,15 +179,15 @@ public class MultiRegionFunctionExecutionDUnitTest extends JUnit4CacheTestCase {
     pf.setRedundantCopies(1);
     AttributesFactory factory = new AttributesFactory();
     factory.setPartitionAttributes(pf.create());
-    cache.createRegion("PR1", factory.create());
+    cache.createRegionFactory(factory.create()).create("PR1");
 
     factory = new AttributesFactory();
     factory.setDataPolicy(DataPolicy.REPLICATE);
-    cache.createRegion("RR1", factory.create());
+    cache.createRegionFactory(factory.create()).create("RR1");
 
     factory = new AttributesFactory();
     factory.setDataPolicy(DataPolicy.EMPTY);
-    cache.createRegion("RR2", factory.create());
+    cache.createRegionFactory(factory.create()).create("RR2");
   }
 
   @SuppressWarnings("unchecked")
@@ -199,15 +199,15 @@ public class MultiRegionFunctionExecutionDUnitTest extends JUnit4CacheTestCase {
     pf.setRedundantCopies(1);
     AttributesFactory factory = new AttributesFactory();
     factory.setPartitionAttributes(pf.create());
-    cache.createRegion("PR1", factory.create());
+    cache.createRegionFactory(factory.create()).create("PR1");
 
     factory = new AttributesFactory();
     factory.setDataPolicy(DataPolicy.NORMAL);
-    cache.createRegion("RR1", factory.create());
+    cache.createRegionFactory(factory.create()).create("RR1");
 
     factory = new AttributesFactory();
     factory.setDataPolicy(DataPolicy.REPLICATE);
-    cache.createRegion("RR2", factory.create());
+    cache.createRegionFactory(factory.create()).create("RR2");
   }
 
   @SuppressWarnings("unchecked")
@@ -220,7 +220,7 @@ public class MultiRegionFunctionExecutionDUnitTest extends JUnit4CacheTestCase {
     pf.setLocalMaxMemory(0);
     AttributesFactory factory = new AttributesFactory();
     factory.setPartitionAttributes(pf.create());
-    cache.createRegion("PR1", factory.create());
+    cache.createRegionFactory(factory.create()).create("PR1");
 
 
     pf = new PartitionAttributesFactory();
@@ -228,15 +228,15 @@ public class MultiRegionFunctionExecutionDUnitTest extends JUnit4CacheTestCase {
     pf.setRedundantCopies(1);
     factory = new AttributesFactory();
     factory.setPartitionAttributes(pf.create());
-    cache.createRegion("PR2", factory.create());
+    cache.createRegionFactory(factory.create()).create("PR2");
 
     factory = new AttributesFactory();
     factory.setDataPolicy(DataPolicy.EMPTY);
-    cache.createRegion("RR1", factory.create());
+    cache.createRegionFactory(factory.create()).create("RR1");
 
     factory = new AttributesFactory();
     factory.setDataPolicy(DataPolicy.NORMAL);
-    cache.createRegion("RR2", factory.create());
+    cache.createRegionFactory(factory.create()).create("RR2");
   }
 
   @SuppressWarnings("unchecked")
@@ -248,7 +248,7 @@ public class MultiRegionFunctionExecutionDUnitTest extends JUnit4CacheTestCase {
     pf.setRedundantCopies(1);
     AttributesFactory factory = new AttributesFactory();
     factory.setPartitionAttributes(pf.create());
-    cache.createRegion("PR1", factory.create());
+    cache.createRegionFactory(factory.create()).create("PR1");
 
 
     pf = new PartitionAttributesFactory();
@@ -256,15 +256,15 @@ public class MultiRegionFunctionExecutionDUnitTest extends JUnit4CacheTestCase {
     pf.setRedundantCopies(1);
     factory = new AttributesFactory();
     factory.setPartitionAttributes(pf.create());
-    cache.createRegion("PR2", factory.create());
+    cache.createRegionFactory(factory.create()).create("PR2");
 
     factory = new AttributesFactory();
     factory.setDataPolicy(DataPolicy.REPLICATE);
-    cache.createRegion("RR1", factory.create());
+    cache.createRegionFactory(factory.create()).create("RR1");
 
     factory = new AttributesFactory();
     factory.setDataPolicy(DataPolicy.REPLICATE);
-    cache.createRegion("RR2", factory.create());
+    cache.createRegionFactory(factory.create()).create("RR2");
   }
 
   @SuppressWarnings("unchecked")
@@ -276,7 +276,7 @@ public class MultiRegionFunctionExecutionDUnitTest extends JUnit4CacheTestCase {
     pf.setRedundantCopies(1);
     AttributesFactory factory = new AttributesFactory();
     factory.setPartitionAttributes(pf.create());
-    PR1 = cache.createRegion("PR1", factory.create());
+    PR1 = cache.createRegionFactory(factory.create()).create("PR1");
 
 
     pf = new PartitionAttributesFactory();
@@ -285,19 +285,19 @@ public class MultiRegionFunctionExecutionDUnitTest extends JUnit4CacheTestCase {
     pf.setLocalMaxMemory(0);
     factory = new AttributesFactory();
     factory.setPartitionAttributes(pf.create());
-    PR2 = cache.createRegion("PR2", factory.create());
+    PR2 = cache.createRegionFactory(factory.create()).create("PR2");
 
     factory = new AttributesFactory();
     factory.setDataPolicy(DataPolicy.REPLICATE);
-    RR1 = cache.createRegion("RR1", factory.create());
+    RR1 = cache.createRegionFactory(factory.create()).create("RR1");
 
     factory = new AttributesFactory();
     factory.setDataPolicy(DataPolicy.EMPTY);
-    RR2 = cache.createRegion("RR2", factory.create());
+    RR2 = cache.createRegionFactory(factory.create()).create("RR2");
 
     factory = new AttributesFactory();
     factory.setScope(Scope.LOCAL);
-    LR1 = cache.createRegion("LR1", factory.create());
+    LR1 = cache.createRegionFactory(factory.create()).create("LR1");
 
     for (int i = 0; i < 24; i++) {
       PR1.put(new Integer(i), new Integer(i));

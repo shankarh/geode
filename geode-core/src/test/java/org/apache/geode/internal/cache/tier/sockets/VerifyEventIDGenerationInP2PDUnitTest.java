@@ -118,7 +118,7 @@ public class VerifyEventIDGenerationInP2PDUnitTest extends JUnit4DistributedTest
     });
 
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
   }
 

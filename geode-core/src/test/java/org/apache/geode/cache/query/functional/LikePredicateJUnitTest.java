@@ -86,7 +86,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
 
     char ch = 'd';
     String base = "abc";
@@ -179,7 +179,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
 
     char ch = 'd';
     String base = "abc";
@@ -272,7 +272,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
 
     char ch = 'd';
     String base = "abc";
@@ -395,7 +395,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
 
 
     String base = "abc";
@@ -522,7 +522,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
 
     char ch = 'd';
     String base = "abc";
@@ -625,7 +625,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
 
     char ch = 'd';
     String base = "abc";
@@ -718,7 +718,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
 
     String str = "d_";
     String base = "abc";
@@ -841,7 +841,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
 
     String[] values = new String[] {"active", "act**ve", "ac+t+ve", "?act?ve", "act)ve^",
         "|+act(ve", "act*+|ve", "^+act.ve+^", "act[]ve", "act][ve", "act^[a-z]ve", "act/ve",
@@ -914,7 +914,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
 
     String[] values = new String[] {"active",};
 
@@ -981,7 +981,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
 
     String[] values = new String[] {"ac\\tive", "X\\\\X", "Y%Y", "Z\\%Z", "pass\\ive",
         "inact\\%+ive", "1inact\\_+ive",};
@@ -1048,7 +1048,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
 
     String base = "abc";
     for (int i = 1; i <= 10; i++) {
@@ -1139,7 +1139,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
     int size = 10;
 
     String base = "abc";
@@ -1264,7 +1264,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
     QueryService qs = cache.getQueryService();
     Query q;
     String[] queries = new String[] {
@@ -1475,7 +1475,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
 
     char ch = 'd';
     String base = "abc";
@@ -1545,7 +1545,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
 
     String[] values = new String[] {"active", "inactive",};
 
@@ -1653,7 +1653,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
 
     String[] values = new String[] {"ac\\tive", "X\\\\X", "Y%Y", "Z\\%Z", "pass\\ive",
         "inact\\%+ive", "1inact\\_+ive",};
@@ -1702,7 +1702,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
     int size = 10;
 
     String base = "abc";
@@ -1835,7 +1835,7 @@ public class LikePredicateJUnitTest {
     Cache cache = CacheUtils.getCache();
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
 
     region.put("abc", "abc\ndef");
     region.put("opq", "\nopq");
@@ -1964,8 +1964,8 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
-    Region region2 = cache.createRegion("pos2", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
+    Region region2 = cache.createRegionFactory(regionAttributes).create("pos2");
 
     // Create Index
     Index i1 =
@@ -2017,8 +2017,8 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
-    Region region2 = cache.createRegion("pos2", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
+    Region region2 = cache.createRegionFactory(regionAttributes).create("pos2");
 
     // Create Index
     Index i1 =
@@ -2102,7 +2102,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
     for (int i = 0; i < 10; i++) {
       region.put("key-" + i, new Portfolio(i));
     }
@@ -2195,7 +2195,7 @@ public class LikePredicateJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    Region region = cache.createRegion("pos", regionAttributes);
+    Region region = cache.createRegionFactory(regionAttributes).create("pos");
 
     for (int i = 0; i < 10; i++) {
       Portfolio p = new Portfolio(i);

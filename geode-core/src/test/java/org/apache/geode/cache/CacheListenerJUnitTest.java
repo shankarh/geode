@@ -96,7 +96,7 @@ public class CacheListenerJUnitTest {
     af.addCacheListener(cl1);
     af.addCacheListener(cl2);
     af.addCacheListener(cl3);
-    Region r = this.c.createRegion("r", af.create());
+    Region r = this.c.createRegionFactory(af.create()).create("r");
 
     clearListener();
     r.create("key1", "value1");
@@ -123,7 +123,7 @@ public class CacheListenerJUnitTest {
     CacheListener cl2 = new CacheListenerAdapter() {};
     // CacheListener cl3 = new CacheListenerAdapter() {};
     AttributesFactory af = new AttributesFactory();
-    Region r = this.c.createRegion("r", af.create());
+    Region r = this.c.createRegionFactory(af.create()).create("r");
     RegionAttributes ra = r.getAttributes();
     AttributesMutator am = r.getAttributesMutator();
     assertEquals(null, ra.getCacheListener());
@@ -194,7 +194,7 @@ public class CacheListenerJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.addCacheListener(cl1);
     clearListener();
-    Region r = this.c.createRegion("r", af.create());
+    Region r = this.c.createRegionFactory(af.create()).create("r");
     assertEquals(1, this.invokeCount);
     assertTrue(this.lastEvent instanceof RegionEvent);
     CacheEvent e = this.lastEvent;
@@ -224,7 +224,7 @@ public class CacheListenerJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.addCacheListener(cl1);
     clearListener();
-    Region r = this.c.createRegion("r", af.create());
+    Region r = this.c.createRegionFactory(af.create()).create("r");
     r.put("key1", "value1-0");
     assertEquals(1, this.invokeCount);
     assertEquals(Operation.CREATE, this.lastEvent.getOperation());
@@ -283,7 +283,7 @@ public class CacheListenerJUnitTest {
   public void testTxOpOrder() throws Exception {
     AttributesFactory af = new AttributesFactory();
     clearListener();
-    Region r = this.c.createRegion("r", af.create());
+    Region r = this.c.createRegionFactory(af.create()).create("r");
 
     TransactionListener tl1 = new TransactionListenerAdapter() {
       public void afterRollback(TransactionEvent e) {
@@ -311,7 +311,7 @@ public class CacheListenerJUnitTest {
   public void testMultiRegionTxOpOrder() throws Exception {
     AttributesFactory af = new AttributesFactory();
     clearListener();
-    Region r1 = this.c.createRegion("r1", af.create());
+    Region r1 = this.c.createRegionFactory(af.create()).create("r1");
     Region r2 = r1.createSubregion("r2", af.create());
     Region r3 = r2.createSubregion("r3", af.create());
 

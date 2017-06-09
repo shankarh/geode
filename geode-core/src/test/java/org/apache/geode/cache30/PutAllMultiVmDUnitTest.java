@@ -90,7 +90,7 @@ public class PutAllMultiVmDUnitTest extends JUnit4DistributedTestCase { // TODO:
       AttributesFactory factory = new AttributesFactory();
       factory.setScope(Scope.DISTRIBUTED_ACK);
       RegionAttributes attr = factory.create();
-      region = cache.createRegion("map", attr);
+      region = cache.createRegionFactory(attr).create("map");
 
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -103,7 +103,7 @@ public class PutAllMultiVmDUnitTest extends JUnit4DistributedTestCase { // TODO:
       factory.setDataPolicy(DataPolicy.REPLICATE);
       factory.setScope(Scope.DISTRIBUTED_ACK);
       RegionAttributes attr = factory.create();
-      mirroredRegion = cache.createRegion("mirrored", attr);
+      mirroredRegion = cache.createRegionFactory(attr).create("mirrored");
     } catch (Exception ex) {
       ex.printStackTrace();
     }

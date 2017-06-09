@@ -312,7 +312,7 @@ public class DiskStoreFactoryJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    cache.createRegion("r", af.create());
+    cache.createRegionFactory(af.create()).create("r");
     cache.close();
     assertTrue(ifFile.exists());
     assertTrue(ifFile.delete());
@@ -357,7 +357,7 @@ public class DiskStoreFactoryJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    Region r = cache.createRegion("r", af.create());
+    Region r = cache.createRegionFactory(af.create()).create("r");
     r.put("key", "value");
     assertTrue(crfFile.exists());
     cache.close();
@@ -385,7 +385,7 @@ public class DiskStoreFactoryJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    Region r = cache.createRegion("r", af.create());
+    Region r = cache.createRegionFactory(af.create()).create("r");
     r.put("key", "value");
     assertTrue(drfFile.exists());
     cache.close();
@@ -413,7 +413,7 @@ public class DiskStoreFactoryJUnitTest {
     DiskStore diskStore = dsf.create(DiskStoreFactory.DEFAULT_DISK_STORE_NAME);
     AttributesFactory af = new AttributesFactory();
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    Region r = cache.createRegion("r", af.create());
+    Region r = cache.createRegionFactory(af.create()).create("r");
     r.put("key", "value");
     DiskStore ds = ((LocalRegion) r).getDiskStore();
     assertEquals(ds, cache.findDiskStore(DiskStoreFactory.DEFAULT_DISK_STORE_NAME));

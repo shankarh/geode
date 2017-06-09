@@ -92,7 +92,7 @@ public class DiskOfflineCompactionJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    Region r = cache.createRegion("r", af.create());
+    Region r = cache.createRegionFactory(af.create()).create("r");
     int extra_byte_num_per_entry =
         InternalDataSerializer.calculateBytesForTSandDSID(getDSID((LocalRegion) r));
     r.put("key1", "value1");
@@ -131,7 +131,7 @@ public class DiskOfflineCompactionJUnitTest {
     af = new AttributesFactory();
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    r = cache.createRegion("r", af.create());
+    r = cache.createRegionFactory(af.create()).create("r");
     assertEquals(2, r.size());
     assertEquals("value1", r.get("key1"));
     assertEquals("value2", r.get("key2"));
@@ -154,7 +154,7 @@ public class DiskOfflineCompactionJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    Region r = cache.createRegion("r", af.create());
+    Region r = cache.createRegionFactory(af.create()).create("r");
     int extra_byte_num_per_entry =
         InternalDataSerializer.calculateBytesForTSandDSID(getDSID((LocalRegion) r));
     r.put("key1", "value1");
@@ -213,7 +213,7 @@ public class DiskOfflineCompactionJUnitTest {
     af = new AttributesFactory();
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    r = cache.createRegion("r", af.create());
+    r = cache.createRegionFactory(af.create()).create("r");
     assertEquals(2, r.size());
     assertEquals("update1", r.get("key1"));
     assertEquals("update2", r.get("key2"));
@@ -236,7 +236,7 @@ public class DiskOfflineCompactionJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    Region r = cache.createRegion("r", af.create());
+    Region r = cache.createRegionFactory(af.create()).create("r");
     int extra_byte_num_per_entry =
         InternalDataSerializer.calculateBytesForTSandDSID(getDSID((LocalRegion) r));
     r.put("key1", "value1");
@@ -299,7 +299,7 @@ public class DiskOfflineCompactionJUnitTest {
     af = new AttributesFactory();
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    r = cache.createRegion("r", af.create());
+    r = cache.createRegionFactory(af.create()).create("r");
     assertEquals(1, r.size());
     assertEquals("update1", r.get("key1"));
 
@@ -321,7 +321,7 @@ public class DiskOfflineCompactionJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    Region r = cache.createRegion("r", af.create());
+    Region r = cache.createRegionFactory(af.create()).create("r");
     int extra_byte_num_per_entry =
         InternalDataSerializer.calculateBytesForTSandDSID(getDSID((LocalRegion) r));
     r.create("key1", "value1");
@@ -394,7 +394,7 @@ public class DiskOfflineCompactionJUnitTest {
     af = new AttributesFactory();
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    r = cache.createRegion("r", af.create());
+    r = cache.createRegionFactory(af.create()).create("r");
     assertEquals(2, r.size());
     assertEquals("value2", r.get("key2"));
     assertEquals("value3", r.get("key3"));
@@ -417,7 +417,7 @@ public class DiskOfflineCompactionJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    Region r = cache.createRegion("r", af.create());
+    Region r = cache.createRegionFactory(af.create()).create("r");
     int extra_byte_num_per_entry =
         InternalDataSerializer.calculateBytesForTSandDSID(getDSID((LocalRegion) r));
     r.put("key1", "value1");
@@ -426,7 +426,7 @@ public class DiskOfflineCompactionJUnitTest {
     r.put("key2", "update2");
     r.remove("key2");
     r.clear();
-    Region r2 = cache.createRegion("r2", af.create());
+    Region r2 = cache.createRegionFactory(af.create()).create("r2");
     // Put something live in the oplog to keep it alive.
     // This is needed because we now force a roll during ds close
     // so that a krf will be generated for the last oplog.
@@ -484,7 +484,7 @@ public class DiskOfflineCompactionJUnitTest {
     af = new AttributesFactory();
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    r = cache.createRegion("r", af.create());
+    r = cache.createRegionFactory(af.create()).create("r");
     assertEquals(0, r.size());
 
     // if test passed clean up files
@@ -506,8 +506,8 @@ public class DiskOfflineCompactionJUnitTest {
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
     // create a dummy region to keep diskstore files "alive" once we destroy the real region
-    cache.createRegion("r2dummy", af.create());
-    Region r = cache.createRegion("r", af.create());
+    cache.createRegionFactory(af.create()).create("r2dummy");
+    Region r = cache.createRegionFactory(af.create()).create("r");
     int extra_byte_num_per_entry =
         InternalDataSerializer.calculateBytesForTSandDSID(getDSID((LocalRegion) r));
     r.put("key1", "value1");
@@ -517,7 +517,7 @@ public class DiskOfflineCompactionJUnitTest {
     r.remove("key2");
     r.clear();
     r.localDestroyRegion();
-    Region r2 = cache.createRegion("r2", af.create());
+    Region r2 = cache.createRegionFactory(af.create()).create("r2");
     // Put something live in the oplog to keep it alive.
     // This is needed because we now force a roll during ds close
     // so that a krf will be generated for the last oplog.
@@ -579,7 +579,7 @@ public class DiskOfflineCompactionJUnitTest {
     af = new AttributesFactory();
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    r = cache.createRegion("r", af.create());
+    r = cache.createRegionFactory(af.create()).create("r");
     assertEquals(0, r.size());
 
     // if test passed clean up files
@@ -602,7 +602,7 @@ public class DiskOfflineCompactionJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    Region r = cache.createRegion("r", af.create());
+    Region r = cache.createRegionFactory(af.create()).create("r");
     int extra_byte_num_per_entry =
         InternalDataSerializer.calculateBytesForTSandDSID(getDSID((LocalRegion) r));
     r.put("key0", "value0"); // extra key to keep oplog1 from being empty
@@ -669,7 +669,7 @@ public class DiskOfflineCompactionJUnitTest {
     af = new AttributesFactory();
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    r = cache.createRegion("r", af.create());
+    r = cache.createRegionFactory(af.create()).create("r");
     assertEquals(3, r.size());
     assertEquals("value0", r.get("key0"));
     assertEquals("update1", r.get("key1"));
@@ -696,7 +696,7 @@ public class DiskOfflineCompactionJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    Region r = cache.createRegion("r", af.create());
+    Region r = cache.createRegionFactory(af.create()).create("r");
     int extra_byte_num_per_entry =
         InternalDataSerializer.calculateBytesForTSandDSID(getDSID((LocalRegion) r));
     r.put("key0", "value0"); // extra key to keep oplog1 from being empty
@@ -770,7 +770,7 @@ public class DiskOfflineCompactionJUnitTest {
     af = new AttributesFactory();
     af.setDiskStoreName(name);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    r = cache.createRegion("r", af.create());
+    r = cache.createRegionFactory(af.create()).create("r");
     assertEquals(2, r.size());
     assertEquals("value0", r.get("key0"));
     assertEquals("update1", r.get("key1"));

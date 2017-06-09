@@ -76,7 +76,7 @@ public class PartitionedRegionDataStoreJUnitTest {
     RegionAttributes ra = af.create();
 
     PartitionedRegion pr = null;
-    pr = (PartitionedRegion) cache.createRegion("PR2", ra);
+    pr = (PartitionedRegion) cache.createRegionFactory(ra).create("PR2");
     paf.setLocalProperties(null).create();
     /* PartitionedRegionDataStore prDS = */ new PartitionedRegionDataStore(pr);
     /*
@@ -98,7 +98,7 @@ public class PartitionedRegionDataStoreJUnitTest {
     RegionAttributes ra = af.create();
 
     PartitionedRegion pr = null;
-    pr = (PartitionedRegion) cache.createRegion("PR3", ra);
+    pr = (PartitionedRegion) cache.createRegionFactory(ra).create("PR3");
 
     String key = "User";
     String value = "1";

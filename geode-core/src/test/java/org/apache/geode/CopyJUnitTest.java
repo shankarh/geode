@@ -89,7 +89,7 @@ public class CopyJUnitTest {
         newValue = null;
       }
     });
-    this.region = this.cache.createRegion("CopyJUnitTest", af.create());
+    this.region = this.cache.createRegionFactory(af.create()).create("CopyJUnitTest");
   }
 
   private void closeCache() {

@@ -157,7 +157,7 @@ public class DistributedTransactionDUnitTest extends JUnit4CacheTestCase {
       af.setDataPolicy(DataPolicy.EMPTY); // for accessor
     }
     af.setConcurrencyChecksEnabled(getConcurrencyChecksEnabled());
-    getCache().createRegion(CUSTOMER_RR, af.create());
+    getCache().basicCreateRegion(CUSTOMER_RR, af.create());
   }
 
   void createPR(boolean accessor, int redundantCopies, InterestPolicy interestPolicy) {
@@ -170,7 +170,7 @@ public class DistributedTransactionDUnitTest extends JUnit4CacheTestCase {
         .setTotalNumBuckets(4).setLocalMaxMemory(accessor ? 0 : 1)
         .setPartitionResolver(new CustomerIDPartitionResolver("resolver1"))
         .setRedundantCopies(redundantCopies).create());
-    getCache().createRegion(CUSTOMER_PR, af.create());
+    getCache().basicCreateRegion(CUSTOMER_PR, af.create());
 
   }
 
@@ -186,7 +186,7 @@ public class DistributedTransactionDUnitTest extends JUnit4CacheTestCase {
     af.setScope(Scope.DISTRIBUTED_ACK);
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
     // af.setConcurrencyChecksEnabled(getConcurrencyChecksEnabled());
-    getCache().createRegion(D_REFERENCE, af.create());
+    getCache().basicCreateRegion(D_REFERENCE, af.create());
 
     af = new AttributesFactory();
     // af.setConcurrencyChecksEnabled(getConcurrencyChecksEnabled());
@@ -198,13 +198,13 @@ public class DistributedTransactionDUnitTest extends JUnit4CacheTestCase {
         .setTotalNumBuckets(4).setLocalMaxMemory(accessor ? 0 : 1)
         .setPartitionResolver(new CustomerIDPartitionResolver("resolver1"))
         .setRedundantCopies(redundantCopies).create());
-    getCache().createRegion(CUSTOMER_PR, af.create());
+    getCache().basicCreateRegion(CUSTOMER_PR, af.create());
     af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
     af.setPartitionAttributes(new PartitionAttributesFactory<OrderId, Order>().setTotalNumBuckets(4)
         .setLocalMaxMemory(accessor ? 0 : 1)
         .setPartitionResolver(new CustomerIDPartitionResolver("resolver2"))
         .setRedundantCopies(redundantCopies).setColocatedWith(CUSTOMER_PR).create());
-    getCache().createRegion(ORDER_PR, af.create());
+    getCache().basicCreateRegion(ORDER_PR, af.create());
   }
 
   public void createRegions(VM[] vms) {
@@ -299,7 +299,7 @@ public class DistributedTransactionDUnitTest extends JUnit4CacheTestCase {
   }
 
   public void createPersistentPR() {
-    getCache().createRegion(PERSISTENT_CUSTOMER_PR,
+    getCache().basicCreateRegion(PERSISTENT_CUSTOMER_PR,
         getPersistentPRAttributes(1, -1, getCache(), 113, true));
   }
 
@@ -669,7 +669,7 @@ public class DistributedTransactionDUnitTest extends JUnit4CacheTestCase {
             .setTotalNumBuckets(4).setLocalMaxMemory(1)
             .setPartitionResolver(new CustomerIDPartitionResolver("resolver1"))
             .setRedundantCopies(0).create());
-        getCache().createRegion(CUSTOMER_PR1, af.create());
+        getCache().basicCreateRegion(CUSTOMER_PR1, af.create());
         return null;
       }
     });
@@ -684,7 +684,7 @@ public class DistributedTransactionDUnitTest extends JUnit4CacheTestCase {
             .setTotalNumBuckets(4).setLocalMaxMemory(1)
             .setPartitionResolver(new CustomerIDPartitionResolver("resolver2"))
             .setRedundantCopies(0).create());
-        getCache().createRegion(CUSTOMER_PR2, af.create());
+        getCache().basicCreateRegion(CUSTOMER_PR2, af.create());
         return null;
       }
     });
@@ -699,7 +699,7 @@ public class DistributedTransactionDUnitTest extends JUnit4CacheTestCase {
             .setTotalNumBuckets(4).setLocalMaxMemory(0) // since this is an accessor
             .setPartitionResolver(new CustomerIDPartitionResolver("resolver1"))
             .setRedundantCopies(0).create());
-        getCache().createRegion(CUSTOMER_PR1, af.create());
+        getCache().basicCreateRegion(CUSTOMER_PR1, af.create());
 
         return null;
       }
@@ -713,7 +713,7 @@ public class DistributedTransactionDUnitTest extends JUnit4CacheTestCase {
             .setTotalNumBuckets(4).setLocalMaxMemory(0) // since this is an accessor
             .setPartitionResolver(new CustomerIDPartitionResolver("resolver2"))
             .setRedundantCopies(0).create());
-        getCache().createRegion(CUSTOMER_PR2, af.create());
+        getCache().basicCreateRegion(CUSTOMER_PR2, af.create());
         return null;
       }
     });
@@ -974,7 +974,7 @@ public class DistributedTransactionDUnitTest extends JUnit4CacheTestCase {
             .setTotalNumBuckets(4).setLocalMaxMemory(1)
             .setPartitionResolver(new CustomerIDPartitionResolver("resolver1"))
             .setRedundantCopies(0).create());
-        getCache().createRegion("NONCOLOCATED_PR", af.create());
+        getCache().basicCreateRegion("NONCOLOCATED_PR", af.create());
         return null;
       }
     });
@@ -1162,7 +1162,7 @@ public class DistributedTransactionDUnitTest extends JUnit4CacheTestCase {
             .setTotalNumBuckets(4).setLocalMaxMemory(1)
             .setPartitionResolver(new CustomerIDPartitionResolver("resolver1"))
             .setRedundantCopies(0).create());
-        getCache().createRegion(CUSTOMER_PR1, af.create());
+        getCache().basicCreateRegion(CUSTOMER_PR1, af.create());
         return null;
       }
     });
@@ -1177,7 +1177,7 @@ public class DistributedTransactionDUnitTest extends JUnit4CacheTestCase {
             .setTotalNumBuckets(4).setLocalMaxMemory(1)
             .setPartitionResolver(new CustomerIDPartitionResolver("resolver2"))
             .setRedundantCopies(0).create());
-        getCache().createRegion(CUSTOMER_PR2, af.create());
+        getCache().basicCreateRegion(CUSTOMER_PR2, af.create());
         return null;
       }
     });

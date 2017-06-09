@@ -117,9 +117,9 @@ public class ClearDAckDUnitTest extends JUnit4DistributedTestCase { // TODO: ref
       // DistributedSystem.setThreadsSocketPolicy(false);
       RegionAttributes attr = factory.create();
 
-      region = cache.createRegion("map", attr);
+      region = cache.createRegionFactory(attr).create("map");
       LogWriterUtils.getLogWriter().info("vm0 map region: " + region);
-      paperWork = cache.createRegion("paperWork", attr);
+      paperWork = cache.createRegionFactory(attr).create("paperWork");
       return cache.getDistributedSystem().getDistributedMember();
     } catch (CacheException ex) {
       throw new RuntimeException("createCacheVM0 exception", ex);
@@ -145,9 +145,9 @@ public class ClearDAckDUnitTest extends JUnit4DistributedTestCase { // TODO: ref
 
       RegionAttributes attr = factory.create();
 
-      region = cache.createRegion("map", attr);
+      region = cache.createRegionFactory(attr).create("map");
       LogWriterUtils.getLogWriter().info("vm1 map region: " + region);
-      paperWork = cache.createRegion("paperWork", attr);
+      paperWork = cache.createRegionFactory(attr).create("paperWork");
       return cache.getDistributedSystem().getDistributedMember();
 
     } catch (CacheException ex) {
@@ -174,9 +174,9 @@ public class ClearDAckDUnitTest extends JUnit4DistributedTestCase { // TODO: ref
 
       RegionAttributes attr = factory.create();
 
-      region = cache.createRegion("map", attr);
+      region = cache.createRegionFactory(attr).create("map");
       LogWriterUtils.getLogWriter().info("vm2 map region: " + region);
-      paperWork = cache.createRegion("paperWork", attr);
+      paperWork = cache.createRegionFactory(attr).create("paperWork");
 
       region.put("vm2Key", "vm2Value");
       region.localClear();

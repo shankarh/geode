@@ -75,7 +75,7 @@ public class LonerDMJUnitTest {
         try {
           AttributesFactory af = new AttributesFactory();
           af.setScope(Scope.GLOBAL);
-          Region r = c.createRegion("loner", af.create());
+          Region r = c.createRegionFactory(af.create()).create("loner");
           r.put("key1", "value1");
           r.get("key1");
           r.get("key2");
@@ -130,7 +130,7 @@ public class LonerDMJUnitTest {
         try {
           AttributesFactory af = new AttributesFactory();
           af.setScope(Scope.GLOBAL);
-          Region r = c.createRegion("loner", af.create());
+          Region r = c.createRegionFactory(af.create()).create("loner");
           r.put("key1", "value1");
           r.get("key1");
           r.get("key2");

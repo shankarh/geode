@@ -86,7 +86,7 @@ public class DiskOldAPIsJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setDiskWriteAttributes(dwaf.create());
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    Region r = cache.createRegion("r", af.create());
+    Region r = cache.createRegionFactory(af.create()).create("r");
     assertEquals(true, r.getAttributes().isDiskSynchronous());
     if (destroyRegion) {
       r.localDestroyRegion();
@@ -96,7 +96,7 @@ public class DiskOldAPIsJUnitTest {
 
     dwaf.setSynchronous(false);
     af.setDiskWriteAttributes(dwaf.create());
-    r = cache.createRegion("r", af.create());
+    r = cache.createRegionFactory(af.create()).create("r");
     assertEquals(false, r.getAttributes().isDiskSynchronous());
     if (destroyRegion) {
       r.localDestroyRegion();
@@ -108,7 +108,7 @@ public class DiskOldAPIsJUnitTest {
     dwaf.setSynchronous(true);
     af.setDiskWriteAttributes(dwaf.create());
     af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
-    r = cache.createRegion("r2", af.create());
+    r = cache.createRegionFactory(af.create()).create("r2");
     assertEquals(true, r.getAttributes().isDiskSynchronous());
     r.put("key", "value");
     {
@@ -129,7 +129,7 @@ public class DiskOldAPIsJUnitTest {
     dwaf.setSynchronous(false);
     af.setDiskWriteAttributes(dwaf.create());
     af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
-    r = cache.createRegion("r2", af.create());
+    r = cache.createRegionFactory(af.create()).create("r2");
     assertEquals(false, r.getAttributes().isDiskSynchronous());
     r.put("key", "value");
     {
@@ -153,7 +153,7 @@ public class DiskOldAPIsJUnitTest {
     af.setDataPolicy(DataPolicy.PARTITION);
     af.setEvictionAttributes(
         EvictionAttributes.createLRUEntryAttributes(1, EvictionAction.OVERFLOW_TO_DISK));
-    r = cache.createRegion("r3", af.create());
+    r = cache.createRegionFactory(af.create()).create("r3");
     assertEquals(true, r.getAttributes().isDiskSynchronous());
     {
       for (int i = 0; i < 300; i++) {
@@ -178,7 +178,7 @@ public class DiskOldAPIsJUnitTest {
     af.setDataPolicy(DataPolicy.PARTITION);
     af.setEvictionAttributes(
         EvictionAttributes.createLRUEntryAttributes(1, EvictionAction.OVERFLOW_TO_DISK));
-    r = cache.createRegion("r3", af.create());
+    r = cache.createRegionFactory(af.create()).create("r3");
     assertEquals(false, r.getAttributes().isDiskSynchronous());
     {
       for (int i = 0; i < 300; i++) {
@@ -212,7 +212,7 @@ public class DiskOldAPIsJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setDiskWriteAttributes(dwaf.create());
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    Region r = cache.createRegion("r", af.create());
+    Region r = cache.createRegionFactory(af.create()).create("r");
     {
       LocalRegion lr = (LocalRegion) r;
       DiskStoreImpl ds = lr.getDiskStore();
@@ -226,7 +226,7 @@ public class DiskOldAPIsJUnitTest {
     // now try it with a pr
     af.setDiskWriteAttributes(dwaf.create());
     af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
-    r = cache.createRegion("r", af.create());
+    r = cache.createRegionFactory(af.create()).create("r");
     {
       LocalRegion lr = (LocalRegion) r;
       DiskStoreImpl ds = lr.getDiskStore();
@@ -262,7 +262,7 @@ public class DiskOldAPIsJUnitTest {
     AttributesFactory af = new AttributesFactory();
     af.setDiskWriteAttributes(dwaf.create());
     af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-    Region r = cache.createRegion("r", af.create());
+    Region r = cache.createRegionFactory(af.create()).create("r");
     {
       LocalRegion lr = (LocalRegion) r;
       DiskStoreImpl ds = lr.getDiskStore();
@@ -275,7 +275,7 @@ public class DiskOldAPIsJUnitTest {
     // now try it with a pr
     af.setDiskWriteAttributes(dwaf.create());
     af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
-    r = cache.createRegion("r", af.create());
+    r = cache.createRegionFactory(af.create()).create("r");
     {
       LocalRegion lr = (LocalRegion) r;
       DiskStoreImpl ds = lr.getDiskStore();
@@ -313,7 +313,7 @@ public class DiskOldAPIsJUnitTest {
       AttributesFactory af = new AttributesFactory();
       af.setDiskDirs(new File[] {f1, f2});
       af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-      Region r = cache.createRegion("r", af.create());
+      Region r = cache.createRegionFactory(af.create()).create("r");
       {
         LocalRegion lr = (LocalRegion) r;
         DiskStoreImpl ds = lr.getDiskStore();
@@ -326,7 +326,7 @@ public class DiskOldAPIsJUnitTest {
 
       // now try it with a pr
       af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
-      r = cache.createRegion("r", af.create());
+      r = cache.createRegionFactory(af.create()).create("r");
       {
         LocalRegion lr = (LocalRegion) r;
         DiskStoreImpl ds = lr.getDiskStore();
@@ -371,7 +371,7 @@ public class DiskOldAPIsJUnitTest {
       AttributesFactory af = new AttributesFactory();
       af.setDiskDirsAndSizes(new File[] {f1, f2}, new int[] {1, 2});
       af.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
-      Region r = cache.createRegion("r", af.create());
+      Region r = cache.createRegionFactory(af.create()).create("r");
       {
         LocalRegion lr = (LocalRegion) r;
         DiskStoreImpl ds = lr.getDiskStore();
@@ -388,7 +388,7 @@ public class DiskOldAPIsJUnitTest {
 
       // now try it with a pr
       af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
-      r = cache.createRegion("r", af.create());
+      r = cache.createRegionFactory(af.create()).create("r");
       {
         LocalRegion lr = (LocalRegion) r;
         DiskStoreImpl ds = lr.getDiskStore();

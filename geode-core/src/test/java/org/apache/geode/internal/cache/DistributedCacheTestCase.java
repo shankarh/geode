@@ -90,7 +90,7 @@ public abstract class DistributedCacheTestCase extends JUnit4DistributedTestCase
 
     AttributesFactory factory = new AttributesFactory();
     factory.setScope(Scope.DISTRIBUTED_NO_ACK);
-    cache.createRegion("root", factory.create());
+    cache.createRegionFactory(factory.create()).create("root");
   }
 
   /**

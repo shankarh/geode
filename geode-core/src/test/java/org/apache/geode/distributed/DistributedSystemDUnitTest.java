@@ -203,7 +203,8 @@ public class DistributedSystemDUnitTest extends JUnit4DistributedTestCase {
 
     // make sure isolated distributed system can still create a cache and region
     Cache cache = CacheFactory.create(system);
-    Region region = cache.createRegion(getUniqueName(), new AttributesFactory().create());
+    Region region =
+        cache.createRegionFactory(new AttributesFactory().create()).create(getUniqueName());
     region.put("test", "value");
 
     assertThat(region.get("test")).isEqualTo("value");

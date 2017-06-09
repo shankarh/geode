@@ -80,7 +80,7 @@ public class PartitionedRegionDestroyDUnitTest extends PartitionedRegionDUnitTes
       public void run2() throws CacheException {
         Cache cache = getCache();
         for (int i = 0; i < MAX_REGIONS; i++) {
-          cache.createRegion(PR_PREFIX + i, createRegionAttrsForPR(0, 200));
+          cache.createRegionFactory(createRegionAttrsForPR(0, 200)).create(PR_PREFIX + i);
         }
         LogWriterUtils.getLogWriter()
             .info("Successfully created " + MAX_REGIONS + " PartitionedRegions.");

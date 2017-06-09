@@ -310,7 +310,7 @@ public class HAConflationDUnitTest extends JUnit4CacheTestCase {
       factory.setCacheListener(clientListener);
     }
     RegionAttributes attrs = factory.create();
-    basicGetCache().createRegion(regionName, attrs);
+    basicGetCache().createRegionFactory(attrs).create(regionName);
     Region region = basicGetCache().getRegion(Region.SEPARATOR + regionName);
     assertNotNull(region);
 
@@ -334,7 +334,7 @@ public class HAConflationDUnitTest extends JUnit4CacheTestCase {
       factory.setCacheListener(serverListener);
     }
     RegionAttributes attrs = factory.create();
-    basicGetCache().createRegion(regionName, attrs);
+    basicGetCache().createRegionFactory(attrs).create(regionName);
     CacheServerImpl server = (CacheServerImpl) basicGetCache().addCacheServer();
     assertNotNull(server);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);

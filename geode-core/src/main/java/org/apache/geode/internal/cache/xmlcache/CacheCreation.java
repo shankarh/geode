@@ -978,13 +978,11 @@ public class CacheCreation implements InternalCache {
     throw new UnsupportedOperationException(LocalizedStrings.SHOULDNT_INVOKE.toLocalizedString());
   }
 
-  @Override
   public Region createVMRegion(String name, RegionAttributes aRegionAttributes)
       throws RegionExistsException, TimeoutException {
     return createRegion(name, aRegionAttributes);
   }
 
-  @Override
   public Region createRegion(String name, RegionAttributes aRegionAttributes)
       throws RegionExistsException, TimeoutException {
     if (aRegionAttributes instanceof RegionAttributesCreation) {

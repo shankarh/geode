@@ -121,7 +121,7 @@ public class LIFOEvictionAlgoMemoryEnabledRegionJUnitTest {
         .createLIFOMemoryAttributes(maximumMegabytes, EvictionAction.OVERFLOW_TO_DISK));
     RegionAttributes attr = factory.create();
 
-    ((GemFireCacheImpl) cache).createRegion(regionName, attr);
+    ((GemFireCacheImpl) cache).basicCreateRegion(regionName, attr);
     /*
      * NewLIFOClockHand extends NewLRUClockHand to hold on to the list reference
      */

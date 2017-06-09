@@ -97,7 +97,7 @@ public class TypedIteratorJUnitTest {
     // attributesFactory.setValueConstraint(Portfolio.class);
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    region = cache.createRegion("pos", regionAttributes);
+    region = cache.createRegionFactory(regionAttributes).create("pos");
     region.put("0", new Portfolio(0));
     region.put("1", new Portfolio(1));
     region.put("2", new Portfolio(2));

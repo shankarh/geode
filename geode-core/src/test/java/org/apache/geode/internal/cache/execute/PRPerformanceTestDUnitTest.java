@@ -120,7 +120,7 @@ public class PRPerformanceTestDUnitTest extends PartitionedRegionDUnitTestCase {
           PartitionAttributes prAttr = paf.create();
           attr.setPartitionAttributes(prAttr);
           RegionAttributes regionAttribs = attr.create();
-          cache.createRegion("PR1", regionAttribs);
+          cache.createRegionFactory(regionAttribs).create("PR1");
           PerformanceTestFunction function = new PerformanceTestFunction();
           FunctionService.registerFunction(function);
         }
@@ -140,7 +140,7 @@ public class PRPerformanceTestDUnitTest extends PartitionedRegionDUnitTestCase {
 
           attr.setPartitionAttributes(prAttr);
           RegionAttributes regionAttribs = attr.create();
-          cache.createRegion("PR1", regionAttribs);
+          cache.createRegionFactory(regionAttribs).create("PR1");
 
         }
       };

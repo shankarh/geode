@@ -1812,7 +1812,7 @@ public class MemoryThresholdsDUnitTest extends ClientServerTestCase {
 
           public void close() {}
         });
-        Region<Integer, String> r = getCache().createRegion(rName, af.create());
+        Region<Integer, String> r = getCache().basicCreateRegion(rName, af.create());
 
         assertFalse(hmm.getState().isCritical());
         int expectedInvocations = 0;
@@ -1952,7 +1952,7 @@ public class MemoryThresholdsDUnitTest extends ClientServerTestCase {
             AttributesFactory<Integer, String> af = new AttributesFactory<Integer, String>();
             af.setScope(Scope.DISTRIBUTED_ACK);
             af.setDataPolicy(DataPolicy.REPLICATE);
-            getCache().createRegion(rName, af.create());
+            getCache().basicCreateRegion(rName, af.create());
           }
         };
     replicate1.invoke(createRegion);
@@ -2346,7 +2346,7 @@ public class MemoryThresholdsDUnitTest extends ClientServerTestCase {
         } else {
           af.setPartitionAttributes(new PartitionAttributesFactory().setLocalMaxMemory(0).create());
         }
-        getCache().createRegion(rName, af.create());
+        getCache().basicCreateRegion(rName, af.create());
       }
     };
   }

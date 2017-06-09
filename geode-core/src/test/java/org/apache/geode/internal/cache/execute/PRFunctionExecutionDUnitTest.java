@@ -128,7 +128,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
         pa.setAll(ra.getPartitionAttributes());
         raf.setPartitionAttributes(pa);
 
-        Region pr = cache.createRegion(rName, raf.create());
+        Region pr = cache.createRegionFactory(raf.create()).create(rName);
 
         final String testKey = "execKey";
         final Set testKeysSet = new HashSet();
@@ -162,7 +162,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
         pa.setAll(ra.getPartitionAttributes());
         raf.setPartitionAttributes(pa);
 
-        Region pr = getCache().createRegion(rName, raf.create());
+        Region pr = getCache().basicCreateRegion(rName, raf.create());
         final String testKey = "execKey";
         final Set testKeysSet = new HashSet();
         testKeysSet.add(testKey);
@@ -206,7 +206,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
       public Object call() throws Exception {
         RegionAttributes ra = PartitionedRegionTestHelper.createRegionAttrsForPR(0, 0);
 
-        getCache().createRegion(rName, ra);
+        getCache().basicCreateRegion(rName, ra);
         return Boolean.TRUE;
       }
     });
@@ -220,7 +220,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
         pa.setAll(ra.getPartitionAttributes());
         raf.setPartitionAttributes(pa);
 
-        getCache().createRegion(rName, raf.create());
+        getCache().basicCreateRegion(rName, raf.create());
         Function function = new TestFunction(true, TEST_FUNCTION2);
         FunctionService.registerFunction(function);
         return Boolean.TRUE;
@@ -288,7 +288,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
         pa.setAll(ra.getPartitionAttributes());
         raf.setPartitionAttributes(pa);
 
-        Region pr = getCache().createRegion(rName, raf.create());
+        Region pr = getCache().basicCreateRegion(rName, raf.create());
         final String testKey = "execKey";
         final Set testKeysSet = new HashSet();
         testKeysSet.add(testKey);
@@ -330,7 +330,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
       public Object call() throws Exception {
         RegionAttributes ra = PartitionedRegionTestHelper.createRegionAttrsForPR(0, 0);
 
-        getCache().createRegion(rName, ra);
+        getCache().basicCreateRegion(rName, ra);
         return Boolean.TRUE;
       }
     });
@@ -343,7 +343,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
         PartitionAttributesImpl pa = new PartitionAttributesImpl();
         pa.setAll(ra.getPartitionAttributes());
         raf.setPartitionAttributes(pa);
-        getCache().createRegion(rName, raf.create());
+        getCache().basicCreateRegion(rName, raf.create());
         Function function = new TestFunction(true, TestFunction.TEST_FUNCTION_REEXECUTE_EXCEPTION);
         FunctionService.registerFunction(function);
         return Boolean.TRUE;
@@ -390,7 +390,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
       public Object call() throws Exception {
         RegionAttributes ra = PartitionedRegionTestHelper.createRegionAttrsForPR(0, 0);
 
-        getCache().createRegion(rName, ra);
+        getCache().basicCreateRegion(rName, ra);
         return Boolean.TRUE;
       }
     });
@@ -404,7 +404,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
         pa.setAll(ra.getPartitionAttributes());
         raf.setPartitionAttributes(pa);
 
-        getCache().createRegion(rName, raf.create());
+        getCache().basicCreateRegion(rName, raf.create());
         Function function = new TestFunction(true, TEST_FUNCTION2);
         FunctionService.registerFunction(function);
         return Boolean.TRUE;
@@ -469,7 +469,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
       public Object call() throws Exception {
         RegionAttributes ra = PartitionedRegionTestHelper.createRegionAttrsForPR(0, 0);
 
-        getCache().createRegion(rName, ra);
+        getCache().basicCreateRegion(rName, ra);
         return Boolean.TRUE;
       }
     });
@@ -483,7 +483,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
         pa.setAll(ra.getPartitionAttributes());
         raf.setPartitionAttributes(pa);
 
-        getCache().createRegion(rName, raf.create());
+        getCache().basicCreateRegion(rName, raf.create());
         return Boolean.TRUE;
       }
     });
@@ -542,7 +542,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
     accessor.invoke(new SerializableCallable("Create PR") {
       public Object call() throws Exception {
         RegionAttributes ra = PartitionedRegionTestHelper.createRegionAttrsForPR(0, 0);
-        getCache().createRegion(rName, ra);
+        getCache().basicCreateRegion(rName, ra);
         return Boolean.TRUE;
       }
     });
@@ -555,7 +555,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             PartitionAttributesImpl pa = new PartitionAttributesImpl();
             pa.setAll(ra.getPartitionAttributes());
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             Function function = new TestFunction(true, TEST_FUNCTION2);
             FunctionService.registerFunction(function);
             return Boolean.TRUE;
@@ -642,7 +642,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
         factory.setDataPolicy(DataPolicy.PARTITION);
         factory.setPartitionAttributes(partitionAttributes);
         RegionAttributes attrs = factory.create();
-        getCache().createRegion(rName, attrs);
+        getCache().basicCreateRegion(rName, attrs);
         return Boolean.TRUE;
       }
     });
@@ -660,7 +660,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             factory.setDataPolicy(DataPolicy.PARTITION);
             factory.setPartitionAttributes(partitionAttributes);
             RegionAttributes attrs = factory.create();
-            getCache().createRegion(rName, attrs);
+            getCache().basicCreateRegion(rName, attrs);
             Function function = new TestFunction(true, TestFunction.TEST_FUNCTION_LASTRESULT);
             FunctionService.registerFunction(function);
             return Boolean.TRUE;
@@ -722,7 +722,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             factory.setDataPolicy(DataPolicy.PARTITION);
             factory.setPartitionAttributes(partitionAttributes);
             RegionAttributes attrs = factory.create();
-            getCache().createRegion(rName, attrs);
+            getCache().basicCreateRegion(rName, attrs);
             Function function = new TestFunction(true, TestFunction.TEST_FUNCTION_LASTRESULT);
             FunctionService.registerFunction(function);
             return Boolean.TRUE;
@@ -781,7 +781,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
     accessor.invoke(new SerializableCallable("Create PR") {
       public Object call() throws Exception {
         RegionAttributes ra = PartitionedRegionTestHelper.createRegionAttrsForPR(0, 0);
-        getCache().createRegion(rName, ra);
+        getCache().basicCreateRegion(rName, ra);
         return Boolean.TRUE;
       }
     });
@@ -794,7 +794,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             PartitionAttributesImpl pa = new PartitionAttributesImpl();
             pa.setAll(ra.getPartitionAttributes());
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             Function function =
                 new TestFunction(true, TestFunction.TEST_FUNCTION_REEXECUTE_EXCEPTION);
             FunctionService.registerFunction(function);
@@ -852,7 +852,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
       public Object call() throws Exception {
         cache = getCache();
         RegionAttributes ra = PartitionedRegionTestHelper.createRegionAttrsForPR(1, 0);
-        cache.createRegion(rName, ra);
+        cache.createRegionFactory(ra).create(rName);
         regionName = rName;
         return Boolean.TRUE;
       }
@@ -866,7 +866,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             PartitionAttributesImpl pa = new PartitionAttributesImpl();
             pa.setAll(ra.getPartitionAttributes());
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             Function function = new TestFunction(true, TestFunction.TEST_FUNCTION_HA);
             FunctionService.registerFunction(function);
             return Boolean.TRUE;
@@ -946,7 +946,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
       public Object call() throws Exception {
         cache = getCache();
         RegionAttributes ra = PartitionedRegionTestHelper.createRegionAttrsForPR(1, 0);
-        cache.createRegion(rName, ra);
+        cache.createRegionFactory(ra).create(rName);
         regionName = rName;
         return Boolean.TRUE;
       }
@@ -960,7 +960,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             PartitionAttributesImpl pa = new PartitionAttributesImpl();
             pa.setAll(ra.getPartitionAttributes());
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             Function function = new TestFunction(true, TestFunction.TEST_FUNCTION_HA);
             FunctionService.registerFunction(function);
             return Boolean.TRUE;
@@ -1059,7 +1059,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
     accessor.invoke(new SerializableCallable("Create PR") {
       public Object call() throws Exception {
         RegionAttributes ra = PartitionedRegionTestHelper.createRegionAttrsForPR(0, 0);
-        getCache().createRegion(rName, ra);
+        getCache().basicCreateRegion(rName, ra);
         return Boolean.TRUE;
       }
     });
@@ -1072,7 +1072,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             PartitionAttributesImpl pa = new PartitionAttributesImpl();
             pa.setAll(ra.getPartitionAttributes());
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             return Boolean.TRUE;
           }
         };
@@ -1144,7 +1144,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
     accessor.invoke(new SerializableCallable("Create PR") {
       public Object call() throws Exception {
         RegionAttributes ra = PartitionedRegionTestHelper.createRegionAttrsForPR(0, 0);
-        getCache().createRegion(rName, ra);
+        getCache().basicCreateRegion(rName, ra);
         return Boolean.TRUE;
       }
     });
@@ -1157,7 +1157,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             PartitionAttributesImpl pa = new PartitionAttributesImpl();
             pa.setAll(ra.getPartitionAttributes());
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             Function function = new TestFunction(true, TEST_FUNCTION2);
             FunctionService.registerFunction(function);
             return Boolean.TRUE;
@@ -1214,7 +1214,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
     accessor.invoke(new SerializableCallable("Create PR") {
       public Object call() throws Exception {
         RegionAttributes ra = PartitionedRegionTestHelper.createRegionAttrsForPR(0, 0);
-        getCache().createRegion(rName, ra);
+        getCache().basicCreateRegion(rName, ra);
         return Boolean.TRUE;
       }
     });
@@ -1227,7 +1227,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             PartitionAttributesImpl pa = new PartitionAttributesImpl();
             pa.setAll(ra.getPartitionAttributes());
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             Function function = new TestFunction(false, TEST_FUNCTION7);
             FunctionService.registerFunction(function);
             return Boolean.TRUE;
@@ -1290,7 +1290,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
     accessor.invoke(new SerializableCallable("Create PR") {
       public Object call() throws Exception {
         RegionAttributes ra = PartitionedRegionTestHelper.createRegionAttrsForPR(0, 0);
-        getCache().createRegion(rName, ra);
+        getCache().basicCreateRegion(rName, ra);
         return Boolean.TRUE;
       }
     });
@@ -1303,7 +1303,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             PartitionAttributesImpl pa = new PartitionAttributesImpl();
             pa.setAll(ra.getPartitionAttributes());
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             Function function = new TestFunction(true, TEST_FUNCTION2);
             FunctionService.registerFunction(function);
             return Boolean.TRUE;
@@ -1361,7 +1361,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
     accessor.invoke(new SerializableCallable("Create PR") {
       public Object call() throws Exception {
         RegionAttributes ra = PartitionedRegionTestHelper.createRegionAttrsForPR(0, 0);
-        getCache().createRegion(rName, ra);
+        getCache().basicCreateRegion(rName, ra);
         return Boolean.TRUE;
       }
     });
@@ -1374,7 +1374,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             PartitionAttributesImpl pa = new PartitionAttributesImpl();
             pa.setAll(ra.getPartitionAttributes());
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             Function function = new TestFunction(false, TEST_FUNCTION7);
             FunctionService.registerFunction(function);
             return Boolean.TRUE;
@@ -1436,7 +1436,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
     accessor.invoke(new SerializableCallable("Create PR") {
       public Object call() throws Exception {
         RegionAttributes ra = PartitionedRegionTestHelper.createRegionAttrsForPR(0, 0);
-        getCache().createRegion(rName, ra);
+        getCache().basicCreateRegion(rName, ra);
         return Boolean.TRUE;
       }
     });
@@ -1449,7 +1449,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             PartitionAttributesImpl pa = new PartitionAttributesImpl();
             pa.setAll(ra.getPartitionAttributes());
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             Function function = new TestFunction(true, TEST_FUNCTION2);
             FunctionService.registerFunction(function);
             return Boolean.TRUE;
@@ -1537,7 +1537,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
       public Object call() throws Exception {
         PartitionResolver resolver = new BucketFilterPRResolver();
         RegionAttributes ra = PartitionedRegionTestHelper.createRegionAttrsForPR(0, 0, resolver);
-        getCache().createRegion(rName, ra);
+        getCache().basicCreateRegion(rName, ra);
         return Boolean.TRUE;
       }
     });
@@ -1552,7 +1552,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             PartitionAttributesImpl pa = new PartitionAttributesImpl();
             pa.setAll(ra.getPartitionAttributes());
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             Function function = new TestFunction(true, TestFunction.TEST_FUNCTION_BUCKET_FILTER);
             FunctionService.registerFunction(function);
             return Boolean.TRUE;
@@ -1661,7 +1661,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
       public Object call() throws Exception {
         PartitionResolver resolver = new BucketFilterPRResolver();
         RegionAttributes ra = PartitionedRegionTestHelper.createRegionAttrsForPR(0, 0, resolver);
-        getCache().createRegion(rName, ra);
+        getCache().basicCreateRegion(rName, ra);
         return Boolean.TRUE;
       }
     });
@@ -1676,7 +1676,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             PartitionAttributesImpl pa = new PartitionAttributesImpl();
             pa.setAll(ra.getPartitionAttributes());
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             Function function = new TestFunction(true, TestFunction.TEST_FUNCTION_BUCKET_FILTER);
             FunctionService.registerFunction(function);
             return Boolean.TRUE;
@@ -1745,7 +1745,8 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
         PartitionAttributesImpl pa = new PartitionAttributesImpl();
         pa.setAll(ra.getPartitionAttributes());
         raf.setPartitionAttributes(pa);
-        PartitionedRegion pr = (PartitionedRegion) getCache().createRegion(rName, raf.create());
+        PartitionedRegion pr =
+            (PartitionedRegion) getCache().basicCreateRegion(rName, raf.create());
         final String testKey = "execKey";
         DistributedSystem.setThreadsSocketPolicy(false);
         // Function function = new TestFunction(true,"TestFunction2");
@@ -1820,7 +1821,8 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
         PartitionAttributesImpl pa = new PartitionAttributesImpl();
         pa.setAll(ra.getPartitionAttributes());
         raf.setPartitionAttributes(pa);
-        PartitionedRegion pr = (PartitionedRegion) getCache().createRegion(rName, raf.create());
+        PartitionedRegion pr =
+            (PartitionedRegion) getCache().basicCreateRegion(rName, raf.create());
         final String testKey = "execKey";
         DistributedSystem.setThreadsSocketPolicy(false);
         // Function function = new TestFunction(true,"TestFunction2");
@@ -1901,7 +1903,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             pa.setAll(ra.getPartitionAttributes());
             pa.setTotalNumBuckets(17);
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             Function function = new TestFunction(true, TEST_FUNCTION2);
             FunctionService.registerFunction(function);
             return Boolean.TRUE;
@@ -1978,7 +1980,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             pa.setAll(ra.getPartitionAttributes());
             pa.setTotalNumBuckets(17);
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             Function function = new TestFunction(true, TestFunction.TEST_FUNCTION2);
             FunctionService.registerFunction(function);
             return Boolean.TRUE;
@@ -2054,7 +2056,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             pa.setAll(ra.getPartitionAttributes());
             pa.setTotalNumBuckets(17);
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             // Function function = new TestFunction(true,"TestFunction2");
             Function function = new TestFunction(true, TestFunction.TEST_FUNCTION2);
             FunctionService.registerFunction(function);
@@ -2124,7 +2126,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
         pa.setTotalNumBuckets(17);
         raf.setPartitionAttributes(pa);
 
-        getCache().createRegion(rName, raf.create());
+        getCache().basicCreateRegion(rName, raf.create());
         return Boolean.TRUE;
       }
     });
@@ -2138,7 +2140,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             pa.setAll(ra.getPartitionAttributes());
             pa.setTotalNumBuckets(17);
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             // Function function = new TestFunction(true,"TestFunction2");
             Function function = new TestFunction(true, TestFunction.TEST_FUNCTION2);
             FunctionService.registerFunction(function);
@@ -2204,7 +2206,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             pa.setAll(ra.getPartitionAttributes());
             pa.setTotalNumBuckets(17);
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             return Boolean.TRUE;
           }
         };
@@ -2284,7 +2286,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             pa.setAll(ra.getPartitionAttributes());
             pa.setTotalNumBuckets(17);
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             FunctionService.registerFunction(new FunctionAdapter() {
               @Override
               public void execute(FunctionContext context) {
@@ -2390,7 +2392,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             pa.setTotalNumBuckets(17);
             pa.setPartitionResolver(new CustomerIDPartitionResolver("CustomerIDPartitionResolver"));
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             Function function = new TestFunction(true, TestFunction.TEST_FUNCTION3);
             FunctionService.registerFunction(function);
             return Boolean.TRUE;
@@ -2469,7 +2471,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             pa.setTotalNumBuckets(17);
             pa.setPartitionResolver(new CustomerIDPartitionResolver("CustomerIDPartitionResolver"));
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName1, raf.create());
+            getCache().basicCreateRegion(rName1, raf.create());
             Function function = new TestFunction(true, TestFunction.TEST_FUNCTION3);
             FunctionService.registerFunction(function);
 
@@ -2488,7 +2490,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
             pa.setPartitionResolver(new CustomerIDPartitionResolver("CustomerIDPartitionResolver"));
             pa.setColocatedWith(rName1);
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName2, raf.create());
+            getCache().basicCreateRegion(rName2, raf.create());
             return Boolean.TRUE;
           }
         };
@@ -2586,7 +2588,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
         new SerializableCallable("Create datastore for " + rName) {
           public Object call() throws Exception {
             RegionAttributes ra = PartitionedRegionTestHelper.createRegionAttrsForPR(0, 10);
-            getCache().createRegion(rName, ra);
+            getCache().basicCreateRegion(rName, ra);
             return Boolean.TRUE;
           }
         };
@@ -2596,7 +2598,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
     accessor.invoke(new SerializableCallable("Create accessor for " + rName + ", create buckets") {
       public Object call() throws Exception {
         RegionAttributes ra = PartitionedRegionTestHelper.createRegionAttrsForPR(0, 0);
-        Region pr = getCache().createRegion(rName, ra);
+        Region pr = getCache().basicCreateRegion(rName, ra);
         // Assuming that bucket balancing will create a single bucket (per key)
         // in different datastores
         pr.put(key1, key1);
@@ -2817,7 +2819,7 @@ public class PRFunctionExecutionDUnitTest extends PartitionedRegionDUnitTestCase
     AttributesFactory factory = new AttributesFactory();
     factory.setDataPolicy(DataPolicy.PARTITION);
     assertNotNull(cache);
-    Region region = cache.createRegion("PartitonedRegion", factory.create());
+    Region region = cache.createRegionFactory(factory.create()).create("PartitonedRegion");
     for (int i = 0; i < 20; i++) {
       region.put("KEY_" + i, "VALUE_" + i);
     }

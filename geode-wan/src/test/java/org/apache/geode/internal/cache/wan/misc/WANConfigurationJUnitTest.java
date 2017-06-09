@@ -132,7 +132,7 @@ public class WANConfigurationJUnitTest {
     senderIds.add("ny");
     Set<String> attrsSenderIds = attrs.getGatewaySenderIds();
     assertEquals(senderIds, attrsSenderIds);
-    Region r = cache.createRegion("Customer", attrs);
+    Region r = cache.createRegionFactory(attrs).create("Customer");
     assertEquals(senderIds, ((LocalRegion) r).getGatewaySenderIds());
   }
 

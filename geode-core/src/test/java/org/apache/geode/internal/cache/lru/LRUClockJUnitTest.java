@@ -507,7 +507,7 @@ public class LRUClockJUnitTest {
     AttributesFactory af = new AttributesFactory();
     Region root = c.getRegion("root");
     if (root == null) {
-      root = c.createRegion("root", af.create());
+      root = c.createRegionFactory(af.create()).create("root");
     }
     Region sub = root.createSubregion(testName.getMethodName(), af.create());
     return sub;

@@ -120,9 +120,9 @@ public class MultiRegionIndexUsageJUnitTest {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setValueConstraint(Country.class);
 
-    region1 = cache.createRegion("Countries1", factory.create());
-    region2 = cache.createRegion("Countries2", factory.create());
-    region3 = cache.createRegion("Countries3", factory.create());
+    region1 = cache.createRegionFactory(factory.create()).create("Countries1");
+    region2 = cache.createRegionFactory(factory.create()).create("Countries2");
+    region3 = cache.createRegionFactory(factory.create()).create("Countries3");
 
     populateData();
   }// end of setUp

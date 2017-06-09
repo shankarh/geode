@@ -165,7 +165,7 @@ public class CacheServerTestUtil extends JUnit4DistributedTestCase {
       factory.addCacheListener(new ControlListener());
     }
     RegionAttributes attrs = factory.create();
-    cache.createRegion(regionName, attrs);
+    cache.createRegionFactory(attrs).create(regionName);
     pool = p;
   }
 
@@ -190,8 +190,8 @@ public class CacheServerTestUtil extends JUnit4DistributedTestCase {
     factory.setScope(Scope.LOCAL);
     factory.setPoolName(p.getName());
     RegionAttributes attrs = factory.create();
-    cache.createRegion(regionName1, attrs);
-    cache.createRegion(regionName2, attrs);
+    cache.createRegionFactory(attrs).create(regionName1);
+    cache.createRegionFactory(attrs).create(regionName2);
     pool = p;
   }
 
@@ -281,14 +281,14 @@ public class CacheServerTestUtil extends JUnit4DistributedTestCase {
     AttributesFactory factory1 = new AttributesFactory();
     factory1.setScope(Scope.LOCAL);
     factory1.setPoolName(p.getName());
-    cache.createRegion(regionName1, factory1.create());
+    cache.createRegionFactory(factory1.create()).create(regionName1);
 
     // Initialize region2
     p = pf.create("CacheServerTestUtil2");
     AttributesFactory factory2 = new AttributesFactory();
     factory2.setScope(Scope.LOCAL);
     factory2.setPoolName(p.getName());
-    cache.createRegion(regionName2, factory2.create());
+    cache.createRegionFactory(factory2.create()).create(regionName2);
   }
 
   private static Properties getClientProperties() {
@@ -316,7 +316,7 @@ public class CacheServerTestUtil extends JUnit4DistributedTestCase {
     factory.setEnableBridgeConflation(true);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(regionName, attrs);
+    cache.createRegionFactory(attrs).create(regionName);
     CacheServer server1 = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server1.setPort(port);
@@ -336,7 +336,7 @@ public class CacheServerTestUtil extends JUnit4DistributedTestCase {
     factory.setEnableBridgeConflation(true);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(regionName, attrs);
+    cache.createRegionFactory(attrs).create(regionName);
     CacheServer server1 = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server1.setPort(port);
@@ -356,7 +356,7 @@ public class CacheServerTestUtil extends JUnit4DistributedTestCase {
     factory.setEnableBridgeConflation(true);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(regionName, attrs);
+    cache.createRegionFactory(attrs).create(regionName);
     CacheServer server = cache.addCacheServer();
     server.setPort(serverPort.intValue());
     server.setNotifyBySubscription(notifyBySubscription.booleanValue());
@@ -372,10 +372,10 @@ public class CacheServerTestUtil extends JUnit4DistributedTestCase {
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
     if (!regionName1.equals("")) {
-      cache.createRegion(regionName1, attrs);
+      cache.createRegionFactory(attrs).create(regionName1);
     }
     if (!regionName2.equals("")) {
-      cache.createRegion(regionName2, attrs);
+      cache.createRegionFactory(attrs).create(regionName2);
     }
     CacheServer server1 = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);

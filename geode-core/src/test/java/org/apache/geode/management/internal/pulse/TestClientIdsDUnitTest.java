@@ -104,7 +104,7 @@ public class TestClientIdsDUnitTest implements Serializable {
     factory.setDataPolicy(DataPolicy.REPLICATE);
 
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
     CacheServer cacheServer = cache.addCacheServer();
     cacheServer.setPort(0);

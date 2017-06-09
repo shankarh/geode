@@ -117,7 +117,7 @@ public class PartitionedRegionRedundancyZoneDUnitTest extends JUnit4CacheTestCas
         paf.setRedundantCopies(1);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
         return cache.getDistributedSystem().getDistributedMember();
       }
     };

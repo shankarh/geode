@@ -309,7 +309,7 @@ public class ClientInterestNotifyDUnitTest extends JUnit4DistributedTestCase {
     createPool2(host, factory, port);
     factory.setCacheListener(test.new EventListener(name + REGION_NAME1));
     RegionAttributes attrs = factory.create();
-    cacheClient.createRegion(REGION_NAME1, attrs);
+    cacheClient.createRegionFactory(attrs).create(REGION_NAME1);
 
     factory = new AttributesFactory();
     factory.setScope(Scope.LOCAL);
@@ -317,7 +317,7 @@ public class ClientInterestNotifyDUnitTest extends JUnit4DistributedTestCase {
     createPool2(host, factory, port);
     factory.setCacheListener(test.new EventListener(name + REGION_NAME2));
     attrs = factory.create();
-    cacheClient.createRegion(REGION_NAME2, attrs);
+    cacheClient.createRegionFactory(attrs).create(REGION_NAME2);
 
     factory = new AttributesFactory();
     factory.setScope(Scope.LOCAL);
@@ -325,7 +325,7 @@ public class ClientInterestNotifyDUnitTest extends JUnit4DistributedTestCase {
     createPool2(host, factory, port);
     factory.setCacheListener(test.new EventListener(name + REGION_NAME3));
     attrs = factory.create();
-    cacheClient.createRegion(REGION_NAME3, attrs);
+    cacheClient.createRegionFactory(attrs).create(REGION_NAME3);
   }
 
   public static void createClientCacheFeeder(String host, Integer port) throws Exception {
@@ -337,9 +337,9 @@ public class ClientInterestNotifyDUnitTest extends JUnit4DistributedTestCase {
     factory.setConcurrencyChecksEnabled(false);
     createPool2(host, factory, port);
     RegionAttributes attrs = factory.create();
-    cacheFeeder.createRegion(REGION_NAME1, attrs);
-    cacheFeeder.createRegion(REGION_NAME2, attrs);
-    cacheFeeder.createRegion(REGION_NAME3, attrs);
+    cacheFeeder.createRegionFactory(attrs).create(REGION_NAME1);
+    cacheFeeder.createRegionFactory(attrs).create(REGION_NAME2);
+    cacheFeeder.createRegionFactory(attrs).create(REGION_NAME3);
   }
 
   /**
@@ -419,9 +419,9 @@ public class ClientInterestNotifyDUnitTest extends JUnit4DistributedTestCase {
     factory.setDataPolicy(DataPolicy.REPLICATE);
     factory.setConcurrencyChecksEnabled(false);
     RegionAttributes attrs = factory.create();
-    cacheServer.createRegion(REGION_NAME1, attrs);
-    cacheServer.createRegion(REGION_NAME2, attrs);
-    cacheServer.createRegion(REGION_NAME3, attrs);
+    cacheServer.createRegionFactory(attrs).create(REGION_NAME1);
+    cacheServer.createRegionFactory(attrs).create(REGION_NAME2);
+    cacheServer.createRegionFactory(attrs).create(REGION_NAME3);
     CacheServer server = cacheServer.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server.setPort(port);

@@ -343,7 +343,7 @@ public class ReliableMessagingDUnitTest extends JUnit4DistributedTestCase {
     RegionAttributes attrs = factory.create();
 
     cache.setMessageSyncInterval(25);
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
     CacheServer server = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
@@ -374,7 +374,7 @@ public class ReliableMessagingDUnitTest extends JUnit4DistributedTestCase {
     factory.setPoolName(p.getName());
 
     RegionAttributes attrs = factory.create();
-    Region region = cache.createRegion(REGION_NAME, attrs);
+    Region region = cache.createRegionFactory(attrs).create(REGION_NAME);
     region.registerInterest("ALL_KEYS");
 
     pool = p;

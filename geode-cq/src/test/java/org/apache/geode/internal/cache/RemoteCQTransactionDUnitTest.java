@@ -130,7 +130,7 @@ public class RemoteCQTransactionDUnitTest extends JUnit4CacheTestCase {
     af.setScope(Scope.DISTRIBUTED_ACK);
     af.setDataPolicy(DataPolicy.REPLICATE);
     af.setConcurrencyChecksEnabled(getConcurrencyChecksEnabled());
-    getCache().createRegion(D_REFERENCE, af.create());
+    getCache().basicCreateRegion(D_REFERENCE, af.create());
     af = new AttributesFactory();
     af.setConcurrencyChecksEnabled(getConcurrencyChecksEnabled());
     if (interestPolicy != null) {
@@ -140,12 +140,12 @@ public class RemoteCQTransactionDUnitTest extends JUnit4CacheTestCase {
         .setTotalNumBuckets(4).setLocalMaxMemory(accessor ? 0 : 1)
         .setPartitionResolver(new CustomerIDPartitionResolver("resolver1"))
         .setRedundantCopies(redundantCopies).create());
-    getCache().createRegion(CUSTOMER, af.create());
+    getCache().basicCreateRegion(CUSTOMER, af.create());
     af.setPartitionAttributes(new PartitionAttributesFactory<OrderId, Order>().setTotalNumBuckets(4)
         .setLocalMaxMemory(accessor ? 0 : 1)
         .setPartitionResolver(new CustomerIDPartitionResolver("resolver2"))
         .setRedundantCopies(redundantCopies).setColocatedWith(CUSTOMER).create());
-    getCache().createRegion(ORDER, af.create());
+    getCache().basicCreateRegion(ORDER, af.create());
   }
 
   protected boolean getConcurrencyChecksEnabled() {

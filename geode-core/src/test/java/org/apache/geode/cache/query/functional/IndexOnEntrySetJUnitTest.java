@@ -122,7 +122,7 @@ public class IndexOnEntrySetJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     attributesFactory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes regionAttributes = attributesFactory.create();
-    return cache.createRegion(regionName, regionAttributes);
+    return cache.createRegionFactory(regionAttributes).create(regionName);
   }
 
   private Region createPartitionedRegion(String regionName) throws ParseException {
@@ -131,7 +131,7 @@ public class IndexOnEntrySetJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     attributesFactory.setPartitionAttributes(prAttFactory.create());
     RegionAttributes regionAttributes = attributesFactory.create();
-    return cache.createRegion(regionName, regionAttributes);
+    return cache.createRegionFactory(regionAttributes).create(regionName);
   }
 
   private void populateRegion(Region region) throws Exception {

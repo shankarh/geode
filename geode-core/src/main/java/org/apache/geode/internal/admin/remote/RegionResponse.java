@@ -66,7 +66,8 @@ public class RegionResponse extends AdminResponse {
             break;
 
           case RegionRequest.CREATE_VM_ROOT:
-            r = cache.createRegion(request.newRegionName, request.newRegionAttributes);
+            r = cache.createRegionFactory(request.newRegionAttributes)
+                .create(request.newRegionName);
             break;
 
           case RegionRequest.CREATE_VM_REGION:

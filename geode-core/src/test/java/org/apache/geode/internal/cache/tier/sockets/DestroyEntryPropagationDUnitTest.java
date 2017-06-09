@@ -430,7 +430,7 @@ public class DestroyEntryPropagationDUnitTest extends JUnit4DistributedTestCase 
     factory.setPoolName(p.getName());
     factory.setCacheListener(new CertifiableTestCacheListener(LogWriterUtils.getLogWriter()));
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
   }
 
@@ -441,7 +441,7 @@ public class DestroyEntryPropagationDUnitTest extends JUnit4DistributedTestCase 
     factory.setDataPolicy(DataPolicy.REPLICATE);
     factory.setCacheListener(new CertifiableTestCacheListener(LogWriterUtils.getLogWriter()));
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
     CacheServer server = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);

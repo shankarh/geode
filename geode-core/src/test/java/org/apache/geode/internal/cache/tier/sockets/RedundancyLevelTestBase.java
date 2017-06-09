@@ -530,7 +530,7 @@ public class RedundancyLevelTestBase extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setPoolName(p.getName());
     RegionAttributes attrs = factory.createRegionAttributes();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
     pool = p;
     createEntriesK1andK2();
     registerK1AndK2();
@@ -543,7 +543,7 @@ public class RedundancyLevelTestBase extends JUnit4DistributedTestCase {
     factory.setEnableConflation(true);
     factory.setMirrorType(MirrorType.KEYS_VALUES);
     RegionAttributes attrs = factory.createRegionAttributes();
-    cache.createVMRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
     CacheServer server1 = cache.addCacheServer();
 

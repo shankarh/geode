@@ -387,7 +387,7 @@ public class FixedPRSinglehopDUnitTest extends JUnit4CacheTestCase {
 
       AttributesFactory attr = new AttributesFactory();
       attr.setPartitionAttributes(paf.create());
-      region = cache.createRegion(PR_NAME, attr.create());
+      region = cache.createRegionFactory(attr.create()).create(PR_NAME);
       assertNotNull(region);
       LogWriterUtils.getLogWriter()
           .info("Partitioned Region " + PR_NAME + " created Successfully :" + region.toString());
@@ -430,7 +430,7 @@ public class FixedPRSinglehopDUnitTest extends JUnit4CacheTestCase {
 
       AttributesFactory attr = new AttributesFactory();
       attr.setPartitionAttributes(paf.create());
-      region = cache.createRegion(PR_NAME, attr.create());
+      region = cache.createRegionFactory(attr.create()).create(PR_NAME);
       assertNotNull(region);
       LogWriterUtils.getLogWriter()
           .info("Partitioned Region " + PR_NAME + " created Successfully :" + region.toString());
@@ -479,7 +479,7 @@ public class FixedPRSinglehopDUnitTest extends JUnit4CacheTestCase {
 
     AttributesFactory attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
-    region = cache.createRegion(PR_NAME, attr.create());
+    region = cache.createRegionFactory(attr.create()).create(PR_NAME);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region " + PR_NAME + " created Successfully :" + region.toString());
@@ -584,7 +584,7 @@ public class FixedPRSinglehopDUnitTest extends JUnit4CacheTestCase {
     factory.setPoolName(poolName);
     factory.setDataPolicy(DataPolicy.EMPTY);
     RegionAttributes attrs = factory.create();
-    region = cache.createRegion(PR_NAME, attrs);
+    region = cache.createRegionFactory(attrs).create(PR_NAME);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region " + PR_NAME + " created Successfully :" + region.toString());

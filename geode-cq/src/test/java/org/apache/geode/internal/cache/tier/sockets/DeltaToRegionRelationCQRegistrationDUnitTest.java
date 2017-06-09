@@ -470,8 +470,8 @@ public class DeltaToRegionRelationCQRegistrationDUnitTest extends JUnit4Distribu
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME1, attrs);
-    cache.createRegion(REGION_NAME2, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME1);
+    cache.createRegionFactory(attrs).create(REGION_NAME2);
 
     CacheServer server = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
@@ -505,13 +505,13 @@ public class DeltaToRegionRelationCQRegistrationDUnitTest extends JUnit4Distribu
 
     // region with empty data policy
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME1, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME1);
 
     assertFalse(cache.getRegion(REGION_NAME1).getAttributes().getCloningEnabled());
     factory.setDataPolicy(DataPolicy.NORMAL);
     attrs = factory.create();
     // region with non empty data policy
-    cache.createRegion(REGION_NAME2, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME2);
     assertFalse(cache.getRegion(REGION_NAME2).getAttributes().getCloningEnabled());
     cache.getRegion(REGION_NAME2).getAttributesMutator().setCloningEnabled(true);
     assertTrue(cache.getRegion(REGION_NAME2).getAttributes().getCloningEnabled());
@@ -556,12 +556,12 @@ public class DeltaToRegionRelationCQRegistrationDUnitTest extends JUnit4Distribu
 
     // region with empty data policy
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME1, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME1);
 
     factory.setDataPolicy(DataPolicy.NORMAL);
     attrs = factory.create();
     // region with non empty data policy
-    cache.createRegion(REGION_NAME2, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME2);
 
     return new Integer(p.getPrimaryPort());
   }

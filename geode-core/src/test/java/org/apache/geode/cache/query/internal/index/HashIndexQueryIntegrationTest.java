@@ -1606,7 +1606,7 @@ public class HashIndexQueryIntegrationTest {
     attributesFactory.setDataPolicy(DataPolicy.NORMAL);
     attributesFactory.setIndexMaintenanceSynchronous(synchMaintenance);
     RegionAttributes regionAttributes = attributesFactory.create();
-    region = cache.createRegion(regionName, regionAttributes);
+    region = cache.createRegionFactory(regionAttributes).create(regionName);
   }
 
   private void createReplicatedRegion(String regionName) throws ParseException {
@@ -1620,7 +1620,7 @@ public class HashIndexQueryIntegrationTest {
     attributesFactory.setDataPolicy(DataPolicy.REPLICATE);
     attributesFactory.setIndexMaintenanceSynchronous(synchMaintenance);
     RegionAttributes regionAttributes = attributesFactory.create();
-    region = cache.createRegion(regionName, regionAttributes);
+    region = cache.createRegionFactory(regionAttributes).create(regionName);
   }
 
   private void createReplicatedRegionWithOverflow(String regionName) throws ParseException {
@@ -1630,7 +1630,7 @@ public class HashIndexQueryIntegrationTest {
     attributesFactory.setEvictionAttributes(
         EvictionAttributes.createLRUEntryAttributes(1, EvictionAction.OVERFLOW_TO_DISK));
     RegionAttributes regionAttributes = attributesFactory.create();
-    region = cache.createRegion(regionName, regionAttributes);
+    region = cache.createRegionFactory(regionAttributes).create(regionName);
   }
 
   private void createPartitionedRegion(String regionName) throws ParseException {
@@ -1645,7 +1645,7 @@ public class HashIndexQueryIntegrationTest {
     attributesFactory.setPartitionAttributes(prAttFactory.create());
     attributesFactory.setIndexMaintenanceSynchronous(synchMaintenance);
     RegionAttributes regionAttributes = attributesFactory.create();
-    region = cache.createRegion(regionName, regionAttributes);
+    region = cache.createRegionFactory(regionAttributes).create(regionName);
   }
 
   private void createData(Region region, int numEntries) {

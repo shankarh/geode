@@ -142,7 +142,8 @@ public class TXJUnitTest {
     attributesFactory.setConcurrencyChecksEnabled(false); // test validation expects this behavior
     attributesFactory.setIndexMaintenanceSynchronous(true);
 
-    this.region = this.cache.createRegion(getClass().getSimpleName(), attributesFactory.create());
+    this.region =
+        this.cache.basicCreateRegion(getClass().getSimpleName(), attributesFactory.create());
   }
 
   protected void closeCache() {
@@ -422,7 +423,7 @@ public class TXJUnitTest {
 
     Region<String, String> reg1 = this.region;
     Region<String, String> reg2 =
-        this.cache.createRegion(getUniqueName(), attributesFactory.create());
+        this.cache.basicCreateRegion(getUniqueName(), attributesFactory.create());
 
     this.txMgr.setListener(new TransactionListener() {
       @Override
@@ -4975,7 +4976,7 @@ public class TXJUnitTest {
       af.setScope(Scope.GLOBAL);
       Region<String, String> gr = null;
       try {
-        gr = this.cache.createRegion("GLOBALTXTest", af.create());
+        gr = this.cache.basicCreateRegion("GLOBALTXTest", af.create());
       } catch (CacheException ex) {
         fail("did not expect " + ex);
       }
@@ -5005,7 +5006,7 @@ public class TXJUnitTest {
       af.setDiskStoreName("testCheckNoTX");
       Region<String, String> dr = null;
       try {
-        dr = this.cache.createRegion("DiskTXTest", af.create());
+        dr = this.cache.basicCreateRegion("DiskTXTest", af.create());
       } catch (CacheException ex) {
         fail("did not expect " + ex);
       }
@@ -5759,7 +5760,7 @@ public class TXJUnitTest {
     af.setEvictionAttributes(
         EvictionAttributes.createLRUEntryAttributes(lruSize, EvictionAction.LOCAL_DESTROY));
     af.setScope(Scope.LOCAL);
-    Region<String, Object> lruRegion = this.cache.createRegion(getUniqueName(), af.create());
+    Region<String, Object> lruRegion = this.cache.basicCreateRegion(getUniqueName(), af.create());
 
     // Non-TX LRU verification
     assertEquals(0, lruRegion.entrySet(false).size());
@@ -6478,7 +6479,7 @@ public class TXJUnitTest {
       // Create a region with async index updates
       AttributesFactory af = new AttributesFactory(this.region.getAttributes());
       af.setIndexMaintenanceSynchronous(false);
-      final Region aIregion = this.cache.createRegion(getUniqueName(), af.create());
+      final Region aIregion = this.cache.basicCreateRegion(getUniqueName(), af.create());
       final String aIfromClause = aIregion.getFullPath() + " value ";
       final String aIqstr = "SELECT DISTINCT * FROM " + aIfromClause;
 
@@ -6767,7 +6768,7 @@ public class TXJUnitTest {
         new PartitionAttributesFactory().setRedundantCopies(0).setTotalNumBuckets(1).create();
     af.setPartitionAttributes(pa);
     af.addCacheListener(cl);
-    Region pr = this.cache.createRegion("testTxEventForRegion", af.create());
+    Region pr = this.cache.basicCreateRegion("testTxEventForRegion", af.create());
     pr.put(2, "tw");
     pr.put(3, "three");
     pr.put(4, "four");
@@ -6792,11 +6793,11 @@ public class TXJUnitTest {
   public void testPutAllSupported() throws Exception {
     TXManagerImpl ctm = this.cache.getTxManager();
     AttributesFactory af = new AttributesFactory();
-    Region r = this.cache.createRegion("dRegion", af.create());
+    Region r = this.cache.basicCreateRegion("dRegion", af.create());
     PartitionAttributes pa =
         new PartitionAttributesFactory().setRedundantCopies(0).setTotalNumBuckets(1).create();
     af.setPartitionAttributes(pa);
-    Region pr = this.cache.createRegion("prRegion", af.create());
+    Region pr = this.cache.basicCreateRegion("prRegion", af.create());
     Map map = new HashMap();
     map.put("stuff", "junk");
     map.put("stuff2", "junk2");
@@ -6822,11 +6823,11 @@ public class TXJUnitTest {
   public void testGetAllSupported() throws Exception {
     CacheTransactionManager ctm = this.cache.getCacheTransactionManager();
     AttributesFactory af = new AttributesFactory();
-    Region r = this.cache.createRegion("dRegion", af.create());
+    Region r = this.cache.basicCreateRegion("dRegion", af.create());
     PartitionAttributes pa =
         new PartitionAttributesFactory().setRedundantCopies(0).setTotalNumBuckets(1).create();
     af.setPartitionAttributes(pa);
-    Region pr = this.cache.createRegion("prRegion", af.create());
+    Region pr = this.cache.basicCreateRegion("prRegion", af.create());
     List list = new ArrayList();
     list.add("stuff");
     list.add("stuff2");
@@ -6850,11 +6851,11 @@ public class TXJUnitTest {
   public void testDestroyRegionNotSupported() throws Exception {
     CacheTransactionManager ctm = this.cache.getCacheTransactionManager();
     AttributesFactory af = new AttributesFactory();
-    Region r = this.cache.createRegion("dRegion", af.create());
+    Region r = this.cache.basicCreateRegion("dRegion", af.create());
     PartitionAttributes pa =
         new PartitionAttributesFactory().setRedundantCopies(0).setTotalNumBuckets(1).create();
     af.setPartitionAttributes(pa);
-    Region pr = this.cache.createRegion("prRegion", af.create());
+    Region pr = this.cache.basicCreateRegion("prRegion", af.create());
     List list = new ArrayList();
     list.add("stuff");
     list.add("stuff2");
@@ -6905,11 +6906,11 @@ public class TXJUnitTest {
   public void testInvalidateRegionNotSupported() throws Exception {
     CacheTransactionManager ctm = this.cache.getCacheTransactionManager();
     AttributesFactory af = new AttributesFactory();
-    Region r = this.cache.createRegion("dRegion", af.create());
+    Region r = this.cache.basicCreateRegion("dRegion", af.create());
     PartitionAttributes pa =
         new PartitionAttributesFactory().setRedundantCopies(0).setTotalNumBuckets(1).create();
     af.setPartitionAttributes(pa);
-    Region pr = this.cache.createRegion("prRegion", af.create());
+    Region pr = this.cache.basicCreateRegion("prRegion", af.create());
     ctm.begin();
     try {
       pr.invalidateRegion();
@@ -6954,11 +6955,11 @@ public class TXJUnitTest {
   public void testClearRegionNotSupported() throws Exception {
     CacheTransactionManager ctm = this.cache.getCacheTransactionManager();
     AttributesFactory af = new AttributesFactory();
-    Region r = this.cache.createRegion("dRegion", af.create());
+    Region r = this.cache.basicCreateRegion("dRegion", af.create());
     PartitionAttributes pa =
         new PartitionAttributesFactory().setRedundantCopies(0).setTotalNumBuckets(1).create();
     af.setPartitionAttributes(pa);
-    Region pr = this.cache.createRegion("prRegion", af.create());
+    Region pr = this.cache.basicCreateRegion("prRegion", af.create());
     ctm.begin();
     try {
       pr.clear();
@@ -6997,7 +6998,7 @@ public class TXJUnitTest {
   public void testBug51781() {
     AttributesFactory<Integer, String> af = new AttributesFactory<Integer, String>();
     af.setDataPolicy(DataPolicy.NORMAL);
-    Region<Integer, String> r = this.cache.createRegion(getUniqueName(), af.create());
+    Region<Integer, String> r = this.cache.basicCreateRegion(getUniqueName(), af.create());
     CacheTransactionManager mgr = this.cache.getCacheTransactionManager();
     r.put(1, "value1");
     r.put(2, "value2");

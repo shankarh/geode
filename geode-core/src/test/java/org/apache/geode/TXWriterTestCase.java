@@ -66,7 +66,7 @@ public class TXWriterTestCase {
     af.setScope(Scope.DISTRIBUTED_NO_ACK);
     af.setIndexMaintenanceSynchronous(true);
 
-    this.region = this.cache.createRegion("TXTest", af.create());
+    this.region = this.cache.basicCreateRegion("TXTest", af.create());
     this.txMgr = this.cache.getCacheTransactionManager();
   }
 

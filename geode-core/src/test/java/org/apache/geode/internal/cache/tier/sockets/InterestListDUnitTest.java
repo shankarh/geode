@@ -585,7 +585,7 @@ public class InterestListDUnitTest extends JUnit4DistributedTestCase {
     factory.setPoolName(p.getName());
 
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
     return cache.getDistributedSystem().getDistributedMember();
   }
@@ -611,7 +611,7 @@ public class InterestListDUnitTest extends JUnit4DistributedTestCase {
     factory.setEnableSubscriptionConflation(true);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
   }
 
   private static void addPartitionedRegion() {

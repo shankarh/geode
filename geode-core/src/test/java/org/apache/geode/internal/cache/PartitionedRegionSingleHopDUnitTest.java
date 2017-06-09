@@ -188,7 +188,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     AttributesFactory attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    region = cache.createRegion(PR_NAME, attr.create());
+    region = cache.createRegionFactory(attr.create()).create(PR_NAME);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region " + PR_NAME + " created Successfully :" + region.toString());
@@ -200,7 +200,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    customerRegion = cache.createRegion("CUSTOMER", attr.create());
+    customerRegion = cache.createRegionFactory(attr.create()).create("CUSTOMER");
     assertNotNull(customerRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region CUSTOMER created Successfully :" + customerRegion.toString());
@@ -212,7 +212,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    orderRegion = cache.createRegion("ORDER", attr.create());
+    orderRegion = cache.createRegionFactory(attr.create()).create("ORDER");
     assertNotNull(orderRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region ORDER created Successfully :" + orderRegion.toString());
@@ -224,7 +224,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    shipmentRegion = cache.createRegion("SHIPMENT", attr.create());
+    shipmentRegion = cache.createRegionFactory(attr.create()).create("SHIPMENT");
     assertNotNull(shipmentRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region SHIPMENT created Successfully :" + shipmentRegion.toString());
@@ -1193,7 +1193,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     AttributesFactory attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    region = cache.createRegion(PR_NAME, attr.create());
+    region = cache.createRegionFactory(attr.create()).create(PR_NAME);
 
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
@@ -1206,7 +1206,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    customerRegion = cache.createRegion("CUSTOMER", attr.create());
+    customerRegion = cache.createRegionFactory(attr.create()).create("CUSTOMER");
     assertNotNull(customerRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region CUSTOMER created Successfully :" + customerRegion.toString());
@@ -1218,7 +1218,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    orderRegion = cache.createRegion("ORDER", attr.create());
+    orderRegion = cache.createRegionFactory(attr.create()).create("ORDER");
     assertNotNull(orderRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region ORDER created Successfully :" + orderRegion.toString());
@@ -1229,11 +1229,11 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    shipmentRegion = cache.createRegion("SHIPMENT", attr.create());
+    shipmentRegion = cache.createRegionFactory(attr.create()).create("SHIPMENT");
     assertNotNull(shipmentRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region SHIPMENT created Successfully :" + shipmentRegion.toString());
-    replicatedRegion = cache.createRegion("rr", new AttributesFactory().create());
+    replicatedRegion = cache.createRegionFactory(attr.create()).create("rr");
     return port;
   }
 
@@ -1255,7 +1255,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     AttributesFactory attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    region = cache.createRegion(PR_NAME, attr.create());
+    region = cache.createRegionFactory(attr.create()).create(PR_NAME);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region " + PR_NAME + " created Successfully :" + region.toString());
@@ -1267,7 +1267,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    customerRegion = cache.createRegion("CUSTOMER", attr.create());
+    customerRegion = cache.createRegionFactory(attr.create()).create("CUSTOMER");
     assertNotNull(customerRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region CUSTOMER created Successfully :" + customerRegion.toString());
@@ -1279,7 +1279,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    orderRegion = cache.createRegion("ORDER", attr.create());
+    orderRegion = cache.createRegionFactory(attr.create()).create("ORDER");
     assertNotNull(orderRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region ORDER created Successfully :" + orderRegion.toString());
@@ -1291,12 +1291,12 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    shipmentRegion = cache.createRegion("SHIPMENT", attr.create());
+    shipmentRegion = cache.createRegionFactory(attr.create()).create("SHIPMENT");
     assertNotNull(shipmentRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region SHIPMENT created Successfully :" + shipmentRegion.toString());
 
-    replicatedRegion = cache.createRegion("rr", new AttributesFactory().create());
+    replicatedRegion = cache.createRegionFactory(new AttributesFactory().create()).create("rr");
 
     return port;
   }
@@ -1315,7 +1315,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr.setDiskStoreName("disk");
     attr.setPartitionAttributes(paf.create());
     // attr.setConcurrencyChecksEnabled(true);
-    region = cache.createRegion(PR_NAME, attr.create());
+    region = cache.createRegionFactory(attr.create()).create(PR_NAME);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region " + PR_NAME + " created Successfully :" + region.toString());
@@ -1329,7 +1329,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr.setDiskStoreName("disk");
     attr.setPartitionAttributes(paf.create());
     // attr.setConcurrencyChecksEnabled(true);
-    customerRegion = cache.createRegion("CUSTOMER", attr.create());
+    customerRegion = cache.createRegionFactory(attr.create()).create("CUSTOMER");
     assertNotNull(customerRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region CUSTOMER created Successfully :" + customerRegion.toString());
@@ -1343,7 +1343,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr.setDiskStoreName("disk");
     attr.setPartitionAttributes(paf.create());
     // attr.setConcurrencyChecksEnabled(true);
-    orderRegion = cache.createRegion("ORDER", attr.create());
+    orderRegion = cache.createRegionFactory(attr.create()).create("ORDER");
     assertNotNull(orderRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region ORDER created Successfully :" + orderRegion.toString());
@@ -1357,12 +1357,12 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr.setDiskStoreName("disk");
     attr.setPartitionAttributes(paf.create());
     // attr.setConcurrencyChecksEnabled(true);
-    shipmentRegion = cache.createRegion("SHIPMENT", attr.create());
+    shipmentRegion = cache.createRegionFactory(attr.create()).create("SHIPMENT");
     assertNotNull(shipmentRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region SHIPMENT created Successfully :" + shipmentRegion.toString());
 
-    replicatedRegion = cache.createRegion("rr", new AttributesFactory().create());
+    replicatedRegion = cache.createRegionFactory(new AttributesFactory().create()).create("rr");
     CacheServer server = cache.addCacheServer();
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);
     server.setPort(port);
@@ -1390,7 +1390,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr.setDiskStoreName("disk");
     attr.setPartitionAttributes(paf.create());
     // attr.setConcurrencyChecksEnabled(true);
-    region = cache.createRegion(PR_NAME, attr.create());
+    region = cache.createRegionFactory(attr.create()).create(PR_NAME);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region " + PR_NAME + " created Successfully :" + region.toString());
@@ -1404,7 +1404,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr.setDiskStoreName("disk");
     attr.setPartitionAttributes(paf.create());
     // attr.setConcurrencyChecksEnabled(true);
-    customerRegion = cache.createRegion("CUSTOMER", attr.create());
+    customerRegion = cache.createRegionFactory(attr.create()).create("CUSTOMER");
     assertNotNull(customerRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region CUSTOMER created Successfully :" + customerRegion.toString());
@@ -1418,7 +1418,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr.setDiskStoreName("disk");
     attr.setPartitionAttributes(paf.create());
     // attr.setConcurrencyChecksEnabled(true);
-    orderRegion = cache.createRegion("ORDER", attr.create());
+    orderRegion = cache.createRegionFactory(attr.create()).create("ORDER");
     assertNotNull(orderRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region ORDER created Successfully :" + orderRegion.toString());
@@ -1432,12 +1432,12 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr.setDiskStoreName("disk");
     attr.setPartitionAttributes(paf.create());
     // attr.setConcurrencyChecksEnabled(true);
-    shipmentRegion = cache.createRegion("SHIPMENT", attr.create());
+    shipmentRegion = cache.createRegionFactory(attr.create()).create("SHIPMENT");
     assertNotNull(shipmentRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region SHIPMENT created Successfully :" + shipmentRegion.toString());
 
-    replicatedRegion = cache.createRegion("rr", new AttributesFactory().create());
+    replicatedRegion = cache.createRegionFactory(new AttributesFactory().create()).create("rr");
     CacheServer server = cache.addCacheServer();
     server.setPort(port);
     server.setHostnameForClients("localhost");
@@ -1466,7 +1466,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     AttributesFactory attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    region = cache.createRegion(PR_NAME, attr.create());
+    region = cache.createRegionFactory(attr.create()).create(PR_NAME);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region " + PR_NAME + " created Successfully :" + region.toString());
@@ -1478,7 +1478,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    customerRegion = cache.createRegion("CUSTOMER", attr.create());
+    customerRegion = cache.createRegionFactory(attr.create()).create("CUSTOMER");
     assertNotNull(customerRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region CUSTOMER created Successfully :" + customerRegion.toString());
@@ -1490,7 +1490,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    orderRegion = cache.createRegion("ORDER", attr.create());
+    orderRegion = cache.createRegionFactory(attr.create()).create("ORDER");
     assertNotNull(orderRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region ORDER created Successfully :" + orderRegion.toString());
@@ -1502,12 +1502,12 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    shipmentRegion = cache.createRegion("SHIPMENT", attr.create());
+    shipmentRegion = cache.createRegionFactory(attr.create()).create("SHIPMENT");
     assertNotNull(shipmentRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region SHIPMENT created Successfully :" + shipmentRegion.toString());
 
-    replicatedRegion = cache.createRegion("rr", new AttributesFactory().create());
+    replicatedRegion = cache.createRegionFactory(new AttributesFactory().create()).create("rr");
   }
 
   public static void startServerOnPort(int port) {
@@ -1532,7 +1532,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     AttributesFactory attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    region = cache.createRegion(PR_NAME, attr.create());
+    region = cache.createRegionFactory(attr.create()).create(PR_NAME);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region " + PR_NAME + " created Successfully :" + region.toString());
@@ -1544,7 +1544,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    customerRegion = cache.createRegion("CUSTOMER", attr.create());
+    customerRegion = cache.createRegionFactory(attr.create()).create("CUSTOMER");
     assertNotNull(customerRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region CUSTOMER created Successfully :" + customerRegion.toString());
@@ -1555,7 +1555,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    orderRegion = cache.createRegion("ORDER", attr.create());
+    orderRegion = cache.createRegionFactory(attr.create()).create("ORDER");
     assertNotNull(orderRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region ORDER created Successfully :" + orderRegion.toString());
@@ -1566,11 +1566,11 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     attr = new AttributesFactory();
     attr.setPartitionAttributes(paf.create());
     attr.setConcurrencyChecksEnabled(true);
-    shipmentRegion = cache.createRegion("SHIPMENT", attr.create());
+    shipmentRegion = cache.createRegionFactory(attr.create()).create("SHIPMENT");
     assertNotNull(shipmentRegion);
     LogWriterUtils.getLogWriter()
         .info("Partitioned Region SHIPMENT created Successfully :" + shipmentRegion.toString());
-    replicatedRegion = cache.createRegion("rr", new AttributesFactory().create());
+    replicatedRegion = cache.createRegionFactory(new AttributesFactory().create()).create("rr");
   }
 
   public static void createClient(int port0) {
@@ -1670,7 +1670,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     factory.setPoolName(poolName);
     factory.setDataPolicy(DataPolicy.EMPTY);
     RegionAttributes attrs = factory.create();
-    region = cache.createRegion(PR_NAME, attrs);
+    region = cache.createRegionFactory(attrs).create(PR_NAME);
     assertNotNull(region);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region " + PR_NAME + " created Successfully :" + region.toString());
@@ -1680,7 +1680,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     factory.setScope(Scope.LOCAL);
     factory.setConcurrencyChecksEnabled(true);
     attrs = factory.create();
-    customerRegion = cache.createRegion("CUSTOMER", attrs);
+    customerRegion = cache.createRegionFactory(attrs).create("CUSTOMER");
     assertNotNull(customerRegion);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region CUSTOMER created Successfully :" + customerRegion.toString());
@@ -1690,7 +1690,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     factory.setScope(Scope.LOCAL);
     factory.setConcurrencyChecksEnabled(true);
     attrs = factory.create();
-    orderRegion = cache.createRegion("ORDER", attrs);
+    orderRegion = cache.createRegionFactory(attrs).create("ORDER");
     assertNotNull(orderRegion);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region ORDER created Successfully :" + orderRegion.toString());
@@ -1700,7 +1700,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     factory.setScope(Scope.LOCAL);
     factory.setConcurrencyChecksEnabled(true);
     attrs = factory.create();
-    shipmentRegion = cache.createRegion("SHIPMENT", attrs);
+    shipmentRegion = cache.createRegionFactory(attrs).create("SHIPMENT");
     assertNotNull(shipmentRegion);
     LogWriterUtils.getLogWriter()
         .info("Distributed Region SHIPMENT created Successfully :" + shipmentRegion.toString());
@@ -1708,7 +1708,7 @@ public class PartitionedRegionSingleHopDUnitTest extends JUnit4CacheTestCase {
     factory.setScope(Scope.LOCAL);
     factory.setConcurrencyChecksEnabled(true);
     factory.setPoolName(poolName);
-    replicatedRegion = cache.createRegion("rr", factory.create());
+    replicatedRegion = cache.createRegionFactory(factory.create()).create("rr");
   }
 
   public static void putIntoPartitionedRegions() {

@@ -64,8 +64,8 @@ public class BugJUnitTest {
     // attributesFactory.setValueConstraint(Portfolio.class);
     RegionAttributes regionAttributes = attributesFactory.create();
 
-    region = cache.createRegion("pos", regionAttributes);
-    region1 = cache.createRegion("pos1", regionAttributes);
+    region = cache.createRegionFactory().create("pos");
+    region1 = cache.createRegionFactory().create("pos1");
     for (int i = 0; i < 4; i++) {
       Portfolio p = new Portfolio(i);
       region.put("" + i, p);
@@ -355,7 +355,7 @@ public class BugJUnitTest {
 
         }).create());
     PartitionedRegion pr1 =
-        (PartitionedRegion) CacheUtils.getCache().createRegion("pr1", factory.create());
+        (PartitionedRegion) CacheUtils.getCache().basicCreateRegion("pr1", factory.create());
     factory = new AttributesFactory();
     factory.setPartitionAttributes(new PartitionAttributesFactory()
 
@@ -376,7 +376,7 @@ public class BugJUnitTest {
         }).setColocatedWith(pr1.getName()).create());
 
     final PartitionedRegion pr2 =
-        (PartitionedRegion) CacheUtils.getCache().createRegion("pr2", factory.create());
+        (PartitionedRegion) CacheUtils.getCache().basicCreateRegion("pr2", factory.create());
 
     createAllNumPRAndEvenNumPR(pr1, pr2, 80);
     Set<Integer> set = createAndPopulateSet(15);
@@ -420,7 +420,7 @@ public class BugJUnitTest {
 
         }).create());
     PartitionedRegion pr1 =
-        (PartitionedRegion) CacheUtils.getCache().createRegion("pr1", factory.create());
+        (PartitionedRegion) CacheUtils.getCache().basicCreateRegion("pr1", factory.create());
     factory = new AttributesFactory();
     factory.setPartitionAttributes(new PartitionAttributesFactory()
 
@@ -441,7 +441,7 @@ public class BugJUnitTest {
         }).setColocatedWith(pr1.getName()).create());
 
     final PartitionedRegion pr2 =
-        (PartitionedRegion) CacheUtils.getCache().createRegion("pr2", factory.create());
+        (PartitionedRegion) CacheUtils.getCache().basicCreateRegion("pr2", factory.create());
 
     createAllNumPRAndEvenNumPR(pr1, pr2, 80);
     Set<Integer> set = createAndPopulateSet(15);

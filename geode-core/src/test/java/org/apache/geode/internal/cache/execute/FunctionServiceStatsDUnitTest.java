@@ -361,7 +361,7 @@ public class FunctionServiceStatsDUnitTest extends PRClientServerTestBase {
           factory.setScope(Scope.DISTRIBUTED_ACK);
           factory.setDataPolicy(DataPolicy.REPLICATE);
           assertNotNull(cache);
-          Region region = cache.createRegion(regionName, factory.create());
+          Region region = cache.createRegionFactory(factory.create()).create(regionName);
           LogWriterUtils.getLogWriter().info("Region Created :" + region);
           assertNotNull(region);
           for (int i = 1; i <= 200; i++) {
@@ -421,7 +421,7 @@ public class FunctionServiceStatsDUnitTest extends PRClientServerTestBase {
           factory.setDataPolicy(DataPolicy.EMPTY);
           factory.setPoolName(p.getName());
           assertNotNull(cache);
-          Region region = cache.createRegion(regionName, factory.create());
+          Region region = cache.createRegionFactory(factory.create()).create(regionName);
           LogWriterUtils.getLogWriter().info("Client Region Created :" + region);
           assertNotNull(region);
           for (int i = 1; i <= 200; i++) {
@@ -730,7 +730,8 @@ public class FunctionServiceStatsDUnitTest extends PRClientServerTestBase {
         pa.setTotalNumBuckets(17);
         raf.setPartitionAttributes(pa);
 
-        PartitionedRegion pr = (PartitionedRegion) getCache().createRegion(rName, raf.create());
+        PartitionedRegion pr =
+            (PartitionedRegion) getCache().basicCreateRegion(rName, raf.create());
         return Boolean.TRUE;
       }
     });
@@ -744,7 +745,8 @@ public class FunctionServiceStatsDUnitTest extends PRClientServerTestBase {
             pa.setAll(ra.getPartitionAttributes());
             pa.setTotalNumBuckets(17);
             raf.setPartitionAttributes(pa);
-            PartitionedRegion pr = (PartitionedRegion) getCache().createRegion(rName, raf.create());
+            PartitionedRegion pr =
+                (PartitionedRegion) getCache().basicCreateRegion(rName, raf.create());
             Function function = new TestFunction(true, TestFunction.TEST_FUNCTION2);
             FunctionService.registerFunction(function);
             function = new TestFunction(true, TestFunction.TEST_FUNCTION3);
@@ -906,7 +908,7 @@ public class FunctionServiceStatsDUnitTest extends PRClientServerTestBase {
             AttributesFactory factory = new AttributesFactory();
             factory.setScope(Scope.DISTRIBUTED_ACK);
             factory.setDataPolicy(DataPolicy.EMPTY);
-            Region region = getCache().createRegion(rName, factory.create());
+            Region region = getCache().basicCreateRegion(rName, factory.create());
             LogWriterUtils.getLogWriter().info("Region Created :" + region);
             assertNotNull(region);
             FunctionService.registerFunction(new TestFunction(true, TestFunction.TEST_FUNCTION2));
@@ -924,7 +926,7 @@ public class FunctionServiceStatsDUnitTest extends PRClientServerTestBase {
             AttributesFactory factory = new AttributesFactory();
             factory.setScope(Scope.DISTRIBUTED_ACK);
             factory.setDataPolicy(DataPolicy.REPLICATE);
-            Region region = getCache().createRegion(rName, factory.create());
+            Region region = getCache().basicCreateRegion(rName, factory.create());
             LogWriterUtils.getLogWriter().info("Region Created :" + region);
             assertNotNull(region);
             FunctionService.registerFunction(new TestFunction(true, TestFunction.TEST_FUNCTION2));
@@ -1172,7 +1174,7 @@ public class FunctionServiceStatsDUnitTest extends PRClientServerTestBase {
             pa.setAll(ra.getPartitionAttributes());
             pa.setTotalNumBuckets(17);
             raf.setPartitionAttributes(pa);
-            getCache().createRegion(rName, raf.create());
+            getCache().basicCreateRegion(rName, raf.create());
             Function function = new TestFunction(true, "TestFunctionException");
             FunctionService.registerFunction(function);
             return Boolean.TRUE;

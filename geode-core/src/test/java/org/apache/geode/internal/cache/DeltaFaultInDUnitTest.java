@@ -46,7 +46,6 @@ public class DeltaFaultInDUnitTest extends JUnit4CacheTestCase {
 
 
   /**
-   * @param name
    */
   public DeltaFaultInDUnitTest() {
     super();
@@ -76,7 +75,7 @@ public class DeltaFaultInDUnitTest extends JUnit4CacheTestCase {
         attr.setCloningEnabled(clone);
         attr.setEvictionAttributes(
             EvictionAttributes.createLRUEntryAttributes(1, EvictionAction.OVERFLOW_TO_DISK));
-        Region region = cache.createRegion("region1", attr.create());
+        Region region = cache.createRegionFactory(attr.create()).create("region1");
 
         return null;
       }
@@ -99,7 +98,8 @@ public class DeltaFaultInDUnitTest extends JUnit4CacheTestCase {
         attr.setDataPolicy(DataPolicy.PARTITION);
         attr.setEvictionAttributes(
             EvictionAttributes.createLRUEntryAttributes(1, EvictionAction.OVERFLOW_TO_DISK));
-        Region<Integer, TestDelta> region = cache.createRegion("region1", attr.create());
+        Region<Integer, TestDelta> region =
+            cache.createRegionFactory(attr.create()).create("region1");
 
 
         // Put an entry

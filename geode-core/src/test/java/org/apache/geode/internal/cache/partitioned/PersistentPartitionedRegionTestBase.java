@@ -347,13 +347,13 @@ public abstract class PersistentPartitionedRegionTestBase extends JUnit4CacheTes
         {
           AttributesFactory af = new AttributesFactory();
           af.setDataPolicy(DataPolicy.REPLICATE);
-          parent1 = cache.createRegion("parent1", af.create());
+          parent1 = cache.createRegionFactory(af.create()).create("parent1");
         }
         Region parent2;
         {
           AttributesFactory af = new AttributesFactory();
           af.setDataPolicy(DataPolicy.REPLICATE);
-          parent2 = cache.createRegion("parent2", af.create());
+          parent2 = cache.createRegionFactory(af.create()).create("parent2");
         }
         {
           AttributesFactory af = new AttributesFactory();
@@ -434,7 +434,7 @@ public abstract class PersistentPartitionedRegionTestBase extends JUnit4CacheTes
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
-        cache.createRegion(PR_REGION_NAME, af.create());
+        cache.createRegionFactory(af.create()).create(PR_REGION_NAME);
 
         // Colocated region
         paf = (new PartitionAttributesFactory()).setRedundantCopies(setRedundantCopies)
@@ -443,7 +443,7 @@ public abstract class PersistentPartitionedRegionTestBase extends JUnit4CacheTes
         af.setPartitionAttributes(paf.create());
         af.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         af.setDiskStoreName("disk");
-        cache.createRegion(PR_CHILD_REGION_NAME, af.create());
+        cache.createRegionFactory(af.create()).create(PR_CHILD_REGION_NAME);
 
         // Count down on region create.
         childRegionCreated.countDown();
@@ -493,7 +493,7 @@ public abstract class PersistentPartitionedRegionTestBase extends JUnit4CacheTes
 
         RegionAttributes attr =
             getPersistentPRAttributes(redundancy, recoveryDelay, cache, numBuckets, synchronous);
-        cache.createRegion(PR_REGION_NAME, attr);
+        cache.createRegionFactory(attr).create(PR_REGION_NAME);
         if (recoveryDone != null) {
           try {
             recoveryDone.await();

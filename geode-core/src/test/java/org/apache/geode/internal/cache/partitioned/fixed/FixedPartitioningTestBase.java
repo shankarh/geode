@@ -181,7 +181,7 @@ public class FixedPartitioningTestBase extends JUnit4DistributedTestCase {
       af_FPR.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
       af_FPR.setDiskStoreName("disk");
     }
-    region_FPR = (PartitionedRegion) cache.createRegion(regionName, af_FPR.create());
+    region_FPR = (PartitionedRegion) cache.createRegionFactory(af_FPR.create()).create(regionName);
     assertNotNull(region_FPR);
   }
 

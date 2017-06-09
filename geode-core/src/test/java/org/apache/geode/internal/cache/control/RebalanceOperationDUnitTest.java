@@ -138,7 +138,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
         paf.setStartupRecoveryDelay(-1);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
 
@@ -254,7 +254,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
         paf.setStartupRecoveryDelay(-1);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
 
@@ -356,7 +356,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
           paf.setStartupRecoveryDelay(-1);
           PartitionAttributes prAttr = paf.create();
           attr.setPartitionAttributes(prAttr);
-          cache.createRegion("region1", attr.create());
+          cache.createRegionFactory(attr.create()).create("region1");
         }
       };
 
@@ -477,7 +477,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
           paf.setStartupRecoveryDelay(-1);
           PartitionAttributes prAttr = paf.create();
           attr.setPartitionAttributes(prAttr);
-          cache.createRegion("region1", attr.create());
+          cache.createRegionFactory(attr.create()).create("region1");
         }
       };
 
@@ -585,7 +585,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
     paf.setStartupRecoveryDelay(-1);
     PartitionAttributes prAttr = paf.create();
     attr.setPartitionAttributes(prAttr);
-    cache.createRegion(regionName, attr.create());
+    cache.createRegionFactory(attr.create()).create(regionName);
   }
 
   private void doPuts(String regionName) {
@@ -972,7 +972,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
         }
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion(region, attr.create());
+        cache.createRegionFactory(attr.create()).create(region);
         return cache.getDistributedSystem().getDistributedMember();
       }
     };
@@ -1430,7 +1430,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
         paf.setLocalMaxMemory(localMaxMemory);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
 
         return cache.getDistributedSystem().getDistributedMember();
       }
@@ -1456,7 +1456,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
         paf.setStartupRecoveryDelay(-1);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
 
@@ -1569,7 +1569,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
         paf.setStartupRecoveryDelay(-1);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
 
@@ -1680,7 +1680,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
         attr.setCacheLoader(new Bug40228Loader());
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
 
@@ -1823,7 +1823,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
         for (int i = 0; i < NUM_REGIONS; i++) {
-          cache.createRegion("region" + i, attr.create());
+          cache.createRegionFactory(attr.create()).create("region" + i);
         }
       }
     };
@@ -1953,7 +1953,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
         paf.setStartupRecoveryDelay(-1);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
 
@@ -2070,7 +2070,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
         attr.setPartitionAttributes(prAttr);
         attr.setEvictionAttributes(
             EvictionAttributes.createLRUEntryAttributes(1, EvictionAction.OVERFLOW_TO_DISK));
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
 
@@ -2275,7 +2275,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
         {
           AttributesFactory attr = new AttributesFactory();
           attr.setDataPolicy(DataPolicy.REPLICATE);
-          parent = cache.createRegion("parent", attr.create());
+          parent = cache.createRegionFactory(attr.create()).create("parent");
         }
         AttributesFactory attr = new AttributesFactory();
         PartitionAttributesFactory paf = new PartitionAttributesFactory();
@@ -2593,7 +2593,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
         paf.setLocalMaxMemory(100);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
 
@@ -2616,7 +2616,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
     paf.setLocalMaxMemory(100);
     PartitionAttributes prAttr = paf.create();
     attr.setPartitionAttributes(prAttr);
-    final Region region = cache.createRegion("region1", attr.create());
+    final Region region = cache.createRegionFactory(attr.create()).create("region1");
 
     // create some buckets
     region.put(Integer.valueOf(1), "A");
@@ -2756,7 +2756,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
         attr.setDataPolicy(DataPolicy.PERSISTENT_PARTITION);
         attr.setDiskSynchronous(true);
         attr.setDiskStoreName(getUniqueName());
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
 
@@ -2779,7 +2779,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
         paf.setLocalMaxMemory(0);
         PartitionAttributes prAttr = paf.create();
         attr.setPartitionAttributes(prAttr);
-        cache.createRegion("region1", attr.create());
+        cache.createRegionFactory(attr.create()).create("region1");
       }
     };
 
@@ -3020,7 +3020,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
           PartitionAttributes prAttr = paf.create();
           attr.setPartitionAttributes(prAttr);
           attr.setCacheLoader(new Bug40228Loader());
-          cache.createRegion("region1", attr.create());
+          cache.createRegionFactory(attr.create()).create("region1");
         }
       };
 
@@ -3150,7 +3150,7 @@ public class RebalanceOperationDUnitTest extends JUnit4CacheTestCase {
           PartitionAttributes prAttr = paf.create();
           attr.setPartitionAttributes(prAttr);
           attr.setCacheLoader(new Bug40228Loader());
-          cache.createRegion("region1", attr.create());
+          cache.createRegionFactory(attr.create()).create("region1");
         } finally {
           System.setProperty(DiskStoreImpl.RECOVER_VALUE_PROPERTY_NAME, "true");
         }

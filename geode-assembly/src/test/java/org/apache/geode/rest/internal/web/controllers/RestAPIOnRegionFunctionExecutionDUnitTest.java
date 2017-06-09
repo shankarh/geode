@@ -85,8 +85,8 @@ public class RestAPIOnRegionFunctionExecutionDUnitTest extends RestAPITestBase {
     AttributesFactory factory = new AttributesFactory();
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(policy);
-    Region region =
-        CacheFactory.getAnyInstance().createRegion(REPLICATE_REGION_NAME, factory.create());
+    Region region = CacheFactory.getAnyInstance().createRegionFactory(factory.create())
+        .create(REPLICATE_REGION_NAME);
     org.apache.geode.test.dunit.LogWriterUtils.getLogWriter().info("Region Created :" + region);
     assertNotNull(region);
   }
@@ -99,7 +99,8 @@ public class RestAPIOnRegionFunctionExecutionDUnitTest extends RestAPITestBase {
     pa.setTotalNumBuckets(17);
     raf.setPartitionAttributes(pa);
 
-    Region region = CacheFactory.getAnyInstance().createRegion(PR_REGION_NAME, raf.create());
+    Region region =
+        CacheFactory.getAnyInstance().createRegionFactory(raf.create()).create(PR_REGION_NAME);
     org.apache.geode.test.dunit.LogWriterUtils.getLogWriter().info("Region Created :" + region);
     assertNotNull(region);
     return Boolean.TRUE;

@@ -104,7 +104,7 @@ public class PartitionedRegionHADUnitTest extends PartitionedRegionDUnitTestCase
         });
         try {
           Region partitionedregion =
-              cache.createRegion(regionName, createRegionAttributesForPR(1, 20));
+              cache.createRegionFactory(createRegionAttributesForPR(1, 20)).create(regionName);
           if (!rebalancingFinished.await(60000, TimeUnit.MILLISECONDS)) {
             fail("Redundancy recovery did not happen within 60 seconds");
           }
@@ -209,7 +209,8 @@ public class PartitionedRegionHADUnitTest extends PartitionedRegionDUnitTestCase
           Cache cache = getCache();
           System.setProperty(PartitionedRegion.RETRY_TIMEOUT_PROPERTY, "20000");
           for (int i = 0; i < MAX_REGIONS; i++) {
-            cache.createRegion(PR_PREFIX + i, createRegionAttributesForPR(redundantCopies, 200));
+            cache.createRegionFactory(createRegionAttributesForPR(redundantCopies, 200))
+                .create(PR_PREFIX + i);
           }
           System.setProperty(PartitionedRegion.RETRY_TIMEOUT_PROPERTY,
               Integer.toString(PartitionedRegionHelper.DEFAULT_TOTAL_WAIT_RETRY_ITERATION));
@@ -228,7 +229,8 @@ public class PartitionedRegionHADUnitTest extends PartitionedRegionDUnitTestCase
       public void run2() throws CacheException {
         Cache cache = getCache();
         for (int i = 0; i < MAX_REGIONS; i++) {
-          cache.createRegion(PR_PREFIX + i, createRegionAttributesForPR(redundantCopies, 0));
+          cache.createRegionFactory(createRegionAttributesForPR(redundantCopies, 0))
+              .create(PR_PREFIX + i);
         }
       }
     };
@@ -399,9 +401,11 @@ public class PartitionedRegionHADUnitTest extends PartitionedRegionDUnitTestCase
             Cache cache = getCache();
 
             // RedundantCopies = 0 , Scope = DISTRIBUTED_ACK
-            cache.createRegion(PR_ZeroRedundancy, createRegionAttributesForPR(0, 200));
+            cache.createRegionFactory(createRegionAttributesForPR(0, 200))
+                .create(PR_ZeroRedundancy);
             // RedundantCopies > 0 , Scope = DISTRIBUTED_ACK
-            cache.createRegion(PR_SingleRedundancy, createRegionAttributesForPR(1, 200));
+            cache.createRegionFactory(createRegionAttributesForPR(1, 200))
+                .create(PR_SingleRedundancy);
           }
         };
 

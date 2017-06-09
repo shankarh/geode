@@ -121,7 +121,7 @@ public class RegionCloseDUnitTest extends JUnit4DistributedTestCase {
     factory.setPoolName(p.getName());
     RegionAttributes attrs = factory.create();
 
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
   }
 
   public static Integer createServerCache() throws Exception {
@@ -130,7 +130,7 @@ public class RegionCloseDUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes attrs = factory.create();
-    cache.createRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
     CacheServer server = cache.addCacheServer();
     assertNotNull(server);
     int port = AvailablePort.getRandomAvailablePort(AvailablePort.SOCKET);

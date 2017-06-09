@@ -92,7 +92,7 @@ public class MemLRUEvictionControllerDUnitTest extends JUnit4CacheTestCase {
     if (usingMain) {
       DistributedSystem system = DistributedSystem.connect(new Properties());
       Cache cache = CacheFactory.create(system);
-      region = cache.createRegion("Test", factory.create());
+      region = cache.createRegionFactory(factory.create()).create("Test");
 
     } else {
       region = createRegion(name, factory.create());

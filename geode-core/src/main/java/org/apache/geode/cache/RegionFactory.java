@@ -755,7 +755,7 @@ public class RegionFactory<K, V> {
       throws CacheExistsException, RegionExistsException, CacheWriterException, TimeoutException {
     @SuppressWarnings("deprecation")
     RegionAttributes<K, V> ra = this.attrsFactory.create();
-    return getCache().createRegion(name, ra);
+    return getCache().basicCreateRegion(name, ra);
   }
 
   /**

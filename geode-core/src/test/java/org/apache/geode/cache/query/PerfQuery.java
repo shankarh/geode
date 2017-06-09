@@ -230,7 +230,7 @@ public class PerfQuery {
     if (this.region != null) {
       this.region.localDestroyRegion();
     }
-    this.region = cache.createRegion("portfolios", this.regionAttributes);
+    this.region = cache.createRegionFactory(this.regionAttributes).create("portfolios");
     for (int i = 0; i < numPortfolios; i++) {
       this.region.put(String.valueOf(i), new Portfolio(i));
     }
@@ -249,7 +249,7 @@ public class PerfQuery {
     if (this.region != null) {
       this.region.localDestroyRegion();
     }
-    this.region = cache.createRegion("portfolios", this.regionAttributes);
+    this.region = cache.createRegionFactory(this.regionAttributes).create("portfolios");
     for (int i = 0; i < 1000; i++) {
       this.region.put(String.valueOf(i), new Portfolio(i));
     }

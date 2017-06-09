@@ -146,7 +146,7 @@ public class PRClientServerTestBase extends JUnit4CacheTestCase {
     factory.setPartitionAttributes(partitionAttributes);
     RegionAttributes attrs = factory.create();
 
-    Region region = cache.createRegion((String) commonAttributes.get(0), attrs);
+    Region region = cache.createRegionFactory(attrs).create((String) commonAttributes.get(0));
     assertNotNull(region);
     CacheServer server1 = cache.addCacheServer();
     assertNotNull(server1);
@@ -177,7 +177,7 @@ public class PRClientServerTestBase extends JUnit4CacheTestCase {
     factory.setPartitionAttributes(partitionAttributes);
     RegionAttributes attrs = factory.create();
 
-    Region region = cache.createRegion((String) commonAttributes.get(0), attrs);
+    Region region = cache.createRegionFactory(attrs).create((String) commonAttributes.get(0));
     assertNotNull(region);
     CacheServer server1 = cache.addCacheServer();
     assertNotNull(server1);
@@ -205,9 +205,9 @@ public class PRClientServerTestBase extends JUnit4CacheTestCase {
     factory.setPartitionAttributes(partitionAttributes);
     RegionAttributes attrs = factory.create();
 
-    Region region1 = cache.createRegion(PartitionedRegionName + "1", attrs);
+    Region region1 = cache.createRegionFactory(attrs).create(PartitionedRegionName + "1");
     assertNotNull(region1);
-    Region region2 = cache.createRegion(PartitionedRegionName + "2", attrs);
+    Region region2 = cache.createRegionFactory(attrs).create(PartitionedRegionName + "2");
     assertNotNull(region2);
     CacheServer server1 = cache.addCacheServer();
     assertNotNull(server1);
@@ -235,7 +235,7 @@ public class PRClientServerTestBase extends JUnit4CacheTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     assertNotNull(cache);
-    Region region = cache.createRegion(regionName, factory.create());
+    Region region = cache.createRegionFactory(factory.create()).create(regionName);
     assertNotNull(region);
 
     CacheServer server1 = cache.addCacheServer();
@@ -271,7 +271,7 @@ public class PRClientServerTestBase extends JUnit4CacheTestCase {
     factory.setDataPolicy(DataPolicy.EMPTY);
     factory.setPoolName(p.getName());
     RegionAttributes attrs = factory.create();
-    Region region = cache.createRegion(PartitionedRegionName, attrs);
+    Region region = cache.createRegionFactory(attrs).create(PartitionedRegionName);
     assertNotNull(region);
   }
 
@@ -295,7 +295,7 @@ public class PRClientServerTestBase extends JUnit4CacheTestCase {
     factory.setDataPolicy(DataPolicy.EMPTY);
     factory.setPoolName(p.getName());
     RegionAttributes attrs = factory.create();
-    Region region = cache.createRegion(PartitionedRegionName, attrs);
+    Region region = cache.createRegionFactory(attrs).create(PartitionedRegionName);
     assertNotNull(region);
   }
 
@@ -321,13 +321,13 @@ public class PRClientServerTestBase extends JUnit4CacheTestCase {
     factory.setDataPolicy(DataPolicy.EMPTY);
     factory.setPoolName(p.getName());
     RegionAttributes attrs = factory.create();
-    Region region1 = cache.createRegion(PartitionedRegionName + "1", attrs);
+    Region region1 = cache.createRegionFactory(attrs).create(PartitionedRegionName + "1");
     assertNotNull(region1);
 
     factory = new AttributesFactory();
     factory.setDataPolicy(DataPolicy.EMPTY);
     attrs = factory.create();
-    Region region2 = cache.createRegion(PartitionedRegionName + "2", attrs);
+    Region region2 = cache.createRegionFactory(attrs).create(PartitionedRegionName + "2");
     assertNotNull(region2);
   }
 
@@ -354,7 +354,7 @@ public class PRClientServerTestBase extends JUnit4CacheTestCase {
     factory.setDataPolicy(DataPolicy.EMPTY);
     factory.setPoolName(p.getName());
     RegionAttributes attrs = factory.create();
-    Region region = cache.createRegion(PartitionedRegionName, attrs);
+    Region region = cache.createRegionFactory(attrs).create(PartitionedRegionName);
     assertNotNull(region);
   }
 
@@ -381,7 +381,7 @@ public class PRClientServerTestBase extends JUnit4CacheTestCase {
     factory.setDataPolicy(DataPolicy.EMPTY);
     factory.setPoolName(p.getName());
     RegionAttributes attrs = factory.create();
-    Region region = cache.createRegion(PartitionedRegionName, attrs);
+    Region region = cache.createRegionFactory(attrs).create(PartitionedRegionName);
     assertNotNull(region);
   }
 
@@ -431,7 +431,7 @@ public class PRClientServerTestBase extends JUnit4CacheTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setDataPolicy(DataPolicy.REPLICATE);
     assertNotNull(cache);
-    Region region = cache.createRegion(regionName, factory.create());
+    Region region = cache.createRegionFactory(factory.create()).create(regionName);
     assertNotNull(region);
   }
 

@@ -91,7 +91,8 @@ public class PartitionedRegionSizeDUnitTest extends PartitionedRegionDUnitTestCa
       public void run2() throws CacheException {
         Cache cache = getCache();
         for (int i = 0; i < MAX_REGIONS; i++) {
-          cache.createRegion(PR_PREFIX + "DistAckSync" + i, createRegionAttributesForPR(1, 200));
+          cache.createRegionFactory(createRegionAttributesForPR(1, 200))
+              .create(PR_PREFIX + "DistAckSync" + i);
         }
       }
     };
@@ -100,7 +101,8 @@ public class PartitionedRegionSizeDUnitTest extends PartitionedRegionDUnitTestCa
       public void run2() throws CacheException {
         Cache cache = getCache();
         for (int i = 0; i < MAX_REGIONS; i++) {
-          cache.createRegion(PR_PREFIX + "DistAckSync" + i, createRegionAttributesForPR(1, 0));
+          cache.createRegionFactory(createRegionAttributesForPR(1, 0))
+              .create(PR_PREFIX + "DistAckSync" + i);
         }
       }
     };
@@ -179,7 +181,8 @@ public class PartitionedRegionSizeDUnitTest extends PartitionedRegionDUnitTestCa
       public void run2() throws CacheException {
         Cache cache = getCache();
         for (int i = 0; i < MAX_REGIONS; i++) {
-          cache.createRegion(PR_PREFIX + "DistAckASync" + i, createRegionAttributesForPR(1, 200));
+          cache.createRegionFactory(createRegionAttributesForPR(1, 200))
+              .create(PR_PREFIX + "DistAckASync" + i);
         }
       }
     };
@@ -188,7 +191,8 @@ public class PartitionedRegionSizeDUnitTest extends PartitionedRegionDUnitTestCa
       public void run2() throws CacheException {
         Cache cache = getCache();
         for (int i = 0; i < MAX_REGIONS; i++) {
-          cache.createRegion(PR_PREFIX + "DistAckASync" + i, createRegionAttributesForPR(1, 0));
+          cache.createRegionFactory(createRegionAttributesForPR(1, 0))
+              .create(PR_PREFIX + "DistAckASync" + i);
         }
       }
     };
@@ -277,8 +281,8 @@ public class PartitionedRegionSizeDUnitTest extends PartitionedRegionDUnitTestCa
       public void run2() throws CacheException {
         Cache cache = getCache();
         for (int i = 0; i < MAX_REGIONS; i++) {
-          cache.createRegion(PR_PREFIX + "DistAckSyncChangingVMCount" + i,
-              createRegionAttributesForPR(2, 200));
+          cache.createRegionFactory(createRegionAttributesForPR(2, 200))
+              .create(PR_PREFIX + "DistAckSyncChangingVMCount" + i);
         }
       }
     };
@@ -372,7 +376,7 @@ public class PartitionedRegionSizeDUnitTest extends PartitionedRegionDUnitTestCa
       public void run() throws CacheException {
         Cache cache = getCache();
         Region partitionedregion =
-            cache.createRegion(PR_PREFIX, createRegionAttributesForPR(1, 200));
+            cache.createRegionFactory(createRegionAttributesForPR(1, 200)).create(PR_PREFIX);
       }
     };
     vm0.invoke(createPRs);
@@ -421,7 +425,7 @@ public class PartitionedRegionSizeDUnitTest extends PartitionedRegionDUnitTestCa
       public void run() throws CacheException {
         Cache cache = getCache();
         Region partitionedregion =
-            cache.createRegion(PR_PREFIX, createRegionAttributesForPR(1, 200));
+            cache.createRegionFactory(createRegionAttributesForPR(1, 200)).create(PR_PREFIX);
       }
     };
     final long oneItemSize = runProportionalSize(createPRs);
@@ -459,7 +463,7 @@ public class PartitionedRegionSizeDUnitTest extends PartitionedRegionDUnitTestCa
             .create("PartitionedRegionSizeDUnitTest").getName());
         // why isn't attr used after this?
         Region partitionedregion =
-            cache.createRegion(PR_PREFIX, createRegionAttributesForPR(1, 200));
+            cache.createRegionFactory(createRegionAttributesForPR(1, 200)).create(PR_PREFIX);
       }
     };
     final long oneItemSize = runProportionalSize(createPRs);

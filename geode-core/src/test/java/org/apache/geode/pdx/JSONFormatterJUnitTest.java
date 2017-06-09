@@ -60,7 +60,7 @@ public class JSONFormatterJUnitTest {
     final AttributesFactory<Object, Object> af1 = new AttributesFactory<Object, Object>();
     af1.setDataPolicy(DataPolicy.PARTITION);
     final RegionAttributes<Object, Object> rAttributes = af1.create();
-    c.createRegion(PRIMITIVE_KV_STORE_REGION, rAttributes);
+    c.basicCreateRegion(PRIMITIVE_KV_STORE_REGION, rAttributes);
   }
 
   @After

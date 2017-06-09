@@ -160,7 +160,7 @@ public class CompactRangeIndexIndexMapJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     attributesFactory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes regionAttributes = attributesFactory.create();
-    return cache.createRegion(regionName, regionAttributes);
+    return cache.createRegionFactory(regionAttributes).create(regionName);
   }
 
   private Region createReplicatedRegion(String regionName) throws ParseException {
@@ -168,7 +168,7 @@ public class CompactRangeIndexIndexMapJUnitTest {
     AttributesFactory attributesFactory = new AttributesFactory();
     attributesFactory.setDataPolicy(DataPolicy.REPLICATE);
     RegionAttributes regionAttributes = attributesFactory.create();
-    return cache.createRegion(regionName, regionAttributes);
+    return cache.createRegionFactory(regionAttributes).create(regionName);
   }
 
   private void createPortfolios(Region region, int num) {
